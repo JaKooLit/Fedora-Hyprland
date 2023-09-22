@@ -1,7 +1,6 @@
 # FedyrLand-v1
 A Fedora-Hyprland Install Script based from previous Arch-Hyprland Scripts
 
-
 ### Fedora-Hyprland install script based from my Arch-Hyprland-v4 [`Link`](https://github.com/JaKooLit/Hyprland-v4)
 
 ![alt text](https://github.com/JaKooLit/Ja-Hyprland/blob/main/screenshots/Sample-Tokyo-waybar.png "Default")
