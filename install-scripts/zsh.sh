@@ -67,7 +67,6 @@ if [[ $zsh =~ ^[Yy]$ ]]; then
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
   cp -r 'assets/.zshrc' ~/
-  print_success "ZSH and oh-my-zsh installed."
 else
   printf "${NOTE} ZSH wont be installed.\n"
 fi
