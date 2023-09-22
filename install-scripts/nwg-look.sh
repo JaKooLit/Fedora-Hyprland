@@ -68,3 +68,5 @@ if git clone https://github.com/nwg-piotr/nwg-look.git; then
 else
   echo -e "${ERROR} Download failed for nwg-look."
 fi
+
+clear
