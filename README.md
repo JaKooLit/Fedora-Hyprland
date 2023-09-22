@@ -9,10 +9,13 @@ A Fedora-Hyprland Install Script based from previous Arch-Hyprland Scripts
 
 #### you can find more screenshots in the screenshots directory
 
-### ✨  Some notes
+### ✨  Some notes on installation
 - This script is meant to install in any Fedora even Spins.
 - if starting from scratch, recommended spin to install is the Sway Spin. However, I have tested this script in Fedora Workstation (gnome), Plasma Spin and Sway
 - I have not tested in any other spin. However, if you decided to try, recommend to install SDDM. Apart from GDM and SDDM, any other Login Manager may not work nor launch Hyprland. However, hyprland can be launched through tty by type Hyprland
+
+#### WARNING! nwg-look takes long time to install. 
+- nwg-look is a utility to costumize your GTK theme. It's a LXAppearance like. Its a good tool though but this package is entirely optional
 
 ### ✨ to run
 > clone this repo by using git. Change directory, make executable and run the script
@@ -33,7 +36,7 @@ source ~/.zshrc
 - by default gnzh theme is installed. You can find more themes from this [`OH-MY-ZSH-THEMES`](https://github.com/ohmyzsh/ohmyzsh/wiki/Themes)
 - to change the theme, edit ~/.zshrc ZSH_THEME="desired theme"
 
-### ✨ Notes
+### ✨ Hyprland Dot Notes
 - super h for launching a small help file
 - super e to view / edit settings, monitor, keybinds, Environment Variables, etc
 - go through the keybinds. There are alot of hidden features like dual panel, change waybar styles, change wallpaper, etc... its too long to put all in the readme!!!
