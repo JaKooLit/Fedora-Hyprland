@@ -77,6 +77,6 @@ if [[ $XDPH1 =~ ^[Yy]$ ]]; then
     echo "Removing xdg-desktop-portal-lxqt..."
     sudo dnf remove -y xdg-desktop-portal-lxqt 2>&1 | tee -a "$LOG"
   fi
-
-  clear
 fi
+
+clear

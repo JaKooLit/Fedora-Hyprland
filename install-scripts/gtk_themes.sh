@@ -62,3 +62,5 @@ if wget https://github.com/ljmill/tokyo-night-icons/releases/download/v0.2.0/Tok
 else
   echo -e "${ERROR} Download failed for Tokyo Theme GTK packages."
 fi
+
+clear

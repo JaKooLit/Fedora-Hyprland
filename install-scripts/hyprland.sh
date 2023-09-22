@@ -56,4 +56,5 @@ printf "${NOTE} Installing Hyprland Package...\n"
    [ $? -ne 0 ] && { echo -e "\e[1A\e[K${ERROR} - $HYPR install had failed, please check the install.log"; exit 1; }
   done
 
-  clear
+
+clear
