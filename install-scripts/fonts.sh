@@ -6,6 +6,7 @@ google-noto-emoji-fonts
 fontawesome-fonts
 google-droid-sans-fonts
 jetbrains-mono-fonts
+cascadia-code-fonts
 )
 
 
