@@ -3,9 +3,9 @@ A Fedora-Hyprland Install Script based from previous Arch-Hyprland Scripts
 
 ### Fedora-Hyprland install script based from my Arch-Hyprland-v4 [`Link`](https://github.com/JaKooLit/Hyprland-v4)
 
-![alt text](https://github.com/JaKooLit/Ja-Hyprland/blob/main/screenshots/Sample-Tokyo-waybar.png "Default")
+![alt text](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/screenshots/dual_panel-light-dark-switch.png)
 
-![alt text](https://github.com/JaKooLit/Ja-Hyprland/blob/main/screenshots/dual-panel-light-dark-switch.png "Default")
+![alt text](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/screenshots/default-light-dark.png)
 
 #### you can find more screenshots in the screenshots directory
 
