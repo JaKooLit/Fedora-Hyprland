@@ -191,7 +191,7 @@ if [[ $HYP =~ ^[Yy]$ ]]; then
         echo "${NOTE} NVIDIA GPU detected. Rebooting the system..."
         systemctl reboot
     elif command -v sddm >/dev/null; then
-        sudo systemctl start sddm 2>&1 | tee -a "$LOG"
+        sudo systemctl restart sddm 2>&1 | tee -a "$LOG"
     else
         if command -v Hyprland >/dev/null; then
             exec Hyprland
