@@ -20,10 +20,10 @@ A Fedora-Hyprland Install Script based from previous Arch-Hyprland Scripts
 ### ✨ to run
 > clone this repo by using git. Change directory, make executable and run the script
 ```bash
-git clone https://github.com/JaKooLit/FedyrLand-v1.git
-cd FedyrLand-v1
-chmod +x FedyrLand-v1.sh
-./FedyrLand-v1.sh
+git clone https://github.com/JaKooLit/Fedora-Hyprland.git
+cd Fedora-Hyprland
+chmod +x install.sh
+./install.sh
 ```
 ### ✨ for ZSH and OH-MY-ZSH installation
 > do this once installed and script completed; do the following to change the default shell zsh
