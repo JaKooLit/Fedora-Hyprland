@@ -9,7 +9,7 @@ WAYBARFILE="$HOME/.config/hypr/waybar/config"
 WOFIFILE="$HOME/.config/hypr/wofi/config"
 
 # wofi window config (in %)
-WIDTH=12
+WIDTH=10
 HEIGHT=30
 
 ## Wofi Command
