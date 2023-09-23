@@ -69,3 +69,6 @@ log into your account
 - [ ] weather app may come back with no data resulting in  waybar. Deleting rbn folder in ~/.cache may help. However, its not always working. Fedora does not accept the Weather.py in ~/.config/hypr/scripts. If you find a better waybar weather provider, you can download and replace Weather.sh in the scripts directory
 
 more info from the hyprland wiki [`Hyprland Wiki Link`](https://wiki.hyprland.org/FAQ/#my-external-monitor-is-blank--doesnt-render--receives-no-signal-laptop)
+
+### 👍 CREDITS!
+- shutout to one who created and maintaining the Hyprland COPR repo [`Hyprland COPR Link`](https://copr.fedorainfracloud.org/coprs/solopasha/hyprland/)
