@@ -4,7 +4,7 @@ nvidia_pkg=(
   akmod-nvidia
   xorg-x11-drv-nvidia-cuda
   libva
-  nvidia-vaapi-driver
+  libva-nvidia-driver
 )
 
 ############## WARNING DO NOT EDIT BEYOND THIS LINE if you dont know what you are doing! ######################################
@@ -66,14 +66,8 @@ printf "${YELLOW} Installing Nvidia packages...\n"
 # Preparing exec.conf to enable env = WLR_NO_HARDWARE_CURSORS,1 so it will be ready once config files copied
 sed -i '21s/#//' config/hypr/configs/ENVariables.conf
 
-# Check if nvidia_drm modeset is enabled
-nvidia_drm_modeset=$(sudo cat /sys/module/nvidia_drm/parameters/modeset)
 
-if [[ "$nvidia_drm_modeset" == "Yy" ]]; then
-  echo "Nvidia DRM modeset is already enabled. Exiting..."
-  exit 0
-else
-  echo "Nvidia DRM modeset is not enabled. Adding to /etc/default/grub..."
+printf "${YELLOW} nvidia-stuff to /etc/default/grub..."
 
   # Additional options to add to GRUB_CMDLINE_LINUX
   additional_options="rd.driver.blacklist=nouveau modprobe.blacklist=nouveau nvidia-drm.modeset=1"
