@@ -10,7 +10,7 @@ A Fedora-Hyprland Install Script based from previous Arch-Hyprland Scripts
 #### you can find more screenshots in the screenshots directory
 
 ### ✨  Some notes on installation
-- This script is meant to install in any Fedora even Spins.
+- This script is meant to install in any Fedora Work stations and its Spins.
 - if starting from scratch, recommended spin to install is the Sway Spin. However, I have tested this script in Fedora Workstation (gnome), Plasma Spin and Sway
 - I have not tested in any other spin. However, if you decided to try, recommend to install SDDM. Apart from GDM and SDDM, any other Login Manager may not work nor launch Hyprland. However, hyprland can be launched through tty by type Hyprland
 
