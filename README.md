@@ -29,6 +29,7 @@ chmod +x FedyrLand-v1.sh
 > do this once installed and script completed; do the following to change the default shell zsh
 ```bash
 chsh -s $(which zsh)
+zsh
 source ~/.zshrc
 ```
 - reboot or logout
