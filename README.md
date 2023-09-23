@@ -1,4 +1,4 @@
-# FedyrLand-v1
+# Fedora-Hyprland Installer
 A Fedora-Hyprland Install Script based from previous Arch-Hyprland Scripts
 
 ### Fedora-Hyprland install script based from my Arch-Hyprland-v4 [`Link`](https://github.com/JaKooLit/Hyprland-v4)
