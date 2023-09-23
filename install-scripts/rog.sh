@@ -36,8 +36,6 @@ sudo dnf update
 # Set the script to exit on error
 set -e
 
-set -e
-
 # Function for installing packages
 install_package() {
   # Checking if package is already installed

@@ -86,6 +86,4 @@ printf "${YELLOW} nvidia-stuff to /etc/default/grub..."
 
   echo "Nvidia DRM modeset and additional options have been added to /etc/default/grub. Please reboot for changes to take effect."
 
-
-
 clear

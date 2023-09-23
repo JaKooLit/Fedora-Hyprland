@@ -55,11 +55,13 @@ for xdph in xdg-desktop-portal-hyprland; do
   fi
 done
 
+clear 
+
 printf "${NOTE} Checking for other XDG-Desktop-Portal-Implementations....\n"
 sleep 1
 printf "\n"
 printf "${NOTE} XDG-desktop-portal-KDE (if installed) should be manually disabled or removed! I can't remove it... sorry...\n"
-read -n 1 -r -p "${CAT} Would you like me to try to remove other XDG-Desktop-Portal-Implementations? (y/n)" XDPH1
+read -n 1 -r -p "${CAT} Would you like to try to remove other XDG-Desktop-Portal-Implementations? (y/n)" XDPH1
 sleep 1
 if [[ $XDPH1 =~ ^[Yy]$ ]]; then
   # Clean out other portals

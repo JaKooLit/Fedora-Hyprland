@@ -17,6 +17,11 @@ A Fedora-Hyprland Install Script based from previous Arch-Hyprland Scripts
 #### WARNING! nwg-look takes long time to install. 
 - nwg-look is a utility to costumize your GTK theme. It's a LXAppearance like. Its a good tool though but this package is entirely optional
 
+
+### ✨ Costumize the packages and COPR Repos
+- insde the install-scripts folder, you can edit 00-hypr-pkgs.sh, copr.sh
+
+
 ### ✨ to run
 > clone this repo by using git. Change directory, make executable and run the script
 ```bash

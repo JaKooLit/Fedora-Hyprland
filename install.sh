@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# https://github.com/JaKooLit
+
 # Check if running as root. If root, script will exit
 if [[ $EUID -eq 0 ]]; then
     echo "This script should not be executed as root! Exiting......."
@@ -11,7 +13,7 @@ clear
 # Welcome message
 echo "$(tput setaf 6)Welcome to JaKooLit's Fedora-Hyprland Install Script!$(tput sgr0)"
 echo
-echo "$(tput setaf 166) ATTENTION: Ran a full system update and Reboot first!! (Highly Recommended) $(tput sgr0)"
+echo "$(tput setaf 166)ATTENTION: Run a full system update and Reboot first!! (Highly Recommended) $(tput sgr0)"
 echo
 echo "$(tput setaf 3)NOTE: You will be required to answer some questions during the installation! $(tput sgr0)"
 echo
