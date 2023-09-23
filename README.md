@@ -9,6 +9,8 @@ A Fedora-Hyprland Install Script based from previous Arch-Hyprland Scripts
 
 #### you can find more screenshots in the screenshots directory
 
+- Youtube presentation [`Link`](https://youtu.be/w2dt4GlHjV0?si=15JWMFH1wAEM2a5F)
+
 ### ✨  Some notes on installation
 - This script is meant to install in any Fedora Work stations and its Spins.
 - if starting from scratch, recommended spin to install is the Sway Spin. However, I have tested this script in Fedora Workstation (gnome), Plasma Spin and Sway
@@ -45,7 +47,9 @@ source ~/.zshrc
 - super h for launching a small help file
 - super e to view / edit settings, monitor, keybinds, Environment Variables, etc
 - go through the keybinds. There are alot of hidden features like dual panel, change waybar styles, change wallpaper, etc... its too long to put all in the readme!!!
-
+- super d for wofi (menu)
+- super t for thunar (file manager)
+- 
 ### ✨ Roadmap:
 - [ ] Install zsh and oh-my-zsh without necessary steps above
 - [ ] possibly adding gruvbox themes, cursors, icons
