@@ -1,5 +1,3 @@
-# Fedora-Hyprland Installer
-A Fedora-Hyprland Install Script based from previous Arch-Hyprland Scripts
 
 ### Fedora-Hyprland install script based from my Arch-Hyprland-v4 [`Link`](https://github.com/JaKooLit/Hyprland-v4)
 
@@ -7,9 +5,9 @@ A Fedora-Hyprland Install Script based from previous Arch-Hyprland Scripts
 
 ![alt text](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/screenshots/default-light-dark.png)
 
-#### you can find more screenshots in the screenshots directory
+### you can find more screenshots in the screenshots directory
 
-- Youtube presentation [`Link`](https://youtu.be/w2dt4GlHjV0?si=15JWMFH1wAEM2a5F)
+### ✨ Youtube presentation [`Link`](https://youtu.be/w2dt4GlHjV0?si=15JWMFH1wAEM2a5F)
 
 ### ✨  Some notes on installation
 - This script is meant to install in any Fedora Work stations and its Spins.
