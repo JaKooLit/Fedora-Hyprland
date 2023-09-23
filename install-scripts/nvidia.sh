@@ -56,14 +56,12 @@ printf "${YELLOW} Installing Hyprland Nvidia git...\n"
   for NvHYPR in hyprland-nvidia-git; do
     install_package "$NvHYPR" 2>&1 | tee -a "$LOG"
   done
-done
 
 # Install additional Nvidia packages
 printf "${YELLOW} Installing Nvidia packages...\n"
   for NVIDIA in "${nvidia_pkg[@]}"; do
     install_package "$NVIDIA" 2>&1 | tee -a "$LOG"
   done
-done
 
 # Preparing exec.conf to enable env = WLR_NO_HARDWARE_CURSORS,1 so it will be ready once config files copied
 sed -i '21s/#//' config/hypr/configs/ENVariables.conf
