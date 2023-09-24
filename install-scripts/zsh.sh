@@ -54,7 +54,7 @@ read -n1 -rep "${CAT} OPTIONAL - Would you like to install zsh and oh-my-zsh and
 echo
 
 if [[ $zsh =~ ^[Yy]$ ]]; then
-  for ZSH in zsh; do
+  for ZSH in zsh util-linux-user; do
     install_package "$ZSH" 2>&1 | tee -a "$LOG"
     if [ $? -ne 0 ]; then
       echo -e "\e[1A\e[K${ERROR} - $ZSH install had failed, please check the install.log"
