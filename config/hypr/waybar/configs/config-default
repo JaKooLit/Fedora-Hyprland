@@ -18,12 +18,12 @@
 	"cpu", 
 	"temperature", 
 	"memory",
-	//"disk",
 	"custom/weather",
 	],
   
 "modules-center": [
-	"custom/menu", 
+	"custom/menu",
+	"idle_inhibitor", 
 	"clock",
 	"custom/light_dark",	
 	"custom/lock",	
