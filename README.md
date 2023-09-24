@@ -76,5 +76,5 @@ log into your account
 
 - Fedora Sway Specific - swaylock conflicts with swaylock-effects. Lock screen would be only white. If decided to remove swaylock in favor with swaylock-effects, sway will be removed. So care
 
-### ✨ CREDITS
-- a shout out to the one who created and maintaining Hyprland COPR Repo [`HYPRLAND COPR REPO`](https://copr.fedorainfracloud.org/coprs/solopasha/hyprland/)
+### 👍 CREDITS!
+- shutout to one who created and maintaining the Hyprland COPR repo [`Hyprland COPR Link`](https://copr.fedorainfracloud.org/coprs/solopasha/hyprland/)
