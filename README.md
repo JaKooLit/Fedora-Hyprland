@@ -26,6 +26,8 @@
 ### ✨ Costumize the packages and COPR Repos
 - insde the install-scripts folder, you can edit 00-hypr-pkgs.sh, copr.sh
 
+### NOTICE TO NVIDIA OWNERS ### 
+- by default it is installing the latest and newest nvidia drivers. If you have an older nvidia-gpu (GTX 800 series and older), check out nvidia-fedora website [`LINK`](https://rpmfusion.org/Howto/NVIDIA#Installing_the_drivers) and edit nvidia.sh in install-scripts folder to install proper gpu driver
 
 ### ✨ to run
 > clone this repo by using git. Change directory, make executable and run the script
@@ -70,7 +72,9 @@ log into your account
 )
 7. add "env = WLR_DRM_DEVICES,/dev/dri/cardX" to the ENVvariables config (.config/hypr/configs/ENVariables.conf)  ; X being where the symlink of the gpu points to
 ```
+- more info from the hyprland wiki [`Hyprland Wiki Link`](https://wiki.hyprland.org/FAQ/#my-external-monitor-is-blank--doesnt-render--receives-no-signal-laptop)
 
 - Fedora Sway Specific - swaylock conflicts with swaylock-effects. Lock screen would be only white. If decided to remove swaylock in favor with swaylock-effects, sway will be removed. So care
 
-more info from the hyprland wiki [`Hyprland Wiki Link`](https://wiki.hyprland.org/FAQ/#my-external-monitor-is-blank--doesnt-render--receives-no-signal-laptop)
+### ✨ CREDITS
+- a shout out to the one who created and maintaining Hyprland COPR Repo [`HYPRLAND COPR REPO`](https://copr.fedorainfracloud.org/coprs/solopasha/hyprland/)
