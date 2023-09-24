@@ -24,7 +24,7 @@
 
 
 ### ✨ Costumize the packages and COPR Repos
-- insde the install-scripts folder, you can edit 00-hypr-pkgs.sh, copr.sh
+- inside the install-scripts folder, you can edit 00-hypr-pkgs.sh, copr.sh
 
 ### 🔔 NOTICE TO NVIDIA OWNERS ### 
 - by default it is installing the latest and newest nvidia drivers. If you have an older nvidia-gpu (GTX 800 series and older), check out nvidia-fedora website [`LINK`](https://rpmfusion.org/Howto/NVIDIA#Installing_the_drivers) and edit nvidia.sh in install-scripts folder to install proper gpu driver
