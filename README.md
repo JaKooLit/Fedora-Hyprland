@@ -5,7 +5,12 @@
 
 ![alt text](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/screenshots/default-light-dark.png)
 
-### 👁️‍🗨️ you can find more screenshots in the screenshots directory
+### Installed on Nobara 🥰
+
+![alt text](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/screenshots/Hyprland-Nobara.png)
+
+
+### you can find more screenshots in the screenshots directory
 
 ### ✨ Youtube presentation [`Link`](https://youtu.be/w2dt4GlHjV0?si=15JWMFH1wAEM2a5F)
 
@@ -14,7 +19,7 @@
 - if starting from scratch, recommended spin to install is the Sway Spin. However, I have tested this script in Fedora Workstation (gnome), Plasma Spin and Sway
 - I have not tested in any other spin. However, if you decided to try, recommend to install SDDM. Apart from GDM and SDDM, any other Login Manager may not work nor launch Hyprland. However, hyprland can be launched through tty by type Hyprland
 
-### ⚠️ WARNING! nwg-look takes long time to install. 
+#### WARNING! nwg-look takes long time to install. 
 - nwg-look is a utility to costumize your GTK theme. It's a LXAppearance like. Its a good tool though but this package is entirely optional
 
 
@@ -31,7 +36,7 @@ chmod +x install.sh
 ./install.sh
 ```
 ### ✨ for ZSH and OH-MY-ZSH installation
-> do this once installed and script are completed; do the following to change the default shell zsh
+> do this once installed and script completed; do the following to change the default shell zsh
 ```bash
 chsh -s $(which zsh)
 zsh
@@ -41,8 +46,8 @@ source ~/.zshrc
 - by default gnzh theme is installed. You can find more themes from this [`OH-MY-ZSH-THEMES`](https://github.com/ohmyzsh/ohmyzsh/wiki/Themes)
 - to change the theme, edit ~/.zshrc ZSH_THEME="desired theme"
 
-### 📓 Hyprland Dot Notes
-- super h to launch small help file
+### ✨ Hyprland Dot Notes
+- super h for launching a small help file
 - super e to view / edit settings, monitor, keybinds, Environment Variables, etc
 - go through the keybinds. There are alot of hidden features like dual panel, change waybar styles, change wallpaper, etc... its too long to put all in the readme!!!
 - super d for wofi (menu)
@@ -52,9 +57,10 @@ source ~/.zshrc
 - [ ] Install zsh and oh-my-zsh without necessary steps above
 - [ ] possibly adding gruvbox themes, cursors, icons
 - [ ] adding vertical waybar 
+- [X] ~~Use kitty in favor of foot~~ - Dropped the idea of kitty. Kitty is using twice memory compared to foot.
 
 ### ✨ some known issues
-- [ ] reports from members of my discord, states that some users of nvidia are getting stuck on sddm login. credit  to @Kenni Fix stated was 
+- reports from members of my discord, states that some users of nvidia are getting stuck on sddm login. credit  to @Kenni Fix stated was 
 ```  
  while in sddm press ctrl+alt+F2 or F3
 log into your account
@@ -64,12 +70,7 @@ log into your account
 )
 7. add "env = WLR_DRM_DEVICES,/dev/dri/cardX" to the ENVvariables config (.config/hypr/configs/ENVariables.conf)  ; X being where the symlink of the gpu points to
 ```
-- [ ] Fedora Sway Specific - swaylock conflicts with swaylock-effects. Lock screen would be only white. If decided to remove swaylock in favor with swaylock-effects, sway will be removed. So care
-- [ ] weather app may come back with no data resulting in  waybar. Deleting rbn folder in ~/.cache may help. However, its not always working. Fedora does not accept the Weather.py in ~/.config/hypr/scripts. If you find a better waybar weather provider, you can download and replace Weather.sh in the scripts directory
 
-- [ ] cava-waybar is not working
+- Fedora Sway Specific - swaylock conflicts with swaylock-effects. Lock screen would be only white. If decided to remove swaylock in favor with swaylock-effects, sway will be removed. So care
 
 more info from the hyprland wiki [`Hyprland Wiki Link`](https://wiki.hyprland.org/FAQ/#my-external-monitor-is-blank--doesnt-render--receives-no-signal-laptop)
-
-### 👍 CREDITS!
-- shutout to one who created and maintaining the Hyprland COPR repo [`Hyprland COPR Link`](https://copr.fedorainfracloud.org/coprs/solopasha/hyprland/)
