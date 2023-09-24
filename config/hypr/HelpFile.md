@@ -29,6 +29,7 @@
   - scripts for wallpaper stuff are located in *~/.config/hypr/scripts* file names `DarkLight.sh` `DarkLight-swaybg.sh` `Wallpaper.sh` `WallpaperSelect.sh` `WaybarStyles.sh` (last one for waybar)
 
   - swww is broken if you use fractional scaling. Use swaybg as your wallpaper provider.
+  - Sample of swaybg for wallpaper is located in ~/.config/hypr/configs/Execs.conf
 
 # Monitor, executables, keybindings, window rules, 
   files are located in *~/.config/hypr/configs*
@@ -86,4 +87,4 @@
 
 
 
-TO CLOSE THIS DOCUMENT - Super q or Super Shift q or CTRL q
+TO CLOSE THIS DOCUMENT - Super q or Super Shift q or if vim, press esc :q!
