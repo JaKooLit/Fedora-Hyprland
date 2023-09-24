@@ -5,12 +5,12 @@
 
 ![alt text](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/screenshots/default-light-dark.png)
 
-### Installed on Nobara 🥰
+### ❕ Installed on Nobara 🥰
 
 ![alt text](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/screenshots/Hyprland-Nobara.png)
 
 
-### you can find more screenshots in the screenshots directory
+### 📷 you can find more screenshots in the screenshots directory
 
 ### ✨ Youtube presentation [`Link`](https://youtu.be/w2dt4GlHjV0?si=15JWMFH1wAEM2a5F)
 
@@ -19,14 +19,14 @@
 - if starting from scratch, recommended spin to install is the Sway Spin. However, I have tested this script in Fedora Workstation (gnome), Plasma Spin and Sway
 - I have not tested in any other spin. However, if you decided to try, recommend to install SDDM. Apart from GDM and SDDM, any other Login Manager may not work nor launch Hyprland. However, hyprland can be launched through tty by type Hyprland
 
-#### WARNING! nwg-look takes long time to install. 
+### ⚠️ WARNING! nwg-look takes long time to install. 
 - nwg-look is a utility to costumize your GTK theme. It's a LXAppearance like. Its a good tool though but this package is entirely optional
 
 
 ### ✨ Costumize the packages and COPR Repos
 - insde the install-scripts folder, you can edit 00-hypr-pkgs.sh, copr.sh
 
-### NOTICE TO NVIDIA OWNERS ### 
+### 🔔 NOTICE TO NVIDIA OWNERS ### 
 - by default it is installing the latest and newest nvidia drivers. If you have an older nvidia-gpu (GTX 800 series and older), check out nvidia-fedora website [`LINK`](https://rpmfusion.org/Howto/NVIDIA#Installing_the_drivers) and edit nvidia.sh in install-scripts folder to install proper gpu driver
 
 ### ✨ to run
@@ -61,7 +61,7 @@ source ~/.zshrc
 - [ ] adding vertical waybar 
 - [X] ~~Use kitty in favor of foot~~ - Dropped the idea of kitty. Kitty is using twice memory compared to foot.
 
-### ✨ some known issues
+### ❗ some known issues
 - reports from members of my discord, states that some users of nvidia are getting stuck on sddm login. credit  to @Kenni Fix stated was 
 ```  
  while in sddm press ctrl+alt+F2 or F3
@@ -76,5 +76,5 @@ log into your account
 
 - Fedora Sway Specific - swaylock conflicts with swaylock-effects. Lock screen would be only white. If decided to remove swaylock in favor with swaylock-effects, sway will be removed. So care
 
-### 👍 CREDITS!
-- shutout to one who created and maintaining the Hyprland COPR repo [`Hyprland COPR Link`](https://copr.fedorainfracloud.org/coprs/solopasha/hyprland/)
+### 👍 CREDITS
+- a shout out to the one who created and maintaining Hyprland COPR Repo [`HYPRLAND COPR REPO`](https://copr.fedorainfracloud.org/coprs/solopasha/hyprland/)
