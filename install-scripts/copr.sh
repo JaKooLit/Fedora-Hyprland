@@ -10,7 +10,7 @@ add_config_if_not_present() {
 
 # Check and add configuration settings to /etc/dnf/dnf.conf
 add_config_if_not_present "/etc/dnf/dnf.conf" "max_parallel_downloads=5"
-add_config_if_not_present "/etc/dnf/dnf.conf" "fastest_mirror=True"
+add_config_if_not_present "/etc/dnf/dnf.conf" "fastestmirror=True"
 add_config_if_not_present "/etc/dnf/dnf.conf" "defaultyes=True"
 
 
