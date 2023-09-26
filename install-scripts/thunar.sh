@@ -5,6 +5,7 @@ Thunar
 thunar-volman 
 tumbler 
 thunar-archive-plugin
+xarchiver
 )
 
 ############## WARNING DO NOT EDIT BEYOND THIS LINE if you dont know what you are doing! ######################################
