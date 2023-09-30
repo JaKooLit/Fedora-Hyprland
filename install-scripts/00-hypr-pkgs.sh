@@ -42,6 +42,7 @@ hypr_package_2=(
   brightnessctl
   btop
   cava
+  gnome-system-monitor
   mousepad
   mpv
   nvtop
