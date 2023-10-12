@@ -28,8 +28,6 @@ RESET=$(tput sgr0)
 # Set the name of the log file to include the current date and time
 LOG="install-$(date +%d-%H%M%S)_bluetooth.log"
 
-ISAUR=$(command -v yay || command -v paru)
-
 # Set the script to exit on error
 set -e
 
