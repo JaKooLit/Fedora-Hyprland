@@ -1,7 +1,7 @@
 # Welcome to my Hyprland help, and tips and tricks #
 # If you have questions, or need help you can open issue on my github
 # Or you can reach me in or join on Discord that I admin
-# Discord link update discord server link or you can message me directly on my discord. DC user: Ja.KooLit
+# Discord link https://discord.gg/V2SJ92vbEN  
 # Github page: https://github.com/JaKooLit
 
   Super = Windows Key
@@ -64,11 +64,15 @@
 
 # waybar customizations
   - waybar font too big or too small. Edit the font-size in waybar styles located in ~/.config/hypr/waybar/styles/ . By default, it is set to 100%. After adjusting the GTK font scaling to your liking, edit all the waybar styles. Reduce or increase according to your needs. NOTE that its on percent %. You can also change to px whichever suits you.
+
   - if you want 12h format instead of 24H format, edit the ~/.config/hypr/waybar/modules look for clock. delete the // and add // or delete the previous one
+
   - CPU Temperature:
     - a.) to change from deg C to deg F , edit the ~/.config/hypr/waybar/modules look for "temperature". Change the format to "format": "{temperatureF}°F {icon}",
     - b.) to fix the temperature if not showing correctly, comment "thermal zone": 0 by putting // before. Delete the // on the "hwmon path". Refresh waybar by pressing CTRL SHIFT w. If still not showing correctly, navigate to /sys/class/hwmon/ and open each hwmon. Look for k10temp for amd. Not sure about intel cpu. and edit accordingly the hwmon path in the "temperature" waybar module.
     - b.1) use this function to easily identify the hwmon path. Ran this in your terminal    ``` for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*})) $(readlink -f $i)"; done ```
+  
+  - Weather.sh (Default weather app in waybar) edit ~/.config/hypr/scripts/Weather.sh and add your city. Make sure a major city in your Area. Delete rbn folder in ~/.cache and refresh waybar by either pressing super shift w or choose waybar layout super alt w.
 
 # Hyprland configurations
   - *Hyprland* configuration files are in `~/.config/hypr/`
