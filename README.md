@@ -55,7 +55,11 @@ source ~/.zshrc
 - go through the keybinds. There are alot of hidden features like dual panel, change waybar styles, change wallpaper, etc... its too long to put all in the readme!!!
 - super d for wofi (menu)
 - super t for thunar (file manager)
-- 
+
+### ✨ Packages that are manually downloaded and build. These packages will not be updated by apt and have to be manually updated
+- nwg-look [`LINK`](https://github.com/nwg-piotr/nwg-look)
+- a.) to update this package, in your installation folder, you can move that folder (nwg-look) or download manually, cd into it, and ran git pull && sudo make install
+
 ### ✨ Roadmap:
 - [ ] Install zsh and oh-my-zsh without necessary steps above
 - [ ] possibly adding gruvbox themes, cursors, icons
