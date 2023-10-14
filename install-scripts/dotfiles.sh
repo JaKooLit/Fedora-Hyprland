@@ -65,7 +65,7 @@ printf "\n"
 set -e # Exit immediately if a command exits with a non-zero status.
 
 printf "${NOTE} copying dotfiles\n"
-  for DIR in btop cava foot hypr swappy swaylock waybar wofi; do 
+  for DIR in btop cava foot hypr neofetch swappy swaylock waybar wofi; do 
     DIRPATH=~/.config/$DIR
     if [ -d "$DIRPATH" ]; then 
       echo -e "${NOTE} - Config for $DIR found, attempting to back up."
@@ -90,6 +90,7 @@ printf "${NOTE} copying dotfiles\n"
   cp -r config/foot ~/.config/ || { echo "Error: Failed to copy foot config files."; exit 1; } 2>&1 | tee -a "$LOG"
   cp -r config/btop ~/.config/ || { echo "Error: Failed to copy btop config files."; exit 1; } 2>&1 | tee -a "$LOG"
   cp -r config/cava ~/.config/ || { echo "Error: Failed to copy cava config files."; exit 1; } 2>&1 | tee -a "$LOG"
+  cp -r config/neofetch ~/.config/ || { echo "Error: Failed to copy neofetch config files."; exit 1; } 2>&1 | tee -a "$LOG"
   cp -r config/swappy ~/.config/ || { echo "Error: Failed to copy swappy config files."; exit 1; } 2>&1 | tee -a "$LOG"
   mkdir -p ~/Pictures/wallpapers
   cp -r wallpapers ~/Pictures/ && { echo "Copy completed!"; } || { echo "Error: Failed to copy wallpapers."; exit 1; } 2>&1 | tee -a "$LOG"
