@@ -19,5 +19,5 @@ while true; do
         fi
     done
 
-    sleep 2
+    sleep 5
 done
