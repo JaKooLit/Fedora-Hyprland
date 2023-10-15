@@ -22,6 +22,7 @@ hypr_package=(
   gvfs-mtp
   jq
   network-manager-applet
+  openssl
   pavucontrol
   pipewire-alsa
   playerctl
