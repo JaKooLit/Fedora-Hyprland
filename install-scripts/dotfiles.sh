@@ -30,6 +30,16 @@ detect_x_layout() {
   fi
 }
 
+# Function to detect keyboard layout in a tty environment
+detect_tty_layout() {
+  layout=$(localectl status --no-pager | awk '/X11 Layout/ {print $3}')
+  if [ -n "$layout" ]; then
+    echo "$layout"
+  else
+    echo "unknown"
+  fi
+}
+
 # Detect the current keyboard layout based on the environment
 if [ -n "$DISPLAY" ]; then
   # System is in an X server environment

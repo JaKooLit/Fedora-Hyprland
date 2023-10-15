@@ -39,7 +39,7 @@
     "tooltip": true,
     "tooltip-format": "{timeTo} {power}w",
     "on-click-middle": "~/.config/hypr/scripts/ChangeBlur.sh",
-    "on-click-right": "sh -c '(sleep 0.5s; wlogout --protocol layer-shell)' & disown",
+    "on-click-right": "$HOME/.config/hypr/scripts/WofiPower.sh",
   },
     
   "bluetooth": {
