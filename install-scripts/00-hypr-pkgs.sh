@@ -27,7 +27,7 @@ hypr_package=(
   pipewire-alsa
   playerctl
   polkit-gnome
-  python-requests
+  python3-requests
   qt5ct
   slurp
   swappy
