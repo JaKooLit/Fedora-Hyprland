@@ -46,7 +46,7 @@ case $choice in
     ;;
 2)
    notification
-   mpv "https://tunein.com/radio/Easy-Rock-Manila-963-s120725/"
+   mpv "https://radio-stations-philippines.com/easy-rock"
    return
 ;; 
 3)
