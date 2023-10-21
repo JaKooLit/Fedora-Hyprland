@@ -1,5 +1,14 @@
 #!/bin/bash
 
+sddm=(
+  sddm
+	qt5-qtgraphicaleffects
+	qt5-qtquickcontrols
+	qt5-qtquickcontrols2
+)
+
+
+############## WARNING DO NOT EDIT BEYOND THIS LINE if you dont know what you are doing! ######################################
 # Determine the directory where the script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -42,10 +51,14 @@ install_package() {
   fi
 }
 
-# Install SDDM and Catppuccin theme
-printf "${NOTE} Installing SDDM........\n"
-for package in sddm; do
-  install_package "$package"
+# Installation of additional sddm stuff
+printf "\n%s - Installing sddm additional stuff.... \n" "${NOTE}"
+for PKG2 in "${sddm[@]}"; do
+  install_package "$PKG2" 2>&1 | tee -a "$LOG"
+  if [ $? -ne 0 ]; then
+    echo -e "\e[1A\e[K${ERROR} - $PKG2 install had failed, please check the install.log"
+    exit 1
+  fi
 done
 
 # Check if other login managers are installed and disabling their service before enabling sddm
@@ -57,7 +70,8 @@ for login_manager in lightdm gdm lxdm lxdm-gtk3; do
 done
 
 printf " Activating sddm service........\n"
-sudo systemctl enable sddm
+sudo systemctl set-default graphical.target 2>&1 | tee -a "$LOG"
+sudo systemctl enable sddm.service 2>&1 | tee -a "$LOG"
 
 # Set up SDDM
 echo -e "${NOTE} Setting up the login screen."
