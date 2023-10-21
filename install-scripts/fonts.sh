@@ -2,11 +2,14 @@
 
 fonts=(
 adobe-source-code-pro-fonts
-google-noto-emoji-fonts
+fira-code-fonts
 fontawesome-fonts
 google-droid-sans-fonts
+google-noto-cjk-fonts
+google-noto-emoji-color-fonts
+google-noto-emoji-fonts
 jetbrains-mono-fonts
-cascadia-code-fonts
+
 )
 
 
