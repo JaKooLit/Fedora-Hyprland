@@ -44,6 +44,7 @@ hypr_package_2=(
   btop
   cava
   gnome-system-monitor
+  google-noto-emoji-color-fonts
   mousepad
   mpv
   nvtop
