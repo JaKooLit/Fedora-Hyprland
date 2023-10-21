@@ -4,6 +4,7 @@ blue=(
 bluez
 bluez-tools
 blueman
+python3-cairo
 )
 
 
