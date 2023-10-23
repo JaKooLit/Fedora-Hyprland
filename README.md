@@ -1,3 +1,12 @@
+<div align="center">
+
+# 💌 ** JaKooLit's Fedora Hyprland Install Script ** 💌
+
+![GitHub Repo stars](https://img.shields.io/github/stars/JaKooLit/Fedora-Hyprland?style=for-the-badge&color=cba6f7) ![GitHub last commit](https://img.shields.io/github/last-commit/JaKooLit/Fedora-Hyprland?style=for-the-badge&color=b4befe) ![GitHub repo size](https://img.shields.io/github/repo-size/JaKooLit/Fedora-Hyprland=for-the-badge&color=cba6f7)
+
+<br/>
+</div>!
+
 
 ### Fedora-Hyprland install script based from my Arch-Hyprland-v4 [`Link`](https://github.com/JaKooLit/Hyprland-v4)
 
@@ -89,3 +98,13 @@ log into your account
 ### 👍👍👍 Thanks and Credits!
 - a shout out to the one who created and maintaining Hyprland COPR Repo [`HYPRLAND COPR REPO`](https://copr.fedorainfracloud.org/coprs/solopasha/hyprland/)
 - shout out to CooSee from Gentoo forums for the nice rainbow borders
+
+
+## 💖 Support
+- a Star on my Github repos would be nice 🌟
+
+- Subscribe to my Youtube Channel [YouTube](https://www.youtube.com/@Ja.KooLit) 
+
+- You can also buy me Coffee Through ko-fi.com 🤩
+
+<a href='https://ko-fi.com/jakoolit' target='_blank'><img height='35' style='border:0px;height:46px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' />
