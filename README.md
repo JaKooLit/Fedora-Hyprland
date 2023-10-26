@@ -10,23 +10,32 @@
 
 ### Fedora-Hyprland install script based from my Arch-Hyprland-v4 [`Link`](https://github.com/JaKooLit/Hyprland-v4)
 
-![alt text](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/screenshots/dual_panel-light-dark-switch.png)
+![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/dual-panel-dark_light-switch.png)
 
-![alt text](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/screenshots/default-light-dark.png)
+![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/deafault-light-dark2.png)
 
 ### ❕ Installed on Nobara 🥰
 
-![alt text](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/screenshots/Hyprland-Nobara.png)
+![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/Hyprland-Nobara.png)
 
 
-### 📷 you can find more screenshots in the screenshots directory
+
+### 📷 More Screenshots [`Link`](https://github.com/JaKooLit/screenshots/tree/main/Hyprland-ScreenShots/Fedora)
+
 
 ### ✨ Youtube presentation [`Link`](https://youtu.be/w2dt4GlHjV0?si=15JWMFH1wAEM2a5F)
 
 
 ### ✨ A video walk through my dotfiles[`Link`](https://youtu.be/fO-RBHvVEcc?si=ijqxxnq_DLiyO8xb)
 
+## 🪧🪧🪧 ANNOUNCEMENT 🪧🪧🪧
+- I have moved to a centralized Hyprland Dots.
 
+- after initial boot-up after install, you will experience a NO wallpaper. This is due to changes I made on the install scripts to correct that, you can press the light/dark button or choose wallpaper (SUPER CTRL W), and that wallpaper will be loaded after reboot or login.
+
+- more info on announcement [`Link`](https://youtu.be/upDl1ns05eg)
+
+If you want to use swaybg as wallpaper provider, you can edit ~/.config/hypr/configs/Execs.conf and uncomment the swaybg part
 ### ✨  Some notes on installation
 - This install script was tested on Minimal Fedora using Fedora Everything - 21-Oct-2023
 - This script is meant to install in any Fedora Work stations and its Spins.

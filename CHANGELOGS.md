@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 27 Oct 2023
+- Moving to a centralized Hyprland-dots
+
 ## 30-Sep-2023
 - added gnome-system-monitor (right click cpu module in waybar)
 
