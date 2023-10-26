@@ -63,9 +63,6 @@ printf "${YELLOW} Installing Nvidia packages...\n"
     install_package "$NVIDIA" 2>&1 | tee -a "$LOG"
   done
 
-# Preparing exec.conf to enable env = WLR_NO_HARDWARE_CURSORS,1 so it will be ready once config files copied
-sed -i '21s/#//' config/hypr/configs/ENVariables.conf
-
 
 printf "${YELLOW} nvidia-stuff to /etc/default/grub..."
 
