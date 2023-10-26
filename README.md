@@ -36,6 +36,8 @@
 - more info on announcement [`Link`](https://youtu.be/upDl1ns05eg)
 
 If you want to use swaybg as wallpaper provider, you can edit ~/.config/hypr/configs/Execs.conf and uncomment the swaybg part
+
+
 ### ✨  Some notes on installation
 - This install script was tested on Minimal Fedora using Fedora Everything - 21-Oct-2023
 - This script is meant to install in any Fedora Work stations and its Spins.
