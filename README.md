@@ -29,7 +29,7 @@
 ### ✨ A video walk through my dotfiles[`Link`](https://youtu.be/fO-RBHvVEcc?si=ijqxxnq_DLiyO8xb)
 
 ## 🪧🪧🪧 ANNOUNCEMENT 🪧🪧🪧
-- I have moved to a centralized Hyprland Dots.
+- I have moved to a centralized Hyprland Dots/Configuration. [`Hyprland-Dots`](https://github.com/JaKooLit/Hyprland-Dots)
 
 - after initial boot-up after install, you will experience a NO wallpaper. This is due to changes I made on the install scripts to correct that, you can press the light/dark button or choose wallpaper (SUPER CTRL W), and that wallpaper will be loaded after reboot or login.
 
