@@ -12,7 +12,7 @@
 
 ![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/dual-panel-dark_light-switch.png)
 
-![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/deafault-light-dark2.png)
+![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/fedora-top-left.png)
 
 ### ❕ Installed on Nobara 🥰
 
