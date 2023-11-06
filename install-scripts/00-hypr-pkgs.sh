@@ -39,6 +39,7 @@ hypr_package=(
   wget
   wl-clipboard
   wlogout
+  yad
 )
 
 # the following packages can be deleted. however, dotfiles may not work properly
