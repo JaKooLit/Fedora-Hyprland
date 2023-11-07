@@ -15,12 +15,13 @@ Extra=(
 hypr_package=( 
   curl
   dunst
-  foot
   git
   grim
   gvfs
   gvfs-mtp
   jq
+  kitty
+  nano
   network-manager-applet
   openssl
   pavucontrol
@@ -28,7 +29,9 @@ hypr_package=(
   playerctl
   polkit-gnome
   python3-requests
+  python3-pip
   qt5ct
+  rofi-wayland
   slurp
   swappy
   swayidle
@@ -36,7 +39,7 @@ hypr_package=(
   wget
   wl-clipboard
   wlogout
-  wofi
+  yad
 )
 
 # the following packages can be deleted. however, dotfiles may not work properly
@@ -48,7 +51,6 @@ hypr_package_2=(
   mousepad
   mpv
   nvtop
-  swaybg
   viewnior
   vim-enhanced
   wlsunset
@@ -114,5 +116,10 @@ for PKG1 in "${hypr_package[@]}" "${hypr_package_2[@]}" "${copr_packages[@]}" "$
     exit 1
   fi
 done
+
+## Installing pywal colors
+printf "\n%s - Installing Pywal.... \n" "${NOTE}"
+
+sudo pip3 install pywal 2>&1 | tee -a "$LOG"
 
 clear
