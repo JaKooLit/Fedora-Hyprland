@@ -108,7 +108,7 @@ execute_script() {
 printf "\n"
 ask_yes_no "Do you have nvidia gpu?" nvidia
 printf "\n"
-ask_yes_no "Do you want to install GTK themes?" gtk_themes
+ask_yes_no "-Install GTK themes (required for Dark/Light function)?" gtk_themes
 printf "\n"
 ask_yes_no "Do you want to configure Bluetooth?" bluetooth
 printf "\n"
