@@ -37,7 +37,7 @@
 ### ✨ Youtube presentation [`v2`](https://youtu.be/_U_WR33XNYY)
 
 ### ✨ A video walk through my dotfiles[`Link`](https://youtu.be/fO-RBHvVEcc?si=ijqxxnq_DLiyO8xb)
-### ✨ A video walk on Hyprland v2[`Link`](https://youtu.be/yaVurRoXc-s?si=iDnBC5S3thPBX3ZE)
+### ✨ A video walk on My Hyprland-Dots v2[`Link`](https://youtu.be/yaVurRoXc-s?si=iDnBC5S3thPBX3ZE)
 
 
 
