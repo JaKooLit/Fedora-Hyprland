@@ -33,8 +33,8 @@
 ### 📷 More Screenshots on v2 [`Link`](https://github.com/JaKooLit/screenshots/tree/main/Hyprland-ScreenShots/Fedora-v2)
 
 
-### ✨ Youtube presentation [`Link`](https://youtu.be/hGEWOif5D4Y?si=WQ-PrPwEhM5Og76Q)
-
+### ✨ Youtube presentation [`v1`](https://youtu.be/w2dt4GlHjV0)
+### ✨ Youtube presentation [`v2`](https://youtu.be/_U_WR33XNYY)
 
 ### ✨ A video walk through my dotfiles[`Link`](https://youtu.be/fO-RBHvVEcc?si=ijqxxnq_DLiyO8xb)
 ### ✨ A video walk on Hyprland v2[`Link`](https://youtu.be/yaVurRoXc-s?si=iDnBC5S3thPBX3ZE)
