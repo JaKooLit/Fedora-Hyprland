@@ -19,6 +19,7 @@ hypr_package=(
   grim
   gvfs
   gvfs-mtp
+  ImageMagick
   jq
   kitty
   nano
