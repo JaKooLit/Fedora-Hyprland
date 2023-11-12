@@ -48,11 +48,11 @@ hypr_package_2=(
   brightnessctl
   btop
   cava
+  eog
   gnome-system-monitor
   mousepad
   mpv
   nvtop
-  viewnior
   vim-enhanced
   wlsunset
 )
