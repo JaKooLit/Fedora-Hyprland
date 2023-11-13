@@ -1,6 +1,7 @@
 #!/bin/bash
 
 thunar=(
+ffmpegthumbnailer
 Thunar 
 thunar-volman 
 tumbler 
