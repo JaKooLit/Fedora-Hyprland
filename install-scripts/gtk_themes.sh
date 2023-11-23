@@ -63,4 +63,6 @@ else
   echo -e "${ERROR} Download failed for Tokyo Theme GTK packages."
 fi
 
+tar -xf "assets/Bibata-Modern-Ice.tar.xz" -C ~/.icons 2>&1 | tee -a "$LOG"
+
 clear
