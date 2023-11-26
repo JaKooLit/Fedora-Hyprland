@@ -52,8 +52,8 @@ install_package() {
 
 
 # Install Hprland Nvidia git
-printf "${YELLOW} Installing Hyprland Nvidia git...\n"
-  for NvHYPR in hyprland-nvidia-git; do
+printf "${YELLOW} Installing Hyprland-git...\n"
+  for NvHYPR in hyprland-git; do
     install_package "$NvHYPR" 2>&1 | tee -a "$LOG"
   done
 
