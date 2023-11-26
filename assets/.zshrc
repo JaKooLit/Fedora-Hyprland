@@ -14,6 +14,9 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# check the dnf plugins commands here
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dnf
+
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
