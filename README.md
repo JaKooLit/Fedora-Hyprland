@@ -7,30 +7,20 @@
 <br/>
 </div>!
 
-
-### Fedora-Hyprland install script based from my Arch-Hyprland-v4 [`Link`](https://github.com/JaKooLit/Hyprland-v4)
-
-![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/dual-panel-dark_light-switch.png)
-
-![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/fedora-top-left.png)
-
-### ❕ Installed on Nobara 🥰
-
-![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/Hyprland-Nobara.png)
-
-
-### 📷 More Screenshots [`Link`](https://github.com/JaKooLit/screenshots/tree/main/Hyprland-ScreenShots/Fedora)
-
-
-#### Hyprland-Dots-v2 Featuring Rofi 
+#### 📷 Hyprland-Dots-v2 Featuring Rofi 
 <p align="center">
     <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Hyprland-ScreenShots/Fedora-v2/rofi.png" /> <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Hyprland-ScreenShots/Fedora-v2/Light.png" />   
    <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Hyprland-ScreenShots/Fedora-v2/panels.png" /> <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Hyprland-ScreenShots/Fedora-v2/panels2.png" /> 
  
 </p>
 
+### ❕ Installed on Nobara 🥰
 
-### 📷 More Screenshots on v2 [`Link`](https://github.com/JaKooLit/screenshots/tree/main/Hyprland-ScreenShots/Fedora-v2)
+![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/Hyprland-Nobara.png)
+
+
+###  📷 More Screenshots [`V1`](https://github.com/JaKooLit/screenshots/tree/main/Hyprland-ScreenShots/Fedora) & [`V2`](https://github.com/JaKooLit/screenshots/tree/main/Hyprland-ScreenShots/Fedora-v2)
+
 
 
 ### ✨ Youtube presentation [`v1`](https://youtu.be/w2dt4GlHjV0)
@@ -43,7 +33,7 @@
 ## 🪧🪧🪧 ANNOUNCEMENT 🪧🪧🪧
 - This Repo does not contain Hyprland Dots or configs! Dotfiles can be checked here [`Hyprland-Dots`](https://github.com/JaKooLit/Hyprland-Dots) . During installation, if you opt to copy installation, it will be downloaded from that centralized repo.
 - Hyprland-Dots use are constantly evolving / improving. you can check CHANGELOGS here [`Hyprland-Dots-Changelogs`](https://github.com/JaKooLit/Hyprland-Dots/wiki/7.-CHANGELOGS)
-
+- Since the Hyprland-Dots are evolving, some of the screenshots maybe old
 
 ### ✨  Some notes on installation
 - This install script was tested on Minimal Fedora using Fedora Everything [`Link`](https://youtu.be/_U_WR33XNYY)
