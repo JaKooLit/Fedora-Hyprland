@@ -40,6 +40,7 @@ hypr_package=(
   waybar
   wget
   wl-clipboard
+  wlogout
   xdg-user-dirs
   yad
 )
