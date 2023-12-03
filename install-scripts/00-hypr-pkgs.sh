@@ -22,6 +22,7 @@ hypr_package=(
   ImageMagick
   jq
   kitty
+  kvantum
   nano
   network-manager-applet
   openssl
