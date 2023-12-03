@@ -2,6 +2,7 @@
 
 ## 03 Dec 2023
 - Added kvantum for qt apps theming
+- return of wlogout due to theming issues of rofi-power
 
 ## 26 Nov 2023
 - nvidia - Move to hyprland-git. see [`commit`](https://github.com/hyprwm/Hyprland/commit/cd96ceecc551c25631783499bd92c6662c5d3616)
