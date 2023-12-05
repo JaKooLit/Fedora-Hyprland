@@ -50,7 +50,7 @@ printf "${WARN} ### ------------------------------------------------------------
 printf "${NOTE} ## CHECK OUT README FOR ADDITIONAL STEPS REQUIRED ONCE ZSH AND OH-MY-ZSH INSTALLED ##\n"
 printf "\n"
 printf "\n"
-read -n1 -rep "${CAT} OPTIONAL - Would you like to install zsh and oh-my-zsh and use as default shell? (y/n)" zsh
+read -rp "${CAT} OPTIONAL - Would you like to install zsh and oh-my-zsh and use as default shell? (y/n) " zsh
 echo
 
 if [[ $zsh =~ ^[Yy]$ ]]; then
