@@ -89,6 +89,10 @@ source ~/.zshrc
 - nwg-look [`LINK`](https://github.com/nwg-piotr/nwg-look)
 - a.) to update this package, in your installation folder, you can move that folder (nwg-look) or download manually, cd into it, and ran git pull && sudo make install
 
+### 🏴‍☠️🏴‍☠️🏴‍☠️ Got a questions regarding the Hyprland Dots?
+- Head over to wiki Link [`WIKI`](🏴https://github.com/JaKooLit/Hyprland-Dots/wiki)
+
+
 ### 🛣️ Roadmap:
 - [ ] Install zsh and oh-my-zsh without necessary steps above
 - [ ] possibly adding gruvbox themes, cursors, icons
