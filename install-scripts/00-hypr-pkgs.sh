@@ -56,6 +56,7 @@ hypr_package_2=(
   gnome-system-monitor
   mousepad
   mpv
+  mpv-mpris
   nvtop
   vim-enhanced
   wlsunset
