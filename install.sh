@@ -182,6 +182,8 @@ if [ "$nwg" == "Y" ]; then
     execute_script "nwg-look.sh"
 fi
 
+execute_script "InputGroup.sh"
+
 if [ "$dots" == "Y" ]; then
     execute_script "dotfiles.sh"
 
