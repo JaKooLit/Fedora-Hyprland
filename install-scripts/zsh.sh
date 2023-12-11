@@ -67,6 +67,11 @@ if [[ $zsh =~ ^[Yy]$ ]]; then
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
   cp -r 'assets/.zshrc' ~/
+  cp -r 'assets/.zprofile' ~/
+
+  printf "${NOTE} changing default shell to zsh.....\n"
+  chsh -s $(which zsh)
+   
 else
   printf "${NOTE} ZSH wont be installed.\n"
 fi
