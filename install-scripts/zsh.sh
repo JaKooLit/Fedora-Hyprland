@@ -48,7 +48,7 @@ install_package() {
 if [ -d "$HOME/.oh-my-zsh" ]; then
     printf "${NOTE} Oh My Zsh found. Creating a backup before uninstalling...${RESET}\n"
     # Perform backup using cp -r and create a backup directory with -backup suffix
-    mv "$HOME/.oh-my-zsh" "$HOME/.oh-my-zsh-backup"
+    cp -r "$HOME/.oh-my-zsh" "$HOME/.oh-my-zsh-backup"
     mv "$HOME/.zshrc" "$HOME/.zshrc-backup"
 
     printf "${NOTE} Backup created....${RESET}\n"
@@ -66,24 +66,48 @@ done
 
 # Install Oh My Zsh, plugins, and set zsh as default shell
 if command -v zsh >/dev/null; then
-    printf "${NOTE} Installing Oh My Zsh and plugins...\n"
-    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting || true
+  printf "${NOTE} Installing Oh My Zsh and plugins...\n"
+  sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
+	# Check if the directories exist before cloning the repositories
+	if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
+    	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions || true
+	else
+    	echo "Directory zsh-autosuggestions already exists. Skipping cloning."
+	fi
+
+	if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]; then
+    	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting || true
+	else
+    	echo "Directory zsh-syntax-highlighting already exists. Skipping cloning."
+	fi
+
     cp -r 'assets/.zshrc' ~/
     cp -r 'assets/.zprofile' ~/
 
     printf "${NOTE} Changing default shell to zsh...\n"
-    chsh -s $(which zsh) || true 2>&1 | tee -a "$LOG"
+
+	while ! chsh -s $(which zsh); do
+    	echo "${ERROR} Authentication failed. Please enter the correct password."
+    	sleep 1
+	done
+	printf "${NOTE} Shell changed successfully to zsh.\n" 2>&1 | tee -a "$LOG"
+
 fi
   printf "\n\n\n\n"
   
-#Pokemon Colorscripts  
-printf "${NOTE} Installing Pokemon-Colorscipts.\n"
-git clone https://gitlab.com/phoneybadger/pokemon-colorscripts.git
-cd pokemon-colorscripts
-sudo ./install.sh
-cd ..
+# Pokemon Colorscripts
+printf "${NOTE} Installing Pokemon-Colorscripts.\n"
 
+# Check if directory 'pokemon-colorscripts' exists
+if [ -d "pokemon-colorscripts" ]; then
+    echo "${OK} Directory 'pokemon-colorscripts' exists. Pulling changes..." 2>&1 | tee -a "$LOG"
+    cd pokemon-colorscripts && git pull 2>&1 | tee -a "$LOG"
+    sudo ./install.sh 2>&1 | tee -a "$LOG"
+else
+    git clone https://gitlab.com/phoneybadger/pokemon-colorscripts.git 2>&1 | tee -a "$LOG"
+    cd pokemon-colorscripts && sudo ./install.sh 2>&1 | tee -a "$LOG"
+fi
+
+cd ..
 
 clear
