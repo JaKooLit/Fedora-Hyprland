@@ -48,8 +48,8 @@ install_package() {
 if [ -d "$HOME/.oh-my-zsh" ]; then
     printf "${NOTE} Oh My Zsh found. Creating a backup before uninstalling...${RESET}\n"
     # Perform backup using cp -r and create a backup directory with -backup suffix
-    cp -r "$HOME/.oh-my-zsh" "$HOME/.oh-my-zsh-backup"
-    mv "$HOME/.zshrc" "$HOME/.zshrc-backup"
+    cp -r "$HOME/.oh-my-zsh" "$HOME/.oh-my-zsh-backup" || true
+    mv "$HOME/.zshrc" "$HOME/.zshrc-backup" || true
 
     printf "${NOTE} Backup created....${RESET}\n"
 fi
@@ -67,7 +67,11 @@ done
 # Install Oh My Zsh, plugins, and set zsh as default shell
 if command -v zsh >/dev/null; then
   printf "${NOTE} Installing Oh My Zsh and plugins...\n"
-  sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
+	if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  		sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
+	else
+		echo "Directory .oh-my-zsh already exists. Skipping re-installation."
+	fi
 	# Check if the directories exist before cloning the repositories
 	if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
     	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions || true
