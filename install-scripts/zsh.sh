@@ -56,7 +56,7 @@ fi
 
 # Installing zsh packages
 printf "${NOTE} Installing core zsh packages...${RESET}\n"
-for ZSH in zsh util-linux-user; do
+for ZSH in zsh util-linux; do
   install_package "$ZSH" 2>&1 | tee -a "$LOG"
   if [ $? -ne 0 ]; then
      echo -e "\e[1A\e[K${ERROR} - $ZSH install had failed, please check the install.log"

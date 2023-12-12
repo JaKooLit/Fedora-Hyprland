@@ -3,13 +3,12 @@
 fonts=(
 adobe-source-code-pro-fonts
 fira-code-fonts
-fontawesome-fonts
+fontawesome-fonts-all
 google-droid-sans-fonts
-google-noto-cjk-fonts
-google-noto-emoji-color-fonts
+google-noto-sans-cjk-fonts
+google-noto-color-emoji-fonts
 google-noto-emoji-fonts
 jetbrains-mono-fonts
-
 )
 
 
