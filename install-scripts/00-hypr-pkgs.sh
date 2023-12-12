@@ -26,6 +26,7 @@ hypr_package=(
   nano
   network-manager-applet
   openssl
+  pamixer
   pavucontrol
   pipewire-alsa
   playerctl

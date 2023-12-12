@@ -17,7 +17,6 @@ add_config_if_not_present "/etc/dnf/dnf.conf" "defaultyes=True"
 # COPR Repos and packages needed from them
 # solopasha/hyprland - most packages
 # en4aew/desktop-tools cliphist
-# notahat/pamixer pamixer
 # trs-sod/swaylock-effects swaylock-effects
 #  alebastr/sway-extras swww
 
@@ -29,7 +28,6 @@ sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-rel
 COPR_REPOS=(
 solopasha/hyprland
 en4aew/desktop-tools
-notahat/pamixer
 trs-sod/swaylock-effects
 alebastr/sway-extras  
 )
