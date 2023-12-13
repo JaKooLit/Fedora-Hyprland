@@ -40,7 +40,7 @@
 - Since the Hyprland-Dots are evolving, some of the screenshots maybe old
 
 ### ✨  Some notes on installation / Pre-requisites
-- install a backup tool like `snapper` or `timeshift`. and Backup your system before installing hyprland using this script. This script DOES not include uninstallation of packages as it may break your system due to shared packages / libraries.
+#### 💬 install a backup tool like `snapper` or `timeshift`. and Backup your system before installing hyprland using this script. This script does NOT include uninstallation of packages as it may break your system due to shared packages / libraries.
 - This install script was tested on Minimal Fedora using Fedora Everything [`Link`](https://youtu.be/_U_WR33XNYY)
 - This script is meant to install in any Fedora Work stations and its Spins.
 - if starting from scratch, recommended spin to install is the Sway Spin. However, I have tested this script in Fedora Workstation (gnome), Plasma Spin and Sway
