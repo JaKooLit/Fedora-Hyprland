@@ -1,5 +1,9 @@
 ## Changelogs
 
+## 16 Dec 2023
+- zsh theme switched to `agnoster` theme by default
+- pywal tty color change disabled by default
+
 ## 11 Dec 2023
 - Changing over to zsh automatically if user opted
 - If chose to install zsh and have no login manager, zsh auto login will auto start Hyprland
