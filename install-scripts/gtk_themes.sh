@@ -1,7 +1,7 @@
 #!/bin/bash
 
 engine=(
-    gtk-engine-murrine
+    gtk-murrine-engine
 )
 
 ############## WARNING DO NOT EDIT BEYOND THIS LINE if you dont know what you are doing! ######################################
