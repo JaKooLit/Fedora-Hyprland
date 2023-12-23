@@ -130,7 +130,6 @@ log into your account
 ### 👍👍👍 Thanks and Credits!
 - [`Hyprland`](https://hyprland.org/) Of course to Hyprland and @vaxerski for this awesome Dynamic Tiling Manager.
 - [`HYPRLAND COPR REPO`](https://copr.fedorainfracloud.org/coprs/solopasha/hyprland/) - a shout out to the one who created and maintaining Hyprland COPR Repo 
-- shout out to CooSee from Gentoo forums for the nice rainbow borders
 
 ## 💖 Support
 - a Star on my Github repos would be nice 🌟
