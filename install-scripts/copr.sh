@@ -29,7 +29,8 @@ COPR_REPOS=(
 solopasha/hyprland
 en4aew/desktop-tools
 trs-sod/swaylock-effects
-alebastr/sway-extras  
+alebastr/sway-extras
+erikreider/SwayNotificationCenter  
 )
 
 # Set some colors for output messages
