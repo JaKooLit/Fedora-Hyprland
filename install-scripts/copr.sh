@@ -1,7 +1,38 @@
 #!/bin/bash
+# 💫 https://github.com/JaKooLit 💫 #
+# COPR repo and tweaking of dnf #
 
-#tweak dnf
-# Function to add config if not present in a file
+# COPR Repos and packages needed from them
+# solopasha/hyprland - most packages
+# en4aew/desktop-tools cliphist
+# trs-sod/swaylock-effects swaylock-effects
+# alebastr/sway-extras swww
+# erikreider/SwayNotificationCenter swaync
+
+# List of COPR repositories to be added and enabled
+COPR_REPOS=(
+solopasha/hyprland
+en4aew/desktop-tools
+trs-sod/swaylock-effects
+alebastr/sway-extras
+erikreider/SwayNotificationCenter  
+)
+
+
+## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
+# Determine the directory where the script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Change the working directory to the parent directory of the script
+PARENT_DIR="$SCRIPT_DIR/.."
+cd "$PARENT_DIR" || exit 1
+
+source "$(dirname "$(readlink -f "$0")")/Global_functions.sh"
+
+# Set the name of the log file to include the current date and time
+LOG="Install-Logs/install-$(date +%d-%H%M%S)_copr.log"
+
+# Function to add dnf config if not present in a file
 add_config_if_not_present() {
   local file="$1"
   local config="$2"
@@ -13,42 +44,11 @@ add_config_if_not_present "/etc/dnf/dnf.conf" "max_parallel_downloads=5"
 add_config_if_not_present "/etc/dnf/dnf.conf" "fastestmirror=True"
 add_config_if_not_present "/etc/dnf/dnf.conf" "defaultyes=True"
 
-
-# COPR Repos and packages needed from them
-# solopasha/hyprland - most packages
-# en4aew/desktop-tools cliphist
-# trs-sod/swaylock-effects swaylock-effects
-#  alebastr/sway-extras swww
-
 # enabling 3rd party repo
-
 sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm &&
-
-# List of COPR repositories to be added and enabled
-COPR_REPOS=(
-solopasha/hyprland
-en4aew/desktop-tools
-trs-sod/swaylock-effects
-alebastr/sway-extras
-erikreider/SwayNotificationCenter  
-)
-
-# Set some colors for output messages
-OK="$(tput setaf 2)[OK]$(tput sgr0)"
-ERROR="$(tput setaf 1)[ERROR]$(tput sgr0)"
-NOTE="$(tput setaf 3)[NOTE]$(tput sgr0)"
-WARN="$(tput setaf 166)[WARN]$(tput sgr0)"
-CAT="$(tput setaf 6)[ACTION]$(tput sgr0)"
-ORANGE=$(tput setaf 166)
-YELLOW=$(tput setaf 3)
-RESET=$(tput sgr0)
-
-# Set the name of the log file to include the current date and time
-LOG="install-$(date +%d-%H%M%S)_copr.log"
 
 
 # Enable COPR Repositories 
-
 for repo in "${COPR_REPOS[@]}";do 
   sudo dnf copr enable -y "$repo" 2>&1 | tee -a "$LOG" || { printf "%s - Failed to enable necessary copr repos\n" "${ERROR}"; exit 1; }
 done

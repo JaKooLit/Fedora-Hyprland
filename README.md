@@ -79,7 +79,7 @@ chmod +x install.sh
 ```
 
 <p align="center">
-    <img align="center" width="100%" src="https://raw.githubusercontent.com/JaKooLit/Fedora-Hyprland/main/Fedora-Installer.png" />
+    <img align="center" width="100%" src="https://raw.githubusercontent.com/JaKooLit/Fedora-Hyprland/main/Fedora-Install.png" />
 
 #### ✨ for ZSH and OH-MY-ZSH installation
 > installer should auto change your default shell to zsh. However, if it does not, do this
@@ -98,7 +98,6 @@ source ~/.zshrc
 - SUPER H for HINT or click on the waybar HINT! Button 
 - Head over to [FAQ](https://github.com/JaKooLit/Hyprland-Dots/wiki/FAQ) and [TIPS](https://github.com/JaKooLit/Hyprland-Dots/wiki/TIPS)
 
-
 #### ✨ Packages that are manually downloaded and build. These packages will not be updated by dnf and have to be manually updated
 - nwg-look [`LINK`](https://github.com/nwg-piotr/nwg-look)
 - a.) to update this package, in your installation folder, you can move that folder (nwg-look) or download manually, cd into it, and ran git pull && sudo make install
@@ -109,6 +108,10 @@ source ~/.zshrc
 #### 🙋 👋 Having issues or questions? 
 - for the install part, kindly open issue on this repo
 - for the Pre-configured Hyprland dots / configuration, submit issue [`here`](https://github.com/JaKooLit/Hyprland-Dots/issues)
+
+#### 🔧 Proper way to re-installing a particular script from install-scripts folder
+- CD into Fedora-Hyprland Folder and then ran the below command. 
+- i.e. `./install-scripts/gtk-themes` - For reinstall GTK Themes. 
 
 #### 🛣️ Roadmap:
 - ~~[ ] Install zsh and oh-my-zsh without necessary steps above~~ DONE 

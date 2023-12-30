@@ -32,6 +32,11 @@ if [ "$proceed" != "y" ]; then
     exit 1
 fi
 
+# Create Directory for Install Logs
+if [ ! -d Install-Logs ]; then
+    mkdir Install-Logs
+fi
+
 # Set some colors for output messages
 OK="$(tput setaf 2)[OK]$(tput sgr0)"
 ERROR="$(tput setaf 1)[ERROR]$(tput sgr0)"
@@ -113,25 +118,25 @@ execute_script() {
 
 # Collect user responses to all questions
 printf "\n"
-ask_yes_no "-Do you have nvidia gpu?" nvidia
+ask_yes_no "-Do you have any nvidia gpu in your system?" nvidia
 printf "\n"
-ask_yes_no "-Install GTK themes (required for Dark/Light function)?" gtk_themes
+ask_yes_no "-Install GTK themes? (required for Dark/Light function)" gtk_themes
 printf "\n"
 ask_yes_no "-Do you want to configure Bluetooth?" bluetooth
 printf "\n"
 ask_yes_no "-Do you want to install Thunar file manager?" thunar
 printf "\n"
-ask_yes_no "-Installing on Asus ROG Laptops?" rog
+ask_yes_no "-Install & configure SDDM log-in Manager plus (OPTIONAL) SDDM Theme?" sddm
 printf "\n"
-ask_yes_no "-Install and configure SDDM log-in Manager?" sddm
+ask_yes_no "-Install XDG-DESKTOP-PORTAL-HYPRLAND? (for proper Screen Share ie OBS)" xdph
 printf "\n"
-ask_yes_no "Install XDG-DESKTOP-PORTAL-HYPRLAND? (for proper Screen Share ie OBS)" xdph
+ask_yes_no "-Install zsh & oh-my-zsh plus (OPTIONAL) pokemon-colorscripts?" zsh
 printf "\n"
-ask_yes_no "-Install zsh, oh-my-zsh & pokemon-colorscripts?" zsh
+ask_yes_no "-Install nwg-look? (Theming app / lxappearance-like) WARNING Package takes abit long to install" nwg
 printf "\n"
-ask_yes_no "-Do you want to install nwg-look? (GTK Theming app - lxappearance-like)" nwg
+ask_yes_no "-Installing on ASUS ROG Laptops?" rog
 printf "\n"
-ask_yes_no "-Do you want to copy Hyprland dotfiles?" dots
+ask_yes_no "-Do you want to download and install pre-configured Hyprland dotfiles?" dots
 printf "\n"
 
 # Ensuring all in the scripts folder are made executable
@@ -162,10 +167,6 @@ if [ "$thunar" == "Y" ]; then
     execute_script "thunar.sh"
 fi
 
-if [ "$rog" == "Y" ]; then
-    execute_script "rog.sh"
-fi
-
 if [ "$sddm" == "Y" ]; then
     execute_script "sddm.sh"
 fi
@@ -176,6 +177,10 @@ fi
 
 if [ "$zsh" == "Y" ]; then
     execute_script "zsh.sh"
+fi
+
+if [ "$rog" == "Y" ]; then
+    execute_script "rog.sh"
 fi
 
 if [ "$nwg" == "Y" ]; then
