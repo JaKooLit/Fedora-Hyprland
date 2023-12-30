@@ -43,7 +43,9 @@ if [ -f Hyprland-Dots.tar.gz ]; then
   fi
 fi
 
-printf "${NOTE} Downloading the latest Hyprland source code release...\n"
+printf "\n"
+
+printf "${NOTE} Downloading the latest Hyprland-Dots source code release...\n"
 
 # Fetch the tag name for the latest release using the GitHub API
 latest_tag=$(curl -s https://api.github.com/repos/JaKooLit/Hyprland-Dots/releases/latest | grep "tag_name" | cut -d '"' -f 4)
