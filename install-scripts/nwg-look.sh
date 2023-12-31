@@ -22,6 +22,7 @@ source "$(dirname "$(readlink -f "$0")")/Global_functions.sh"
 
 # Set the name of the log file to include the current date and time
 LOG="Install-Logs/install-$(date +%d-%H%M%S)_nwg-look.log"
+MLOG="install-$(date +%d-%H%M%S)_nwg-look2.log"
 
 # Installing NWG-Look Dependencies
 for PKG1 in "${nwg_look[@]}"; do
@@ -33,13 +34,33 @@ for PKG1 in "${nwg_look[@]}"; do
 done
 
 printf "${NOTE} Installing nwg-look\n"
-if git clone https://github.com/nwg-piotr/nwg-look.git; then
-  cd nwg-look
-  make build
-  sudo make install 2>&1 | tee -a "$LOG"
-  cd ..
+# Check if nwg-look directory exists
+if [ -d "nwg-look" ]; then
+  printf "${INFO} nwg-look directory already exists. Updating...\n"
+  cd nwg-look || exit 1
+  git stash
+  git pull
 else
-  echo -e "${ERROR} Download failed for nwg-look." 2>&1 | tee -a "$LOG"
+  # Clone nwg-look repository if directory doesn't exist
+  if git clone https://github.com/nwg-piotr/nwg-look.git; then
+    cd nwg-look || exit 1
+  else
+    echo -e "${ERROR} Download failed for nwg-look." 2>&1 | tee -a "$LOG"
+    mv "$MLOG" ../Install-Logs/ || true
+    exit 1
+  fi
 fi
+
+# Build nwg-look
+make build
+if sudo make install 2>&1 | tee -a "$MLOG"; then
+  printf "${OK} nwg-look installed successfully.\n" 2>&1 | tee -a "$MLOG"
+else
+  echo -e "${ERROR} Installation failed for nwg-look" 2>&1 | tee -a "$MLOG"
+fi
+
+# Move logs to Install-Logs directory
+mv "$MLOG" ../Install-Logs/ || true
+cd ..
 
 clear
