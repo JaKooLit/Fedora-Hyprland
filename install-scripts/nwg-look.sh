@@ -3,7 +3,7 @@
 # NWG-LOOK (GTK-Settings) - an lxappearance like #
 
 nwg_look=(
-go
+golang
 gtk3
 gtk3-devel
 cairo-devel
