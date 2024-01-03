@@ -5,7 +5,7 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/JaKooLit/Fedora-Hyprland?style=for-the-badge&color=cba6f7) ![GitHub last commit](https://img.shields.io/github/last-commit/JaKooLit/Fedora-Hyprland?style=for-the-badge&color=b4befe) ![GitHub repo size](https://img.shields.io/github/repo-size/JaKooLit/Fedora-Hyprland?style=for-the-badge&color=cba6f7)
 
 <br/>
-</div>!
+</div>
 
 #### 📷 Hyprland-Dots-v2 Featuring Rofi 
 <p align="center">
