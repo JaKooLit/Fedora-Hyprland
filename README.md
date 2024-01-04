@@ -22,6 +22,9 @@
 
 ![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/Hyprland-Nobara.png)
 
+> [!NOTE]
+> It does not work with Nobara 39
+
 #### 📸 More up to date screenshots [`Link`](https://github.com/JaKooLit/screenshots/tree/main/Hyprland-Dots-Showcase)
 
 ####  📷 Older Screenshots [`V1`](https://github.com/JaKooLit/screenshots/tree/main/Hyprland-ScreenShots/Fedora) & [`V2`](https://github.com/JaKooLit/screenshots/tree/main/Hyprland-ScreenShots/Fedora-v2)
