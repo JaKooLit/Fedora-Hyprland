@@ -139,8 +139,9 @@ log into your account
 
 - Fedora Sway Specific - swaylock conflicts with swaylock-effects. Lock screen would be only white. If decided to remove swaylock in favor with swaylock-effects, sway will be removed. So care
 
-- if you want to use nouveau, or if you have a fairly old nvidia card, you may want to remove the blacklist nouveau by editing your `/etc/default/grub` . See [`here`](https://github.com/JaKooLit/Fedora-Hyprland/issues/20)
-
+#### 🫥 Improving performance for Older Nvidia Cards using driver 470
+  - [`SEE HERE`](https://github.com/JaKooLit/Hyprland-Dots/discussions/123#discussion-6035205)
+  
 #### 📒 Final Notes
 - join my discord channel [`Discord`](https://discord.gg/V2SJ92vbEN)
 - Feel free to copy, re-distribute, and use this script however you want. Would appreciate if you give me some loves by crediting my work :)
