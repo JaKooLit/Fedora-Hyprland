@@ -60,7 +60,6 @@ hypr_package_2=(
   mpv-mpris
   nvtop
   vim-enhanced
-  wlsunset
 )
 
 copr_packages=(
