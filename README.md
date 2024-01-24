@@ -83,8 +83,8 @@ cd Fedora-Hyprland
 chmod +x install.sh
 ./install.sh
 ```
-
-#### ✨ install on nobara linux
+#### ⚠️ use the fedora script for nobara linux 38 and below.
+#### ✨ install on nobara linux 39 and above 
 > clone this repo (latest commit only) to reduce file size download by using git. Change directory, make executable and run the script
 ```bash
 git clone --depth=1 https://github.com/JaKooLit/Fedora-Hyprland.git
