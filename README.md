@@ -23,7 +23,7 @@
 ![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/Hyprland-Nobara.png)
 
 > [!NOTE]
-> It might or might not work with nobara 39.
+> for nobara 39 and above use the script right below the fedora one.
 
 #### 📸 More up to date screenshots [`Link`](https://github.com/JaKooLit/screenshots/tree/main/Hyprland-Dots-Showcase)
 
@@ -93,6 +93,8 @@ cd nobara-linux
 chmod +x install.sh
 ./install.sh
 ```
+#### ✨ nobara linux version made with ❤️ by user1126s 
+ 
 
 <p align="center">
     <img align="center" width="100%" src="https://raw.githubusercontent.com/JaKooLit/Fedora-Hyprland/main/Fedora-Install.png" />
