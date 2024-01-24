@@ -1,5 +1,11 @@
 ## Changelogs
 
+## 24th Jan 2024
+- add support for nobara linux without breaking existing script.
+- move the scripts for nobara linux to the nobara-linux subfolder
+- update readme to include the nobara script as an option for nobara 39 and above
+- everything above done by user1126s
+
 ## 11 Jan 2024
 - dropped wlsunset
 
