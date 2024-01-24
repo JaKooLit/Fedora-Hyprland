@@ -23,7 +23,7 @@
 ![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/Hyprland-Nobara.png)
 
 > [!NOTE]
-> It does not work with Nobara 39
+> It might or might not work with nobara 39.
 
 #### 📸 More up to date screenshots [`Link`](https://github.com/JaKooLit/screenshots/tree/main/Hyprland-Dots-Showcase)
 
@@ -75,11 +75,21 @@
 > [!IMPORTANT]
 > If you want to use nouveau driver, choose N when asked if you have nvidia gpu. This is because the nvidia installer part, it will blacklist nouveau. Hyprland will still be installed but it will skip blacklisting nouveau.
 
-#### ✨ to run
+#### ✨ install on fedora
 > clone this repo (latest commit only) to reduce file size download by using git. Change directory, make executable and run the script
 ```bash
 git clone --depth=1 https://github.com/JaKooLit/Fedora-Hyprland.git
 cd Fedora-Hyprland
+chmod +x install.sh
+./install.sh
+```
+
+#### ✨ install on nobara linux
+> clone this repo (latest commit only) to reduce file size download by using git. Change directory, make executable and run the script
+```bash
+git clone --depth=1 https://github.com/JaKooLit/Fedora-Hyprland.git
+cd Fedora-Hyprland
+cd nobara-linux
 chmod +x install.sh
 ./install.sh
 ```
