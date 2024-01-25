@@ -22,8 +22,6 @@
 
 ![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/Hyprland-Nobara.png)
 
-> [!NOTE]
-> for nobara 39 and above use the script right below the fedora one.
 
 #### 📸 More up to date screenshots [`Link`](https://github.com/JaKooLit/screenshots/tree/main/Hyprland-Dots-Showcase)
 
@@ -87,13 +85,12 @@ chmod +x install.sh
 #### ✨ install on nobara linux 39 and above 
 > clone this repo (latest commit only) to reduce file size download by using git. Change directory, make executable and run the script
 ```bash
-git clone --depth=1 https://github.com/JaKooLit/Fedora-Hyprland.git
+git clone --depth=1 -b development https://github.com/JaKooLit/Fedora-Hyprland.git
 cd Fedora-Hyprland
 cd nobara-linux
 chmod +x install.sh
 ./install.sh
 ```
-#### ✨ nobara linux version made with ❤️ by user1126s 
  
 
 <p align="center">
