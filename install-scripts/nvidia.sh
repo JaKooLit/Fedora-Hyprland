@@ -9,6 +9,13 @@ nvidia_pkg=(
   libva-nvidia-driver
 )
 
+hyprland_pkg=(
+  hyprland
+  hyprcursor
+)
+
+
+
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
 # Determine the directory where the script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -29,9 +36,11 @@ fi
 LOG="Install-Logs/install-$(date +%d-%H%M%S)_nvidia.log"
 
 
-# Install Hprland Nvidia git
+# Install Hprland Nvidia
 printf "${YELLOW} Installing Hyprland-git...\n"
   for NvHYPR in hyprland-git; do
+printf "${YELLOW} Installing Hyprland...\n"
+  for NvHYPR in "${hyprland_pkg[@]}"; do
     install_package "$NvHYPR" 2>&1 | tee -a "$LOG"
   done
 
