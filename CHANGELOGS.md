@@ -1,5 +1,10 @@
 ## Changelogs
 
+<<<<<<< main
+## 20 Apr 2024
+- Change default Oh-my-zsh theme to xiong-chiamiov-plus
+- updated nvidia.sh (added hyprcursor and changed to hyprland only from git for nvidia)
+
 ## 11 Jan 2024
 - dropped wlsunset
 
