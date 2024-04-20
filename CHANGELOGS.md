@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 20 Apr 2024
+- Change default Oh-my-zsh theme to xiong-chiamiov-plus
+
 ## 11 Jan 2024
 - dropped wlsunset
 
