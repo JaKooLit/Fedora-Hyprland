@@ -1,6 +1,8 @@
 ## Changelogs
 
-<<<<<<< main
+## 23 Apr 2024
+- Dropping swayidle and swaylock in favor of hypridle and hyprlock
+
 ## 20 Apr 2024
 - Change default Oh-my-zsh theme to xiong-chiamiov-plus
 - updated nvidia.sh (added hyprcursor and changed to hyprland only from git for nvidia)
