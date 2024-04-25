@@ -5,7 +5,6 @@
 # COPR Repos and packages needed from them
 # solopasha/hyprland - most packages
 # en4aew/desktop-tools cliphist
-# trs-sod/swaylock-effects swaylock-effects
 # alebastr/sway-extras swww
 # erikreider/SwayNotificationCenter swaync
 
@@ -13,7 +12,6 @@
 COPR_REPOS=(
 solopasha/hyprland
 en4aew/desktop-tools
-trs-sod/swaylock-effects
 alebastr/sway-extras
 erikreider/SwayNotificationCenter  
 )
