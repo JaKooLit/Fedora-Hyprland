@@ -58,9 +58,11 @@ sudo cp assets/hyprland.desktop "$wayland_sessions_dir/" 2>&1 | tee -a "$LOG"
 clear
     
 # SDDM-themes
+printf "\n%s - NOTE!! Custom Theme is broken in Fedora 40! You have been warned. \n" "${NOTE}"
+printf "\n"
 valid_input=false
 while [ "$valid_input" != true ]; do
-  read -n 1 -r -p "${CAT} OPTIONAL - Would you like to install SDDM themes? (y/n)" install_sddm_theme
+  read -n 1 -r -p "${CAT} OPTIONAL - Would you like to install SDDM themes? SEE above NOTE above!! (y/n)" install_sddm_theme
   if [[ $install_sddm_theme =~ ^[Yy]$ ]]; then
     printf "\n%s - Installing Simple SDDM Theme\n" "${NOTE}"
 
