@@ -37,7 +37,6 @@ hypr_package=(
   rofi-wayland
   slurp
   swappy
-  swayidle
   SwayNotificationCenter
   waybar
   wget
@@ -64,8 +63,9 @@ hypr_package_2=(
 
 copr_packages=(
   cliphist
+  hypridle
+  hyprlock
   pamixer
-  swaylock-effects
   swww
 )
 
