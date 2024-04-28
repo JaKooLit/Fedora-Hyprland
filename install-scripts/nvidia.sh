@@ -37,8 +37,6 @@ LOG="Install-Logs/install-$(date +%d-%H%M%S)_nvidia.log"
 
 
 # Install Hprland Nvidia
-printf "${YELLOW} Installing Hyprland-git...\n"
-  for NvHYPR in hyprland-git; do
 printf "${YELLOW} Installing Hyprland...\n"
   for NvHYPR in "${hyprland_pkg[@]}"; do
     install_package "$NvHYPR" 2>&1 | tee -a "$LOG"

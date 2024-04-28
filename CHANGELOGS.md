@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 28 Apr 2024
+- Fixed nvidia.sh
+
 ## 26 Apr 2024
 - Updated sddm.sh for Qt6 variant
 
