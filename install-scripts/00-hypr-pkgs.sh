@@ -27,6 +27,7 @@ hypr_package=(
   pamixer
   pavucontrol
   pipewire-alsa
+  pipewire-utils
   playerctl
   polkit-gnome
   python3-requests
