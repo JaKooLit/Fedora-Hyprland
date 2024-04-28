@@ -53,6 +53,9 @@
 > [!NOTE]
 > Main reason why I have not included an uninstallation script is simple. Some packages maybe already installed on your system by default. If I create an uninstall script with packages that I have set to install, you may end up a unrecoverable system. 
 
+> [!WARNING] 
+> Download this script on a directory where you have write permissions. ie. HOME. Or any directory within your home directory. Else script will fail
+
 #### ✨  Some notes on installation / Pre-requisites
 - This install script was tested on Minimal Fedora using Fedora Everything [`Link`](https://youtu.be/_U_WR33XNYY)
 - This script is meant to install in any Fedora Work stations and its Spins.
@@ -82,8 +85,8 @@
 #### ✨ to run
 > clone this repo (latest commit only) to reduce file size download by using git. Change directory, make executable and run the script
 ```bash
-git clone --depth=1 https://github.com/JaKooLit/Fedora-Hyprland.git
-cd Fedora-Hyprland
+git clone --depth=1 https://github.com/JaKooLit/Fedora-Hyprland.git ~/Fedora-Hyprland
+cd ~/Fedora-Hyprland
 chmod +x install.sh
 ./install.sh
 ```
