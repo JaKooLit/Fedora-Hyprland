@@ -170,3 +170,8 @@ log into your account
 
 #### 📹 📹 Youtube videos (Click to view and watch the playlist)
 [![Youtube Playlist Thumbnail](https://raw.githubusercontent.com/JaKooLit/screenshots/main/Youtube.png)](https://youtube.com/playlist?list=PLDtGd5Fw5_GjXCznR0BzCJJDIQSZJRbxx&si=iaNjLulFdsZ6AV-t)
+
+## 🥰🥰 💖💖 👍👍👍
+[![Stargazers over time](https://starchart.cc/JaKooLit/Fedora-Hyprland.svg?variant=adaptive)](https://starchart.cc/JaKooLit/Fedora-Hyprland)
+
+                    
