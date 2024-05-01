@@ -10,6 +10,9 @@ cairo-devel
 glib-devel
 )
 
+# specific tags to download
+nwg_tag="v0.2.7"
+
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
 # Determine the directory where the script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -34,33 +37,31 @@ for PKG1 in "${nwg_look[@]}"; do
 done
 
 printf "${NOTE} Installing nwg-look\n"
-# Check if nwg-look directory exists
+
+# Check if nwg-look folder exists and remove it
 if [ -d "nwg-look" ]; then
-  printf "${INFO} nwg-look directory already exists. Updating...\n"
-  cd nwg-look || exit 1
-  git stash
-  git pull
-else
-  # Clone nwg-look repository if directory doesn't exist
-  if git clone https://github.com/nwg-piotr/nwg-look.git; then
+    printf "${NOTE} Removing existing nwg-look folder...\n"
+    rm -rf "nwg-look"
+fi
+
+# Clone nwg-look repository with the specified tag
+if git clone --recursive -b "$nwg_tag" --depth 1 https://github.com/nwg-piotr/nwg-look.git; then
     cd nwg-look || exit 1
-  else
-    echo -e "${ERROR} Download failed for nwg-look." 2>&1 | tee -a "$LOG"
+    # Build nwg-look
+    make build
+    if sudo make install 2>&1 | tee -a "$MLOG"; then
+        printf "${OK} nwg-look installed successfully.\n" 2>&1 | tee -a "$MLOG"
+    else
+        echo -e "${ERROR} Installation failed for nwg-look" 2>&1 | tee -a "$MLOG"
+    fi
+
+    # Move logs to Install-Logs directory
+    mv "$MLOG" ../Install-Logs/ || true
+    cd ..
+else
+    echo -e "${ERROR} Failed to download nwg-look. Please check your connection" 2>&1 | tee -a "$LOG"
     mv "$MLOG" ../Install-Logs/ || true
     exit 1
-  fi
 fi
-
-# Build nwg-look
-make build
-if sudo make install 2>&1 | tee -a "$MLOG"; then
-  printf "${OK} nwg-look installed successfully.\n" 2>&1 | tee -a "$MLOG"
-else
-  echo -e "${ERROR} Installation failed for nwg-look" 2>&1 | tee -a "$MLOG"
-fi
-
-# Move logs to Install-Logs directory
-mv "$MLOG" ../Install-Logs/ || true
-cd ..
 
 clear
