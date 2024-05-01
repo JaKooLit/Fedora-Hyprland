@@ -32,7 +32,7 @@ MLOG="install-$(date +%d-%H%M%S)_nwg-look2.log"
 for PKG1 in "${nwg_look[@]}"; do
   install_package "$PKG1" 2>&1 | tee -a "$LOG"
   if [ $? -ne 0 ]; then
-    echo -e "\033[1A\033[K${ERROR} - $PKG1 install had failed, please check the install.log"
+    echo -e "\033[1A\033[K${ERROR} - $PKG1 Package installation failed, Please check the installation logs"
     exit 1
   fi
 done
