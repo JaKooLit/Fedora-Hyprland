@@ -146,13 +146,10 @@ chmod +x install-scripts/*
 execute_script "copr.sh"
 execute_script "00-hypr-pkgs.sh"
 execute_script "fonts.sh"
+execute_script "hyprland.sh"
 
 if [ "$nvidia" == "Y" ]; then
     execute_script "nvidia.sh"
-fi
-
-if [ "$nvidia" == "N" ]; then
-    execute_script "hyprland.sh"
 fi
 
 if [ "$gtk_themes" == "Y" ]; then
