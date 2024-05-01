@@ -11,6 +11,7 @@ glib-devel
 )
 
 # specific tags to download
+# for fedora 38 & 39, change this tag to v0.2.6
 nwg_tag="v0.2.7"
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##

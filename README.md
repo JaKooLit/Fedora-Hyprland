@@ -69,6 +69,9 @@
 #### ⚠️ WARNING! nwg-look takes long time to install. 
 - nwg-look is a utility to costumize your GTK theme. It's a LXAppearance like. Its a good tool though but this package is entirely optional
 
+> [!NOTE]
+> For Fedora 38 & 39, edit `install-scripts/nwg-look.sh` Line 15, edit tag to `v0.2.6`. v0.2.7 wont build as it needs a higher golang version
+
 #### ✨ Costumize the packages and COPR Repos
 - inside the install-scripts folder, you can edit 00-hypr-pkgs.sh, copr.sh, etc. Care though as the Hyprland Dots might not work properly
 - default GTK theme if agreed to be installed is Tokyo night GTK themes (dark and light) + Tokyo night SE icons + Bibata Cursor
@@ -82,7 +85,7 @@
 > [!IMPORTANT]
 > If you want to use nouveau driver, choose N when asked if you have nvidia gpu. This is because the nvidia installer part, it will blacklist nouveau. Hyprland will still be installed but it will skip blacklisting nouveau.
 
-#### ✨ to run
+## ✨ to use this script
 > clone this repo (latest commit only) to reduce file size download by using git. Change directory, make executable and run the script
 ```bash
 git clone --depth=1 https://github.com/JaKooLit/Fedora-Hyprland.git ~/Fedora-Hyprland
