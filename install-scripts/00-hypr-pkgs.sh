@@ -40,7 +40,7 @@ hypr_package=(
   swappy
   SwayNotificationCenter
   waybar
-  wget
+  wget2
   wl-clipboard
   wlogout
   xdg-user-dirs
