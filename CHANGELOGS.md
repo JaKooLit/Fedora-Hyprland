@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 02 May 2024
+- Added pyprland (hyprland plugin)
+
 ## 28 Apr 2024
 - Fixed nvidia.sh
 

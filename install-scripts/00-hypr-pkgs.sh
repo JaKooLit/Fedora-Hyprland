@@ -67,6 +67,7 @@ copr_packages=(
   hypridle
   hyprlock
   pamixer
+  pyprland
   swww
 )
 
