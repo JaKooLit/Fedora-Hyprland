@@ -32,6 +32,7 @@ hypr_package=(
   polkit-gnome
   python3-requests
   python3-pip
+  python-pyquery
   qt5ct
   qt6ct
   qt6-qtsvg
