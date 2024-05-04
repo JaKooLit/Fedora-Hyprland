@@ -109,10 +109,9 @@ source ~/.zshrc
 - to change the theme, edit ~/.zshrc ZSH_THEME="desired theme"
 
 #### ✨ TO DO once installation done and dotfiles copied
-- ~~if you opted to install gtk themes, to apply the theme and icon, press the dark/light button (beside the padlock). To apply Bibata modern ice cursor, launch nwg-look (GTK Settings) through rofi.~~ Hyprland-Dots v2.1.18, initial boot file will attempt to apply GTK themes,cursor, and icons. You can tweak more using nwg-look (GTK-Settings) utility
-
 - SUPER H for HINT or click on the waybar HINT! Button 
 - Head over to [FAQ](https://github.com/JaKooLit/Hyprland-Dots/wiki/FAQ) and [TIPS](https://github.com/JaKooLit/Hyprland-Dots/wiki/TIPS)
+- NVIDIA users / owners, after installation, check [`THIS`](https://github.com/JaKooLit/Hyprland-Dots/wiki/Notes_to_remember#--for-nvidia-gpu-users)
 
 #### ✨ Packages that are manually downloaded and build. These packages will not be updated by dnf and have to be manually updated
 - nwg-look [`LINK`](https://github.com/nwg-piotr/nwg-look)
@@ -130,7 +129,6 @@ source ~/.zshrc
 - i.e. `./install-scripts/gtk-themes` - For reinstall GTK Themes. 
 
 #### 🛣️ Roadmap:
-- ~~[ ] Install zsh and oh-my-zsh without necessary steps above~~ DONE 
 - [ ] possibly adding gruvbox themes, cursors, icons
 
 #### ❗ some known issues for nvidia
