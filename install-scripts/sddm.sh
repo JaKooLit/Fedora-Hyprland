@@ -5,7 +5,7 @@
 sddm=(
 	sddm
   qt6-qt5compat 
-  qt6-declarative 
+  qt6-qtdeclarative 
   qt6-qtsvg
 )
 
