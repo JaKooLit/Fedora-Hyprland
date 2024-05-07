@@ -64,6 +64,7 @@ hypr_package_2=(
 )
 
 copr_packages=(
+  aylurs-gtk-shell
   cliphist
   hypridle
   hyprlock
