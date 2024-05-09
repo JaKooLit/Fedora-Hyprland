@@ -13,6 +13,7 @@ Extra=(
 # packages neeeded
 hypr_package=( 
   curl
+  gawk
   git
   grim
   gvfs
