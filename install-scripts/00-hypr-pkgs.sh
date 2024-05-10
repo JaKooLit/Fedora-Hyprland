@@ -117,9 +117,4 @@ for PKG in "${uninstall[@]}"; do
   fi
 done
 
-## Installing pywal colors
-printf "\n%s - Installing Pywal.... \n" "${NOTE}"
-
-sudo pip3 install pywal 2>&1 | tee -a "$LOG"
-
 clear
