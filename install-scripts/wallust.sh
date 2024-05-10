@@ -3,6 +3,7 @@
 # wallust - pywal colors replacement #
 
 depend=(
+cargo
 imagemagick
 )
 
@@ -46,7 +47,7 @@ printf "${NOTE} Installing wallust...\n"
 if git clone --depth 1 -b $wal_tag https://codeberg.org/explosion-mental/wallust.git; then
     cd wallust || exit 1
 	make
-    if sudo cmake --install 2>&1 | tee -a "$MLOG" ; then
+    if sudo make install 2>&1 | tee -a "$MLOG" ; then
         printf "${OK} wallust installed successfully.\n" 2>&1 | tee -a "$MLOG"
     else
         echo -e "${ERROR} Installation failed for wallust." 2>&1 | tee -a "$MLOG"
