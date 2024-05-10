@@ -7,6 +7,17 @@
 <br/>
 </div>
 
+## Show Case
+
+
+https://github.com/JaKooLit/Fedora-Hyprland/assets/85185940/000e384a-f25b-4902-9876-3190c1d994eb
+
+
+### Gallery and Videos
+<details>
+<summary>
+📷 Screenshots
+</summary>
 #### 📷 Hyprland-Dots-v2 Featuring Rofi 
 <p align="center">
     <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Hyprland-ScreenShots/Fedora-v2/rofi.png" /> <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Hyprland-ScreenShots/Fedora-v2/Light.png" />   
@@ -18,13 +29,18 @@
    <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Hyprland-Dots-Showcase/waybar-layout.png" /> <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Hyprland-Dots-Showcase/waybar-style.png"" /> 
 </p>
 
-#### ❕ Installed on Fedora 40 👍
+<summary>
+Installed on Fedora 40 👍
+</summary>
  <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Distro-Hyprland/Fedora/Fedora-40.png" />
 
-
-#### ❕ Installed on Nobara 38 🥰
+<summary>
+Installed on Nobara 38 🥰
+</summary>
 
 ![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/Hyprland-Nobara.png)
+</details>
+
 
 > [!NOTE]
 > It does not work with Nobara 39
