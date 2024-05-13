@@ -13,6 +13,7 @@ Extra=(
 # packages neeeded
 hypr_package=( 
   curl
+  gawk
   git
   grim
   gvfs
@@ -64,6 +65,7 @@ hypr_package_2=(
 )
 
 copr_packages=(
+  aylurs-gtk-shell
   cliphist
   hypridle
   hyprlock
@@ -114,10 +116,5 @@ for PKG in "${uninstall[@]}"; do
     exit 1
   fi
 done
-
-## Installing pywal colors
-printf "\n%s - Installing Pywal.... \n" "${NOTE}"
-
-sudo pip3 install pywal 2>&1 | tee -a "$LOG"
 
 clear

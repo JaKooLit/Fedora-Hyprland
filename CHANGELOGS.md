@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 10 May 2024
+- added wallust-git and remove python-pywal for migration to wallust on Hyprland-Dots v2.2.11
+
 ## 03 May 2024
 - added python3-pyquery for new weather-waybar python based on Hyprland-Dots
 
