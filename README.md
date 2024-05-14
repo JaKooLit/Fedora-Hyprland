@@ -131,7 +131,7 @@ source ~/.zshrc
 
 #### ✨ Packages that are manually downloaded and build. These packages will not be updated by dnf and have to be manually updated
 - nwg-look [`LINK`](https://github.com/nwg-piotr/nwg-look)
-- a.) to update this package, in your installation folder, you can move that folder (nwg-look) or download manually, cd into it, and ran git pull && sudo make install
+- wallust [`LINK`](https://codeberg.org/explosion-mental/wallust)
 
 #### 🙋 Got a questions regarding the Hyprland Dots or configurations? 🙋
 - Head over to wiki Link [`WIKI`](https://github.com/JaKooLit/Hyprland-Dots/wiki)
