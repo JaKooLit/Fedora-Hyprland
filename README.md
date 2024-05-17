@@ -35,15 +35,18 @@ Installed on Fedora 40 👍
  <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Distro-Hyprland/Fedora/Fedora-40.png" />
 
 <summary>
+Installed on Nobara 39 🥰
+</summary>
+
+![alt text](https://github.com/JaKooLit/screenshots/blob/main/Distro-Hyprland/Fedora/nobara39.png)
+
+<summary>
 Installed on Nobara 38 🥰
 </summary>
 
 ![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/Hyprland-Nobara.png)
 </details>
 
-
-> [!NOTE]
-> It does not work with Nobara 39
 
 #### 📸 More up to date screenshots [`Link`](https://github.com/JaKooLit/screenshots/tree/main/Hyprland-Dots-Showcase)
 
@@ -85,8 +88,9 @@ Installed on Nobara 38 🥰
 #### ⚠️ WARNING! nwg-look takes long time to install. 
 - nwg-look is a utility to costumize your GTK theme. It's a LXAppearance like. Its a good tool though but this package is entirely optional
 
-> [!NOTE]
-> For Fedora 38 & 39, edit `install-scripts/nwg-look.sh` Line 15, edit tag to `v0.2.6`. v0.2.7 wont build as it needs a higher golang version
+> [!IMPORTANT]
+> For Fedora 38 & 39, including nobara 38 & 39 and all based to Fedora 38 & 39:
+> edit `install-scripts/nwg-look.sh` Line 15, edit tag to `v0.2.6`. nwg-look v0.2.7 wont build as it needs a higher golang version
 
 #### ✨ Costumize the packages and COPR Repos
 - inside the install-scripts folder, you can edit 00-hypr-pkgs.sh, copr.sh, etc. Care though as the Hyprland Dots might not work properly
@@ -131,7 +135,7 @@ source ~/.zshrc
 
 #### ✨ Packages that are manually downloaded and build. These packages will not be updated by dnf and have to be manually updated
 - nwg-look [`LINK`](https://github.com/nwg-piotr/nwg-look)
-- a.) to update this package, in your installation folder, you can move that folder (nwg-look) or download manually, cd into it, and ran git pull && sudo make install
+- wallust [`LINK`](https://codeberg.org/explosion-mental/wallust)
 
 #### 🙋 Got a questions regarding the Hyprland Dots or configurations? 🙋
 - Head over to wiki Link [`WIKI`](https://github.com/JaKooLit/Hyprland-Dots/wiki)
