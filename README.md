@@ -38,8 +38,7 @@ Installed on Fedora 40 👍
 Installed on Nobara 39 🥰
 </summary>
 
-![alt text](https://github.com/JaKooLit/screenshots/blob/main/screenShots/Fedora/nobara39.png)
-</details>
+![alt text](https://github.com/JaKooLit/screenshots/blob/main/Distro-Hyprland/Fedora/nobara39.png)
 
 <summary>
 Installed on Nobara 38 🥰
