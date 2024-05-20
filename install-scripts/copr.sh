@@ -4,18 +4,13 @@
 
 # COPR Repos and packages needed from them
 # solopasha/hyprland - most packages
-# en4aew/desktop-tools cliphist
-# alebastr/sway-extras swww
 # erikreider/SwayNotificationCenter swaync
 
 # List of COPR repositories to be added and enabled
 COPR_REPOS=(
 solopasha/hyprland
-en4aew/desktop-tools
-alebastr/sway-extras
 erikreider/SwayNotificationCenter  
 )
-
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
 # Determine the directory where the script is located
