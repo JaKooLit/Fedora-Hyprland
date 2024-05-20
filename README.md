@@ -7,8 +7,7 @@
 <br/>
 </div>
 
-## Show Case
-
+### Kool Hyprland-Dots Showcase
 
 https://github.com/JaKooLit/Fedora-Hyprland/assets/85185940/000e384a-f25b-4902-9876-3190c1d994eb
 
