@@ -6,6 +6,7 @@ asusctl=(
 asusctl
 supergfxctl
 asusctl-rog-gui
+power-profiles-daemon
 )
 
 
@@ -39,5 +40,8 @@ done
 
 printf " Activating ROG services...\n"
 sudo systemctl enable --now supergfxd 2>&1 | tee -a "$LOG"
+
+printf " enabling power-profiles-daemon...\n"
+sudo systemctl enable power-profiles-daemon 2>&1 | tee -a "$LOG"
 
 clear
