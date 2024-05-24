@@ -56,11 +56,13 @@ hypr_package_2=(
   btop
   cava
   eog
+  fastfetch
   gnome-system-monitor
   mousepad
   mpv
   mpv-mpris
   nvtop
+  qalculate-gtk
   vim-enhanced
 )
 
