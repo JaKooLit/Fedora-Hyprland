@@ -7,6 +7,10 @@ labels: "Something isn't working"
 
 ## Bug Report
 
+### Before submitting report
+
+[Kindly review the log files in Install-Logs directory. Some apps may have not installed properly.]
+
 ### Description
 
 [Provide a clear and concise description of the bug.]
