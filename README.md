@@ -1,4 +1,11 @@
 <div align="center">
+<br>
+  <a href="### 🪧🪧🪧 ANNOUNCEMENT 🪧🪧🪧"><kbd> <br> Read this First <br> </kbd></a>&ensp;&ensp;
+  <a href="## ✨ to use this script"><kbd> <br> How to use this script <br> </kbd></a>&ensp;&ensp;
+  <a href="### Gallery and Videos"><kbd> <br> Gallery <br> </kbd></a>&ensp;&ensp;
+ </div><br>
+
+<div align="center">
 
 ### 💌 ** JaKooLit's Fedora Hyprland Install Script ** 💌
 
@@ -16,7 +23,6 @@
   <a href="https://github.com/JaKooLit/Hyprland-Dots"><kbd> <br> Hyprland-Dots repo <br> </kbd></a>&ensp;&ensp;
   <a href="https://www.youtube.com/playlist?list=PLDtGd5Fw5_GjXCznR0BzCJJDIQSZJRbxx"><kbd> <br> Youtube <br> </kbd></a>&ensp;&ensp;
   <a href="https://github.com/JaKooLit/Hyprland-Dots/wiki"><kbd> <br> Wiki <br> </kbd></a>&ensp;&ensp;
-  <a href="https://github.com/JaKooLit/Hyprland-Dots/discussions"><kbd> <br> Discussions <br> </kbd></a>&ensp;&ensp;
   <a href="https://github.com/JaKooLit/Hyprland-Dots/wiki/Keybinds"><kbd> <br> Keybinds <br> </kbd></a>&ensp;&ensp;
   <a href="https://github.com/JaKooLit/Hyprland-Dots/wiki/FAQ"><kbd> <br> FAQ <br> </kbd></a>&ensp;&ensp;
   <a href="https://discord.gg/V2SJ92vbEN"><kbd> <br> Discord <br> </kbd></a>
