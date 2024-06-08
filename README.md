@@ -9,6 +9,9 @@
 
 <div align="center">
 #### 👇 KOOL's Hyprland-Dots related Links 👇
+<br/>
+</div>
+<div align="center">
 <br>
   <a href="https://github.com/JaKooLit/Hyprland-Dots"><kbd> <br> Hyprland-Dots repo <br> </kbd></a>&ensp;&ensp;
   <a href="https://www.youtube.com/playlist?list=PLDtGd5Fw5_GjXCznR0BzCJJDIQSZJRbxx"><kbd> <br> Youtube <br> </kbd></a>&ensp;&ensp;
