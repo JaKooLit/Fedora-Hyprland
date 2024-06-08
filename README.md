@@ -97,6 +97,7 @@ Installed on Nobara 38 🥰
 > [!IMPORTANT]
 > For Fedora 38 & 39, including nobara 38 & 39 and all based to Fedora 38 & 39:
 > edit `install-scripts/nwg-look.sh` Line 15, edit tag to `v0.2.6`. nwg-look v0.2.7 wont build as it needs a higher golang version
+> Note that Fedora 39 and older, waybar was not updated. Hyprland and older waybar build than 0.10.3, you will have no workspace
 
 #### ✨ Costumize the packages and COPR Repos
 - inside the install-scripts folder, you can edit 00-hypr-pkgs.sh, copr.sh, etc. Care though as the Hyprland Dots might not work properly
@@ -177,6 +178,8 @@ log into your account
 > Auto start of Hyprland after login (no SDDM or GDM or any login managers)
 - This was disabled a few days ago. (19 May 2024). This was because some users, after they used the Distro-Hyprland scripts with other DE (gnome-wayland or plasma-wayland), if they choose to login into gnome-wayland for example, Hyprland is starting. 
 - to avoid this, I disabled it. You can re-enable again by editing `~/.zprofile` . Remove all the # on the first lines
+
+- Note that Fedora 39 and older, waybar was not updated. Hyprland and older waybar build than 0.10.3, you will have no workspace
 
 #### 🫥 Improving performance for Older Nvidia Cards using driver 470
   - [`SEE HERE`](https://github.com/JaKooLit/Hyprland-Dots/discussions/123#discussion-6035205)
