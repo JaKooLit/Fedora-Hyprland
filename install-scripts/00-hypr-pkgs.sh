@@ -20,6 +20,7 @@ hypr_package=(
   gvfs-mtp
   ImageMagick
   jq
+  inxi
   kitty
   kvantum
   nano
