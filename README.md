@@ -192,10 +192,19 @@ log into your account
 `ls -l /dev/dri/by-path` to check where the symlink points to 
 )
 ```
-- add "env = WLR_DRM_DEVICES,/dev/dri/cardX" to the ENVvariables config (.config/hypr/UserConfigs/ENVariables.conf)  ; X being where the symlink of the gpu points to
+- add "env = WLR_DRM_DEVICES,/dev/dri/cardX" to the ENVvariables config `~/.config/hypr/UserConfigs/ENVariables.conf`  ; X being where the symlink of the gpu points to
 
 - more info from the hyprland wiki [`Hyprland Wiki Link`](https://wiki.hyprland.org/FAQ/#my-external-monitor-is-blank--doesnt-render--receives-no-signal-laptop)
 
+
+- reports from a member of discord for Nvidia for additional env's
+- remove # from the following env's on 
+```
+env = GBM_BACKEND,nvidia-drm
+env = WLR_RENDERER_ALLOW_SOFTWARE,1
+```
+
+#### ❗ other known issues
 > [!NOTE]
 > Auto start of Hyprland after login (no SDDM or GDM or any login managers)
 - This was disabled a few days ago. (19 May 2024). This was because some users, after they used the Distro-Hyprland scripts with other DE (gnome-wayland or plasma-wayland), if they choose to login into gnome-wayland for example, Hyprland is starting. 
