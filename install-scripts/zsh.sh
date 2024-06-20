@@ -5,7 +5,6 @@
 zsh=(
 zsh 
 util-linux
-fzf
 )
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
