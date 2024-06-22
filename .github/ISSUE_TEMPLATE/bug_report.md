@@ -48,3 +48,10 @@ e.g.,
 ### Additional Information
 
 [Add any other information about the problem here. For example, you might include the error message, any recent changes that you made to the project, or any other relevant details.]
+
+### show output of `inxi -CGIsSMnr` install package `inxi` if not exist
+show output here
+```
+
+
+```
