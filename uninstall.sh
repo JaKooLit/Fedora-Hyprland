@@ -1,14 +1,5 @@
 #!/bin/bash
 
-# Check if the script has execution permissions
-if [[ ! -x "$0" ]]; then
-    echo -e "\033[1;31mError: This script doesn't have execution permissions.\033[0m"
-    echo -e "\033[1;33mPlease run the following command and then re-run the script:\033[0m"
-    echo -e "\033[1;36mchmod +x $0\033[0m"
-    exit 1
-fi
-
-
 # Exit immediately if a command exits with a non-zero status
 set -e
 
@@ -26,12 +17,13 @@ print_color() {
     printf "%b%s%b\n" "$1" "$2" "$CLEAR"
 }
 
-# Function to print right-aligned text
-print_right_aligned() {
+# Function to print centered text
+print_centered() {
     local text="$1"
     local color="$2"
     local width=$(tput cols)
-    printf "%b%*s%b\n" "$color" $width "$text" "$CLEAR"
+    local padding=$(( (width - ${#text}) / 2 ))
+    printf "%b%*s%s%*s%b\n" "$color" $padding "" "$text" $padding "" "$CLEAR"
 }
 
 # Function to safely remove packages
@@ -40,7 +32,7 @@ safe_remove() {
         if rpm -q "$package" &> /dev/null; then
             sudo dnf remove -y "$package"
         else
-            echo "Package $package is not installed, skipping."
+            print_color $YELLOW "Package $package is not installed, skipping."
         fi
     done
 }
@@ -51,48 +43,39 @@ safe_remove_copr() {
         if sudo dnf copr list | grep -q "$repo"; then
             sudo dnf copr remove -y "$repo"
         else
-            echo "COPR repository $repo is not enabled, skipping."
+            print_color $YELLOW "COPR repository $repo is not enabled, skipping."
         fi
     done
 }
 
-# Function to safely remove directories
-safe_remove_dir() {
-    for dir in "$@"; do
-        if [ -d "$dir" ]; then
-            rm -rf "$dir"
-            echo "Removed directory: $dir"
-        else
-            echo "Directory $dir does not exist, skipping."
-        fi
-    done
+# Function to safely remove directories and files
+safe_remove_item() {
+    local item="$1"
+    if [ -e "$item" ]; then
+        rm -rf "$item"
+        print_color $GREEN "Removed: $item"
+    else
+        print_color $YELLOW "Item $item does not exist, skipping."
+    fi
 }
 
-# Function to ask user before removing a package
+# Function to ask user before removing an item
 ask_before_remove() {
-    read -p "Do you want to remove $1? (y/n): " choice
+    local item="$1"
+    read -p "Do you want to remove $item? (y/n): " choice
     case "$choice" in 
-        y|Y ) safe_remove "$1";;
-        n|N ) echo "Skipping removal of $1";;
-        * ) echo "Invalid input. Skipping removal of $1";;
+        y|Y ) safe_remove_item "$item";;
+        n|N ) print_color $YELLOW "Keeping $item";;
+        * ) print_color $YELLOW "Invalid input. Keeping $item";;
     esac
 }
 
+# Print banner
+print_color $MAGENTA "UNINSTALL HYPERLAND"
 
-print_color $MAGENTA "
- _   _                  _                 _   _   _         _           _        _ _
-| | | |_   _ _ __  _ __| | __ _ _ __   __| | | | | |_ __  (_)_ __  ___| |_ __ _| | | ___ _ __
-| |_| | | | | '_ \| '__| |/ _\` | '_ \ / _\` | | | | | '_ \ | | '_ \/ __| __/ _\` | | |/ _ \ '__|
-|  _  | |_| | |_) | |  | | (_| | | | | (_| | | |_| | | | || | | | \__ \ || (_| | | |  __/ |
-|_| |_|\__, | .__/|_|  |_|\__,_|_| |_|\__,_|  \___/|_| |_|/ |_| |_|___/\__\__,_|_|_|\___|_|
-       |___/|_|                                         |__/
-"
+print_centered "Made with ♥ by vdcds" $CYAN
 
-# Signature
-print_right_aligned "Made by vdcds" $CYAN
-
-
-# Enhanced Warning message
+# Warning message
 print_color $RED "
 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
 █                                                      █
@@ -136,16 +119,13 @@ print_color $BLUE "Starting Hyprland uninstallation process..."
 
 # Uninstall Hyprland and related packages
 print_color $YELLOW "Removing Hyprland and related packages..."
-safe_remove hyprland waybar wofi dunst polkit-gnome swappy swaylock-effects wlogout
-
-# Ask before removing Kitty terminal
-ask_before_remove kitty
+safe_remove hyprland waybar wofi dunst polkit-gnome swappy swaylock-effects wlogout kitty rofi
 
 # Remove COPR repositories
 print_color $YELLOW "Removing COPR repositories..."
 safe_remove_copr solopasha/hyprland alebastr/sway-extras
 
-# Remove GTK themes, Bluetooth, Thunar, SDDM, XDG-desktop-portal-hyprland
+# Remove additional components
 print_color $YELLOW "Removing additional components..."
 safe_remove adw-gtk3-theme blueman thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman sddm xdg-desktop-portal-hyprland
 
@@ -154,25 +134,70 @@ ask_before_remove zsh
 ask_before_remove util-linux-user
 ask_before_remove pokemon-colorscripts-git
 
-# Remove nwg-look and ROG-related packages
-safe_remove nwg-look asusctl supergfxctl
+# Remove ROG-related packages
+safe_remove asusctl supergfxctl
 
 # Remove fonts
 print_color $YELLOW "Removing fonts..."
 safe_remove 'jetbrains-mono-fonts*' 'fira-code-fonts*'
 
-# Remove configuration files and wallpapers
-print_color $YELLOW "Removing configuration files and wallpapers..."
-safe_remove_dir ~/.config/hypr ~/.config/waybar ~/.config/wofi ~/.config/dunst ~/.config/swappy ~/.config/wlogout ~/Pictures/wallpapers ~/Fedora-Hyprland
+# Remove configuration files
+print_color $YELLOW "Removing configuration files..."
+config_items=(
+    ~/.config/hypr
+    ~/.config/waybar
+    ~/.config/wofi
+    ~/.config/dunst
+    ~/.config/swappy
+    ~/.config/wlogout
+    ~/.config/kitty
+    ~/.config/rofi
+    ~/.config/gtk-3.0
+    ~/.config/gtk-4.0
+    ~/.config/xdg-desktop-portal-hyprland
+    ~/.config/btop
+    ~/.config/cava
+    ~/.config/Thunar
+    ~/.config/xfce4
+    ~/.config/wallust
+    ~/.zshrc
+    ~/.p10k.zsh
+    /etc/environment.d/hyprland.conf
+)
+
+for item in "${config_items[@]}"; do
+    ask_before_remove "$item"
+done
+
+# Ask about wallpaper collection
+ask_before_remove ~/Pictures/wallpapers
+
+# Remove Fedora-Hyprland directory
+ask_before_remove ~/Fedora-Hyprland
+
+# Remove nwg-look (installed from source)
+print_color $YELLOW "Removing nwg-look..."
+if [ -d ~/nwg-look ]; then
+    cd ~/nwg-look
+    if [ -f Makefile ]; then
+        sudo make uninstall
+    fi
+    cd ~
+    safe_remove_item ~/nwg-look
+    
+    # Remove binary if it exists
+    if [ -f /usr/local/bin/nwg-look ]; then
+        sudo rm /usr/local/bin/nwg-look
+    fi
+    
+    print_color $GREEN "Removed nwg-look."
+else
+    print_color $YELLOW "nwg-look directory not found, skipping."
+fi
 
 # Ask before removing Oh My Zsh
 if [ -d ~/.oh-my-zsh ]; then
-    read -p "Do you want to remove Oh My Zsh? (y/n): " choice
-    case "$choice" in 
-        y|Y ) rm -rf ~/.oh-my-zsh; print_color $GREEN "Removed Oh My Zsh.";;
-        n|N ) print_color $YELLOW "Keeping Oh My Zsh.";;
-        * ) print_color $YELLOW "Invalid input. Keeping Oh My Zsh.";;
-    esac
+    ask_before_remove ~/.oh-my-zsh
 fi
 
 # Clean up any leftover dependencies
@@ -186,12 +211,17 @@ print_color $CYAN "sudo dnf group install @workstation-product-environment"
 
 # Final ASCII Art
 print_color $MAGENTA "
- _____ _                 _     __   __          _
-|_   _| |__   __ _ _ __ | | __ \ \ / /__  _   _| |
-  | | | '_ \ / _\` | '_ \| |/ /  \ V / _ \| | | | |
-  | | | | | | (_| | | | |   <    | | (_) | |_| |_|
-  |_| |_| |_|\__,_|_| |_|_|\_\   |_|\___/ \__,_(_)
+   ▄▄▄▄▄▄▄▄▄▄▄  ▄         ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄        ▄  ▄    ▄  ▄▄▄▄▄▄▄▄▄▄▄ 
+  ▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░▌      ▐░▌▐░▌  ▐░▌▐░░░░░░░░░░░▌
+   ▀▀▀▀█░█▀▀▀▀ ▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀█░▌▐░▌░▌     ▐░▌▐░▌ ▐░▌ ▐░█▀▀▀▀▀▀▀▀▀ 
+       ▐░▌     ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌▐░▌    ▐░▌▐░▌▐░▌  ▐░▌          
+       ▐░▌     ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌▐░▌ ▐░▌   ▐░▌▐░▌░▌   ▐░█▄▄▄▄▄▄▄▄▄ 
+       ▐░▌     ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌  ▐░▌  ▐░▌▐░░▌    ▐░░░░░░░░░░░▌
+       ▐░▌     ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌▐░▌   ▐░▌ ▐░▌▐░▌░▌   ▐░█▀▀▀▀▀▀▀▀▀ 
+       ▐░▌     ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌    ▐░▌▐░▌▐░▌▐░▌  ▐░▌          
+       ▐░▌     ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌     ▐░▐░▌▐░▌ ▐░▌ ▐░█▄▄▄▄▄▄▄▄▄ 
+       ▐░▌     ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌      ▐░░▌▐░▌  ▐░▌▐░░░░░░░░░░░▌
+        ▀       ▀         ▀  ▀         ▀  ▀        ▀▀  ▀    ▀  ▀▀▀▀▀▀▀▀▀▀▀ 
 "
 
-# Signature at the end
-print_right_aligned "Made by vdcds" $CYAN
+print_centered "Made with ♥ by vdcds" $CYAN
