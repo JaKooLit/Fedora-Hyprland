@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Check if the script has execution permissions
+if [[ ! -x "$0" ]]; then
+    echo -e "\033[1;31mError: This script doesn't have execution permissions.\033[0m"
+    echo -e "\033[1;33mPlease run the following command and then re-run the script:\033[0m"
+    echo -e "\033[1;36mchmod +x $0\033[0m"
+    exit 1
+fi
+
+
 # Exit immediately if a command exits with a non-zero status
 set -e
 
