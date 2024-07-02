@@ -71,7 +71,7 @@ ask_before_remove() {
 }
 
 # Print banner
-print_color $MAGENTA "UNINSTALL HYPERLAND"
+print_color $MAGENTA "UNINSTALL HYPRLAND"
 
 print_centered "Made with ♥ by vdcds" $CYAN
 
@@ -119,15 +119,15 @@ print_color $BLUE "Starting Hyprland uninstallation process..."
 
 # Uninstall Hyprland and related packages
 print_color $YELLOW "Removing Hyprland and related packages..."
-safe_remove hyprland waybar wofi dunst polkit-gnome swappy swaylock-effects wlogout kitty rofi
+safe_remove hyprland hyprcursor waybar kvantum polkit-gnome swappy SwayNotificationCenter wlogout kitty rofi-wayland aylurs-gtk-shell cliphist hypridle hyprlock pamixer pyprland swww
 
 # Remove COPR repositories
 print_color $YELLOW "Removing COPR repositories..."
-safe_remove_copr solopasha/hyprland alebastr/sway-extras
+safe_remove_copr solopasha/hyprland erikreider/SwayNotificationCenter
 
 # Remove additional components
 print_color $YELLOW "Removing additional components..."
-safe_remove adw-gtk3-theme blueman thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman sddm xdg-desktop-portal-hyprland
+safe_remove blueman thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman sddm xdg-desktop-portal-hyprland
 
 # Ask before removing zsh and related packages
 ask_before_remove zsh
@@ -144,6 +144,7 @@ safe_remove 'jetbrains-mono-fonts*' 'fira-code-fonts*'
 # Remove configuration files
 print_color $YELLOW "Removing configuration files..."
 config_items=(
+    ~/.config/ags
     ~/.config/hypr
     ~/.config/waybar
     ~/.config/wofi
@@ -212,7 +213,7 @@ print_color $CYAN "sudo dnf group install @workstation-product-environment"
 # Final ASCII Art
 print_color $MAGENTA "
 
-THANK YOU FOR USING THIS AMAZING HYPERLAND CONFIG IN FIRST PLACE!  
+THANK YOU FOR USING THIS AMAZING HYPRLAND CONFIG IN FIRST PLACE!  
 
 
 "
