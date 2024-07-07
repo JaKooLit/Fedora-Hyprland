@@ -100,6 +100,9 @@ Installed on Nobara 38 🥰
 > [!NOTE]
 > Main reason why I have not included an uninstallation script is simple. Some packages maybe already installed on your system by default. If I create an uninstall script with packages that I have set to install, you may end up a unrecoverable system. 
 
+#### EXPERIMENTAL UNINSTALL SCRIPT
+- 04 July, 2024 - uninstall.sh . Note that it is experimental. I DO NOT GUARANTEE that it will not mess up your system. USE with caution.
+
 > [!WARNING] 
 > Download this script on a directory where you have write permissions. ie. HOME. Or any directory within your home directory. Else script will fail
 

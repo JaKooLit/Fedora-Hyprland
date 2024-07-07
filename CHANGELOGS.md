@@ -2,6 +2,9 @@
 
 ## 07 Jul 2024
 - added eza (ls replacement for tty). Note only on .zshrc
+- 
+## 04 Jul 2024
+- Added uninstall.sh. USE THIS WITH CAUTION!
 
 ## 26 May 2024
 - Added fzf for zsh (CTRL R to invoke FZF history)
