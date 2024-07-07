@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 07 Jul 2024
+- added eza (ls replacement for tty). Note only on .zshrc
+- 
 ## 04 Jul 2024
 - Added uninstall.sh. USE THIS WITH CAUTION!
 
