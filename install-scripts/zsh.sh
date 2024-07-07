@@ -3,8 +3,10 @@
 # ZSH and oh-my-zsh & Optional Pokemon Color Scrips #
 
 zsh=(
-zsh 
-util-linux
+    eza
+    fzf
+    zsh 
+    util-linux
 )
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
