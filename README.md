@@ -125,14 +125,14 @@ Installed on Nobara 38 🥰
 > Note that Fedora 39 and older, waybar was not updated. Hyprland and older waybar build than 0.10.3, you will have no workspace
 
 #### ✨ Costumize the packages and COPR Repos
-- inside the install-scripts folder, you can edit 00-hypr-pkgs.sh, copr.sh, etc. Care though as the Hyprland Dots might not work properly
+- inside the install-scripts directory, you can edit 00-hypr-pkgs.sh, copr.sh, etc. Care though as the Hyprland Dots might not work properly
 
 #### 💫 SDDM and GTK Themes offered
 - If you opted to install SDDM theme, here's the [`LINK`](https://github.com/JaKooLit/simple-sddm-2)
 - If you opted to install GTK Themes, Icons here's the [`LINK`](https://github.com/JaKooLit/GTK-themes-icons) & Bibata Cursor Modern Ice (assets directory)
 
 #### 🔔 NOTICE TO NVIDIA OWNERS ### 
-- by default it is installing the latest and newest nvidia drivers. If you have an older nvidia-gpu (GTX 800 series and older), check out nvidia-fedora website [`LINK`](https://rpmfusion.org/Howto/NVIDIA#Installing_the_drivers) and edit nvidia.sh in install-scripts folder to install proper gpu driver
+- by default it is installing the latest and newest nvidia drivers. If you have an older nvidia-gpu (GTX 800 series and older), check out nvidia-fedora website [`LINK`](https://rpmfusion.org/Howto/NVIDIA#Installing_the_drivers) and edit nvidia.sh in install-scripts directory to install proper gpu driver
 > [!IMPORTANT]
 > If you want to use nouveau driver, choose N when asked if you have nvidia gpu. This is because the nvidia installer part, it will blacklist nouveau. Hyprland will still be installed but it will skip blacklisting nouveau.
 
@@ -178,9 +178,12 @@ source ~/.zshrc
 - for the install part, kindly open issue on this repo
 - for the Pre-configured Hyprland dots / configuration, submit issue [`here`](https://github.com/JaKooLit/Hyprland-Dots/issues)
 
-#### 🔧 Proper way to re-installing a particular script from install-scripts folder
+#### 🔧 Proper way to re-installing a particular script from install-scripts directory
 - CD into Fedora-Hyprland Folder and then ran the below command. 
-- i.e. `./install-scripts/gtk-themes` - For reinstall GTK Themes. 
+- i.e. `./install-scripts/gtk-themes.sh` - For reinstall GTK Themes or
+- `./install-scripts/sddm.sh` - For reinstall sddm
+> [!IMPORTANT]
+> DO NOT cd into install-scripts directory as script will most likely to fail
 
 #### 🛣️ Roadmap:
 - [ ] possibly adding gruvbox themes, cursors, icons
