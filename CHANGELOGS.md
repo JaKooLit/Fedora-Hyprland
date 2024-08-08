@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 08 Aug 2024
+- added aquamarine for Hyprland v0.42.0
+
 ## 07 Jul 2024
 - added eza (ls replacement for tty). Note only on .zshrc
 - 
