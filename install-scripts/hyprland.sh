@@ -3,8 +3,9 @@
 # Main Hyprland Package #
 
 hypr=(
-hyprland
-hyprcursor
+  aquamarine
+  hyprland
+  hyprcursor
 )
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
