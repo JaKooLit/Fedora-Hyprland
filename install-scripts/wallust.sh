@@ -3,12 +3,13 @@
 # wallust - pywal colors replacement #
 
 depend=(
-cargo
-imagemagick
+  cargo
+  imagemagick
 )
 
 #specific branch or release
-wal_tag="dev"
+#wal_tag="master"
+# 08-Aug-2024 - Changed to master as wallust is now 3.0
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
 # Determine the directory where the script is located
@@ -44,7 +45,7 @@ fi
 
 # Clone and build wallust
 printf "${NOTE} Installing wallust...\n"
-if git clone --depth 1 -b $wal_tag https://codeberg.org/explosion-mental/wallust.git; then
+if git clone --depth 1 https://codeberg.org/explosion-mental/wallust.git; then
     cd wallust || exit 1
 	make
     if sudo make install 2>&1 | tee -a "$MLOG" ; then
