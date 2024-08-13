@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 13 Aug 2024
+- updated to download from Hyprland-Dots releases as usual
+
 ## 09 Aug 2024
 - updated dotfiles.sh to download from Hyprland-Dots main branch for Hyprland 0.42.0 update
 
