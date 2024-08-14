@@ -1,5 +1,14 @@
 ## Changelogs
 
+## 13 Aug 2024
+- updated to download from Hyprland-Dots releases as usual
+
+## 09 Aug 2024
+- updated dotfiles.sh to download from Hyprland-Dots main branch for Hyprland 0.42.0 update
+
+## 08 Aug 2024
+- added aquamarine for Hyprland v0.42.0
+
 ## 07 Jul 2024
 - added eza (ls replacement for tty). Note only on .zshrc
 - 
