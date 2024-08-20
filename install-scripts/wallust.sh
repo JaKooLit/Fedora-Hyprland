@@ -1,6 +1,7 @@
 #!/bin/bash
 # 💫 https://github.com/JaKooLit 💫 #
 # wallust - pywal colors replacement #
+# 20 Aug 2024 - Disabled in favor of errornointernet/packages copr repo
 
 depend=(
   cargo
