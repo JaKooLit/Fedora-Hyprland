@@ -72,6 +72,7 @@ else
   fi
 fi
 
+
 # Update package cache and install packages from COPR Repos
 sudo dnf update -y
 
