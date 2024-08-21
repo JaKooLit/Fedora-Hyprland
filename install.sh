@@ -142,11 +142,14 @@ printf "\n"
 # Ensuring all in the scripts folder are made executable
 chmod +x install-scripts/*
 
+# execute pre clean up
+execute_script "01-pre-cleanup.sh"
+
 # Install hyprland packages
 execute_script "copr.sh"
 execute_script "00-hypr-pkgs.sh"
 execute_script "fonts.sh"
-execute_script "wallust.sh"
+#execute_script "wallust.sh" # this is manual install
 execute_script "hyprland.sh"
 
 if [ "$nvidia" == "Y" ]; then

@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 22 Aug 2024
+- Added pre-clean up script
+
 ## 13 Aug 2024
 - updated to download from Hyprland-Dots releases as usual
 

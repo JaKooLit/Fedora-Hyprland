@@ -42,6 +42,7 @@ hypr_package=(
   slurp
   swappy
   SwayNotificationCenter
+  wallust
   waybar
   wget2
   wl-clipboard
