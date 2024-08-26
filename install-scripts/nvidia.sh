@@ -39,7 +39,7 @@ printf "${YELLOW} Installing Nvidia packages...\n"
 printf "${YELLOW} nvidia-stuff to /etc/default/grub..."
 
 # Additional options to add to GRUB_CMDLINE_LINUX
-additional_options="rd.driver.blacklist=nouveau modprobe.blacklist=nouveau nvidia-drm.modeset=1"
+additional_options="rd.driver.blacklist=nouveau modprobe.blacklist=nouveau nvidia-drm.modeset=1 nvidia_drm.fbdev=1"
 
 # Check if additional options are already present in GRUB_CMDLINE_LINUX
 if grep -q "GRUB_CMDLINE_LINUX.*$additional_options" /etc/default/grub; then

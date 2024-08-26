@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 26 Aug 2024
+- added nvidia_drm.fbdev=1 for grub
+
 ## 22 Aug 2024
 - Added pre-clean up script
 
