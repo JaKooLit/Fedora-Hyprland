@@ -218,6 +218,6 @@ if dnf list installed hyprland &> /dev/null || dnf list installed hyprland-git &
     fi
 else
     # Print error message if neither package is installed
-    printf "\n${NOTE} Hyprland failed to install. Please check Install-Logs...\n\n"
+    printf "\n${WARN} Hyprland failed to install. Please check Install-Logs...\n\n"
     exit 1
 fi
