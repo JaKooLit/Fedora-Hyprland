@@ -22,7 +22,7 @@ source "$(dirname "$(readlink -f "$0")")/Global_functions.sh"
 LOG="Install-Logs/install-$(date +%d-%H%M%S)_hyprland-eco.log"
 
 # Hyprland
-printf "${NOTE} Installing Hyprland Package...\n"
+printf "${NOTE} Installing Hyprland-ECO Package...\n"
  for HYPR in "${hypr[@]}"; do
    install_package "$HYPR" 2>&1 | tee -a "$LOG"
    [ $? -ne 0 ] && { echo -e "\e[1A\e[K${ERROR} - $HYPR Package installation failed, Please check the installation logs"; exit 1; }
