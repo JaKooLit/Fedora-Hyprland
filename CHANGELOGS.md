@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 03 Sep 2024
+- Some re-arranging of hyprland packages and added hyprland-eco.sh script for -eco packages
+
 ## 28 Aug 2024
 - Added final check if hyprland is installed and will give an error to user
 

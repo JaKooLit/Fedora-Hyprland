@@ -151,6 +151,7 @@ execute_script "00-hypr-pkgs.sh"
 execute_script "fonts.sh"
 #execute_script "wallust.sh" # this is manual install
 execute_script "hyprland.sh"
+execute_script "hyprland-eco.sh"
 
 if [ "$nvidia" == "Y" ]; then
     execute_script "nvidia.sh"
