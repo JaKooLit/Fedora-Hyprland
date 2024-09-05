@@ -151,6 +151,7 @@ execute_script "00-hypr-pkgs.sh"
 execute_script "fonts.sh"
 #execute_script "wallust.sh" # this is manual install
 execute_script "hyprland.sh"
+execute_script "hyprland-eco.sh"
 
 if [ "$nvidia" == "Y" ]; then
     execute_script "nvidia.sh"
@@ -218,6 +219,6 @@ if dnf list installed hyprland &> /dev/null || dnf list installed hyprland-git &
     fi
 else
     # Print error message if neither package is installed
-    printf "\n${NOTE} Hyprland failed to install. Please check Install-Logs...\n\n"
+    printf "\n${WARN} Hyprland failed to install. Please check Install-Logs...\n\n"
     exit 1
 fi
