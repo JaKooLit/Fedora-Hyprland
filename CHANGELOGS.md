@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 08 Sep 2024
+- Added final error checks on install-logs
+
 ## 03 Sep 2024
 - Some re-arranging of hyprland packages and added hyprland-eco.sh script for -eco packages
 
