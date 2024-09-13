@@ -35,7 +35,7 @@ source "$(dirname "$(readlink -f "$0")")/Global_functions.sh"
 # Set the name of the log file to include the current date and time
 LOG="Install-Logs/00_CHECK-$(date +%d-%H%M%S)_installed.log"
 
-printf "\n%s - Final Check if packages are installed \n" "${NOTE}"
+printf "\n%s - Final Check if essential packages are installed \n" "${NOTE}"
 # Initialize an empty array to hold missing packages
 missing=()
 
