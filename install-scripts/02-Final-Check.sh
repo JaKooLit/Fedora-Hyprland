@@ -9,7 +9,7 @@ packages=(
   kvantum
   rofi-wayland
   imagemagick
-  swaync
+  SwayNotificationCenter
   swww
   wallust
   waybar
