@@ -5,7 +5,7 @@
 
 depend=(
   cargo
-  imagemagick
+  ImageMagick
 )
 
 #specific branch or release

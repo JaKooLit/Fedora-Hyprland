@@ -8,7 +8,7 @@ packages=(
   cliphist
   kvantum
   rofi-wayland
-  imagemagick
+  ImageMagick
   SwayNotificationCenter
   swww
   wallust
