@@ -2,12 +2,14 @@
 # 💫 https://github.com/JaKooLit 💫 #
 # NWG-LOOK (GTK-Settings) - an lxappearance like #
 
+# now being replaced by fedora copr tofik/nwg-shell 
+
 nwg_look=(
-golang
-gtk3
-gtk3-devel
-cairo-devel
-glib-devel
+    golang
+    gtk3
+    gtk3-devel
+    cairo-devel
+    glib-devel
 )
 
 # specific tags to download

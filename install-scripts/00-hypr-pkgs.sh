@@ -69,10 +69,11 @@ hypr_package_2=(
 copr_packages=(
   aylurs-gtk-shell
   cliphist
+  nwg-look
+  SwayNotificationCenter
   pamixer
   swww
-  wallust
-  SwayNotificationCenter
+  wallust  
 )
 
 # List of packages to uninstall as it conflicts with swaync or causing swaync to not function properly

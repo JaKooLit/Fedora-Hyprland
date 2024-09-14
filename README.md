@@ -116,14 +116,6 @@ Installed on Nobara 38 🥰
 #### ⚠️ WARNING! If you have GDM already as log-in manager, DO NOT install SDDM
 - You will likely to encounter issues
 
-#### ⚠️ WARNING! nwg-look takes long time to install. 
-- nwg-look is a utility to costumize your GTK theme. It's a LXAppearance like. Its a good tool though but this package is entirely optional
-
-> [!IMPORTANT]
-> For Fedora 38 & 39, including nobara 38 & 39 and all based to Fedora 38 & 39:
-> edit `install-scripts/nwg-look.sh` Line 15, edit tag to `v0.2.6`. nwg-look v0.2.7 wont build as it needs a higher golang version
-> Note that Fedora 39 and older, waybar was not updated. Hyprland and older waybar build than 0.10.3, you will have no workspace
-
 #### ✨ Costumize the packages and COPR Repos
 - inside the install-scripts directory, you can edit 00-hypr-pkgs.sh, copr.sh, etc. Care though as the Hyprland Dots might not work properly
 
@@ -163,10 +155,6 @@ source ~/.zshrc
 - SUPER H for HINT or click on the waybar HINT! Button 
 - Head over to [FAQ](https://github.com/JaKooLit/Hyprland-Dots/wiki/FAQ) and [TIPS](https://github.com/JaKooLit/Hyprland-Dots/wiki/TIPS)
 - NVIDIA users / owners, after installation, check [`THIS`](https://github.com/JaKooLit/Hyprland-Dots/wiki/Notes_to_remember#--for-nvidia-gpu-users)
-
-#### ✨ Packages that are manually downloaded and build. These packages will not be updated by dnf and have to be manually updated
-- nwg-look [`LINK`](https://github.com/nwg-piotr/nwg-look)
-- wallust [`LINK`](https://codeberg.org/explosion-mental/wallust)
 
 #### 🙋 Got a questions regarding the Hyprland Dots or configurations? 🙋
 - Head over to wiki Link [`WIKI`](https://github.com/JaKooLit/Hyprland-Dots/wiki)

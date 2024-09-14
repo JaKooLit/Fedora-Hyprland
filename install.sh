@@ -132,8 +132,11 @@ ask_yes_no "-Install XDG-DESKTOP-PORTAL-HYPRLAND? (for proper Screen Share ie OB
 printf "\n"
 ask_yes_no "-Install zsh & oh-my-zsh plus (OPTIONAL) pokemon-colorscripts?" zsh
 printf "\n"
-ask_yes_no "-Install nwg-look? (Theming app / lxappearance-like) WARNING Package takes abit long to install" nwg
-printf "\n"
+
+# disabled in favor of fedora copr
+#ask_yes_no "-Install nwg-look? (Theming app / lxappearance-like) WARNING Package takes abit long to install" nwg
+#printf "\n"
+
 ask_yes_no "-Installing on ASUS ROG Laptops?" rog
 printf "\n"
 ask_yes_no "-Do you want to download and install pre-configured Hyprland dotfiles?" dots
@@ -185,9 +188,9 @@ if [ "$rog" == "Y" ]; then
     execute_script "rog.sh"
 fi
 
-if [ "$nwg" == "Y" ]; then
-    execute_script "nwg-look.sh"
-fi
+#if [ "$nwg" == "Y" ]; then
+#    execute_script "nwg-look.sh"
+#fi
 
 execute_script "InputGroup.sh"
 

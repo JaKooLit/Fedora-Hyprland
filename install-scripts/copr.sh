@@ -6,12 +6,14 @@
 # solopasha/hyprland - most packages
 # erikreider/SwayNotificationCenter swaync
 # errornointernet/packages - wallust ONLY
+# tofik/nwg-shell - nwg-look only
 
 # List of COPR repositories to be added and enabled
 COPR_REPOS=(
   solopasha/hyprland
   erikreider/SwayNotificationCenter
   errornointernet/packages
+  tofik/nwg-shell 
 )
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
@@ -49,28 +51,45 @@ for repo in "${COPR_REPOS[@]}";do
   sudo dnf copr enable -y "$repo" 2>&1 | tee -a "$LOG" || { printf "%s - Failed to enable necessary copr repos\n" "${ERROR}"; exit 1; }
 done
 
-# Add 'wallust' package to the specific COPR repo
-yum_repo="/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:errornointernet:packages.repo"
-line_to_add="includepkgs=wallust"
+# FEDORA COPRS need to only install a single package
+# single packages to install are: wallust, nwg-look
+# Define variables for the first COPR repo
+yum_repo1="/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:errornointernet:packages.repo"
+line_to_add1="includepkgs=wallust"
 
-# Check if the file exists
-if [ ! -f "$yum_repo" ]; then
-  echo "File $yum_repo does not exist." 2>&1 | tee -a "$LOG"
-  exit 2
-fi
+# Define variables for the second COPR repo
+yum_repo2="/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:tofik:nwg-shell:packages.repo"
+line_to_add2="includepkgs=nwg-look"
 
-# Check if includepkgs=wallust exists in yum repo
-if grep -q "^${line_to_add}$" "$yum_repo"; then
-  echo "Line '$line_to_add' already exists in $yum_repo." 2>&1 | tee -a "$LOG"
-else
-  echo "$line_to_add" | sudo tee -a "$yum_repo" > /dev/null
-  if [ $? -eq 0 ]; then
-    echo "Line '$line_to_add' added to $yum_repo." 2>&1 | tee -a "$LOG"
-  else
-    echo "Failed to add line '$line_to_add' to $yum_repo." 2>&1 | tee -a "$LOG"
-    exit 3
+# Function to add a line to a repo file
+add_line_to_repo() {
+  local repo_file=$1
+  local line_to_add=$2
+
+  # Check if the file exists
+  if [ ! -f "$repo_file" ]; then
+    echo "File $repo_file does not exist." 2>&1 | tee -a "$LOG"
+    return 2
   fi
-fi
+
+  # Check if line_to_add already exists in the repo file
+  if grep -q "^${line_to_add}$" "$repo_file"; then
+    echo "Line '$line_to_add' already exists in $repo_file." 2>&1 | tee -a "$LOG"
+  else
+    echo "$line_to_add" | sudo tee -a "$repo_file" > /dev/null
+    if [ $? -eq 0 ]; then
+      echo "Line '$line_to_add' added to $repo_file." 2>&1 | tee -a "$LOG"
+    else
+      echo "Failed to add line '$line_to_add' to $repo_file." 2>&1 | tee -a "$LOG"
+      return 3
+    fi
+  fi
+}
+
+# Update the first COPR repo
+add_line_to_repo "$yum_repo1" "$line_to_add1"
+# Update the second COPR repo
+add_line_to_repo "$yum_repo2" "$line_to_add2"
 
 
 # Update package cache and install packages from COPR Repos
