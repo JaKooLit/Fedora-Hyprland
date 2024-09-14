@@ -51,6 +51,8 @@ for repo in "${COPR_REPOS[@]}";do
   sudo dnf copr enable -y "$repo" 2>&1 | tee -a "$LOG" || { printf "%s - Failed to enable necessary copr repos\n" "${ERROR}"; exit 1; }
 done
 
+printf "\n%.0s" {1..1}
+
 # FEDORA COPRS need to only install a single package
 # single packages to install are: wallust, nwg-look
 # Define variables for the first COPR repo
@@ -58,7 +60,7 @@ yum_repo1="/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:errornointernet:pack
 line_to_add1="includepkgs=wallust"
 
 # Define variables for the second COPR repo
-yum_repo2="/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:tofik:nwg-shell:packages.repo"
+yum_repo2="/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:tofik:nwg-shell.repo"
 line_to_add2="includepkgs=nwg-look"
 
 # Function to add a line to a repo file
@@ -68,19 +70,19 @@ add_line_to_repo() {
 
   # Check if the file exists
   if [ ! -f "$repo_file" ]; then
-    echo "File $repo_file does not exist." 2>&1 | tee -a "$LOG"
+    echo "${WARN} File $repo_file does not exist." 2>&1 | tee -a "$LOG"
     return 2
   fi
 
   # Check if line_to_add already exists in the repo file
   if grep -q "^${line_to_add}$" "$repo_file"; then
-    echo "Line '$line_to_add' already exists in $repo_file." 2>&1 | tee -a "$LOG"
+    echo "${NOTE} Line '$line_to_add' already exists in $repo_file." 2>&1 | tee -a "$LOG"
   else
     echo "$line_to_add" | sudo tee -a "$repo_file" > /dev/null
     if [ $? -eq 0 ]; then
-      echo "Line '$line_to_add' added to $repo_file." 2>&1 | tee -a "$LOG"
+      echo "${OK} Line '$line_to_add' added to $repo_file." 2>&1 | tee -a "$LOG"
     else
-      echo "Failed to add line '$line_to_add' to $repo_file." 2>&1 | tee -a "$LOG"
+      echo "${ERROR} Failed to add line '$line_to_add' to $repo_file." 2>&1 | tee -a "$LOG"
       return 3
     fi
   fi
@@ -91,6 +93,7 @@ add_line_to_repo "$yum_repo1" "$line_to_add1"
 # Update the second COPR repo
 add_line_to_repo "$yum_repo2" "$line_to_add2"
 
+printf "\n%.0s" {1..1}
 
 # Update package cache and install packages from COPR Repos
 sudo dnf update -y
