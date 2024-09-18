@@ -20,6 +20,8 @@ while true; do
     echo "${WARN} This script will add your user to the 'input' group."
     echo "${NOTE} Please note that adding yourself to the 'input' group might be necessary for waybar keyboard-state functionality."
 
+    printf "\n%.0s" {1..2}
+    
     read -p "${YELLOW}Do you want to proceed? (y/n): ${RESET}" choice
 
     if [[ $choice == "y" || $choice == "Y" ]]; then
