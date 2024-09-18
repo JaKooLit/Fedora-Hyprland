@@ -30,9 +30,9 @@ LOG="Install-Logs/install-$(date +%d-%H%M%S)_fonts.log"
 printf "\n%s - Installing necessary fonts.... \n" "${NOTE}"
 
 for PKG1 in "${fonts[@]}"; do
-  install_package "$PKG1" 2>&1 | tee -a "$LOG"
+  install_package "$PKG1"
   if [ $? -ne 0 ]; then
-    echo -e "\e[1A\e[K${ERROR} - $PKG1 Package installation failed, Please check the installation logs"
+    echo -e "${ERROR} - $PKG1 Installation failed. Check the install log."
     exit 1
   fi
 done

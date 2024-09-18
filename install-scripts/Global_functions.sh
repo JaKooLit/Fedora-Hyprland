@@ -7,7 +7,8 @@ if [ ! -d Install-Logs ]; then
     mkdir Install-Logs
 fi
 
-set -e
+# Log file
+LOG="Install-Logs/install.log"
 
 # Set some colors for output messages
 OK="$(tput setaf 2)[OK]$(tput sgr0)"
@@ -19,41 +20,60 @@ ORANGE=$(tput setaf 166)
 YELLOW=$(tput setaf 3)
 RESET=$(tput sgr0)
 
-
 # Function for installing packages
 install_package() {
+  local package="$1"
+
   # Checking if package is already installed
-  if sudo dnf list installed "$1" &>> /dev/null ; then
-    echo -e "${OK} $1 is already installed. Skipping..."
+  if rpm -q "$package" &>/dev/null; then
+    echo -e "${OK} $package is already installed. Skipping..." 2>&1 | tee -a "$LOG"
+    return 0
   else
     # Package not installed
-    echo -e "${NOTE} Installing $1 ..."
-    sudo dnf install -y "$1" 2>&1 | tee -a "$LOG"
-    # Making sure package is installed
-    if sudo dnf list installed "$1" &>> /dev/null ; then
-      echo -e "\e[1A\e[K${OK} $1 was installed."
+    echo -e "${NOTE} Installing $package ..."
+    if sudo dnf install -y "$package" 2>&1 | tee -a "$LOG"; then
+      # Making sure package is installed
+      if rpm -q "$package" &>/dev/null; then
+        echo -e "\e[1A\e[K${OK} $package was installed."
+        return 0
+      else
+        # Package installation did not succeed
+        echo -e "\e[1A\e[K${ERROR} $package failed to install :( , please check the install.log. You may need to install manually! Sorry I have tried :(" 2>&1 | tee -a "$LOG"
+        return 1
+      fi
     else
-      # Something is missing, exiting to review log
-      echo -e "\e[1A\e[K${ERROR} $1 failed to install :( , please check the install.log. You may need to install manually! Sorry I have tried :("
-      exit 1
+      # Installation command itself failed
+      echo -e "${ERROR} An error occurred while trying to install $package. Please check the install.log for details." 2>&1 | tee -a "$LOG"
+      return 1
     fi
   fi
 }
 
 # Function for uninstalling packages
 uninstall_package() {
+  local package="$1"
+
   # Checking if package is installed
-  if sudo dnf list installed "$1" &>> /dev/null ; then
+  if rpm -q "$package" &>/dev/null; then
     # Package is installed
-    echo -e "${NOTE} Uninstalling $1 ..."
-    sudo dnf remove -y "$1" 2>&1 | tee -a "$LOG"
-    # Making sure package is uninstalled
-    if ! sudo dnf list installed "$1" &>> /dev/null ; then
-      echo -e "\e[1A\e[K${OK} $1 was uninstalled."
+    echo -e "${NOTE} Uninstalling $package ..."
+    if sudo dnf remove -y "$package" 2>&1 | tee -a "$LOG"; then
+      # Making sure package is uninstalled
+      if ! rpm -q "$package" &>/dev/null; then
+        echo -e "\e[1A\e[K${OK} $package was uninstalled."
+        return 0
+      else
+        # Uninstallation did not succeed
+        echo -e "\e[1A\e[K${ERROR} $package failed to uninstall. Please check the uninstall.log."
+        return 1
+      fi
     else
-      # Something went wrong, exiting to review log
-      echo -e "\e[1A\e[K${ERROR} $1 failed to uninstall. Please check the uninstall.log."
-      exit 1
+      # Uninstallation command itself failed
+      echo -e "${ERROR} An error occurred while trying to uninstall $package. Please check the uninstall.log for details."
+      return 1
     fi
+  else
+    echo -e "${WARN} $package is not installed. Skipping uninstallation." 2>&1 | tee -a "$LOG"
+    return 0
   fi
 }

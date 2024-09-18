@@ -32,9 +32,12 @@ LOG="Install-Logs/install-$(date +%d-%H%M%S)_nvidia.log"
 # Install additional Nvidia packages
 printf "${YELLOW} Installing Nvidia packages...\n"
   for NVIDIA in "${nvidia_pkg[@]}"; do
-    install_package "$NVIDIA" 2>&1 | tee -a "$LOG"
-  done
-
+  install_package "$NVIDIA"
+  if [ $? -ne 0 ]; then
+    echo -e "${ERROR} - $NVIDIA Installation failed. Check the install log."
+    exit 1
+  fi
+done
 
 printf "${YELLOW} nvidia-stuff to /etc/default/grub..."
 

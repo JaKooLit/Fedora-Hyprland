@@ -27,9 +27,9 @@ LOG="Install-Logs/install-$(date +%d-%H%M%S)_sddm.log"
 # Installation of additional sddm stuff
 printf "\n%s - Installing sddm and dependencies.... \n" "${NOTE}"
 for PKG2 in "${sddm[@]}"; do
-  install_package "$PKG2" 2>&1 | tee -a "$LOG"
+  install_package "$PKG2"
   if [ $? -ne 0 ]; then
-    echo -e "\e[1A\e[K${ERROR} - $PKG2 Package installation failed, Please check the installation logs"
+    echo -e "${ERROR} - $PKG2 Installation failed. Check the install log."
     exit 1
   fi
 done

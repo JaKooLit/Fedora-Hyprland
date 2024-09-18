@@ -28,9 +28,12 @@ LOG="Install-Logs/install-$(date +%d-%H%M%S)_thunar.log"
 # Thunar
 printf "${NOTE} Installing Thunar Packages...\n"  
   for THUNAR in "${thunar[@]}"; do
-    install_package "$THUNAR" 2>&1 | tee -a "$LOG"
-    [ $? -ne 0 ] && { echo -e "\e[1A\e[K${ERROR} - $THUNAR Package installation failed, Please check the installation logs"; exit 1; }
-  done
+  install_package "$THUNAR"
+  if [ $? -ne 0 ]; then
+    echo -e "${ERROR} - $THUNAR Installation failed. Check the install log." 2>&1 | tee -a "$LOG"
+    exit 1
+  fi
+done
 
  # Check for existing configs and copy if does not exist
 for DIR1 in gtk-3.0 Thunar xfce4; do

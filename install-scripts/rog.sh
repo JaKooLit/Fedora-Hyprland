@@ -31,11 +31,11 @@ sudo dnf update
 ### Install software for Asus ROG laptops ###
 printf " Installing ASUS ROG packages...\n"
   for ASUS in "${asusctl[@]}"; do
-  install_package  "$ASUS" 2>&1 | tee -a "$LOG"
-    if [ $? -ne 0 ]; then
-    echo -e "\e[1A\e[K${ERROR} - $ASUS Package installation failed, Please check the installation logs"
+  install_package "$ASUS"
+  if [ $? -ne 0 ]; then
+    echo -e "${ERROR} - $ASUS Installation failed. Check the install log."
     exit 1
-    fi
+  fi
 done
 
 printf " Activating ROG services...\n"

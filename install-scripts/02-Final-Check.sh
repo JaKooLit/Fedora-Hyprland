@@ -1,7 +1,7 @@
 #!/bin/bash
 # 💫 https://github.com/JaKooLit 💫 #
 # Final checking if packages are installed
-# NOTE: These package check are only the essentials
+# NOTE: These package checks are only the essentials
 
 packages=(
   aylurs-gtk-shell
@@ -23,26 +23,29 @@ packages=(
 )
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
+
 # Determine the directory where the script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Change the working directory to the parent directory of the script
 PARENT_DIR="$SCRIPT_DIR/.."
-cd "$PARENT_DIR" || exit 1
+cd "$PARENT_DIR" || { echo "${ERROR} Failed to change directory to $PARENT_DIR"; exit 1; }
 
+# Source the global functions script
 source "$(dirname "$(readlink -f "$0")")/Global_functions.sh"
 
 # Set the name of the log file to include the current date and time
 LOG="Install-Logs/00_CHECK-$(date +%d-%H%M%S)_installed.log"
 
 printf "\n%s - Final Check if essential packages are installed \n" "${NOTE}"
+
 # Initialize an empty array to hold missing packages
 missing=()
 
 # Loop through each package
 for pkg in "${packages[@]}"; do
     # Check if the package is installed
-    if ! dnf list installed "$pkg" > /dev/null 2>&1; then
+    if ! sudo rpm -q "$pkg" > /dev/null 2>&1; then
         missing+=("$pkg")
     fi
 done

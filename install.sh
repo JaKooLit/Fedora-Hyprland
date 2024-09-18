@@ -145,14 +145,10 @@ printf "\n"
 # Ensuring all in the scripts folder are made executable
 chmod +x install-scripts/*
 
-# execute pre clean up
-execute_script "01-pre-cleanup.sh"
-
 # Install hyprland packages
 execute_script "copr.sh"
 execute_script "00-hypr-pkgs.sh"
 execute_script "fonts.sh"
-#execute_script "wallust.sh" # this is manual install
 execute_script "hyprland.sh"
 execute_script "hyprland-eco.sh"
 
@@ -188,14 +184,10 @@ if [ "$rog" == "Y" ]; then
     execute_script "rog.sh"
 fi
 
-#if [ "$nwg" == "Y" ]; then
-#    execute_script "nwg-look.sh"
-#fi
-
 execute_script "InputGroup.sh"
 
 if [ "$dots" == "Y" ]; then
-    execute_script "dotfiles.sh"
+    execute_script "dotfiles-main.sh"
 
 fi
 
@@ -207,7 +199,7 @@ execute_script "02-Final-Check.sh"
 printf "\n%.0s" {1..1}
 
 # Check if hyprland or hyprland-git is installed
-if dnf list installed hyprland &> /dev/null || dnf list installed hyprland-git &> /dev/null; then
+if rpm -q hyprland &> /dev/null || rpm -q hyprland-git &> /dev/null; then
     printf "\n${OK} Hyprland is installed. However, some essential packages may not be installed Please see above!"
     printf "\n${CAT} Ignore this message if it states 'All essential packages are installed.'\n"
     sleep 2
