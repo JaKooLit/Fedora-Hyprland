@@ -22,6 +22,9 @@ source $ZSH/oh-my-zsh.sh
 # Project page: https://gitlab.com/phoneybadger/pokemon-colorscripts#on-other-distros-and-macos
 #pokemon-colorscripts --no-title -s -r
 
+# fastfetch. Will be disabled if above colorscript was chosen to install
+fastfetch -c $HOME/.config/fastfetch/config-compact.jsonc
+
 # Set-up FZF key bindings (CTRL R for fuzzy history finder)
 source <(fzf --zsh)
 

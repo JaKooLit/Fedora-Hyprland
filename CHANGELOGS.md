@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 19 Sep 2024
+- Added fastfetch on tty. However, will be disabled if user decided to install pokemon colorscripts
+
 ## 18 Sep 2024
 - refactored to work with Fedora 41. Tested on Fedora 41 server install
 - dotfiles will now be downloaded from main or master branch instead of from the releases version.

@@ -53,6 +53,10 @@ while true; do
                 cd pokemon-colorscripts && sudo ./install.sh && cd ..
             fi
             sed -i '/#pokemon-colorscripts --no-title -s -r/s/^#//' assets/.zshrc >> "$LOG" 2>&1
+
+            # fastfetch. Will be disabled if above colorscript was chosen to install
+            fastfetch -c $HOME/.config/fastfetch/config-compact.jsonc
+            
 			echo "${NOTE} Pokemon Installation process completed" 2>&1 | tee -a "$LOG"
             break
             ;;
