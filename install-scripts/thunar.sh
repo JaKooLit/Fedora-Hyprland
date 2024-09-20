@@ -38,16 +38,18 @@ done
 printf "\n%.0s" {1..2}
 
 # Ask the user if they want to use Thunar as the default file manager
-read -p "${CAT} Do you want to set Thunar as the default file manager? (y/n): " choice
+read -p "${CAT} Do you want to set Thunar as the default file manager? (y/n): " thunar_default
 
-if [[ "$choice" == [Yy] ]]; then
+if [[ "$thunar_default" == [Yy] ]]; then
     # Setting Thunar as the default file manager
     xdg-mime default thunar.desktop inode/directory
     xdg-mime default thunar.desktop application/x-wayland-gnome-saved-search
     echo "${OK} Thunar has been set as the default file manager." 2>&1 | tee -a "$LOG"
 else
-    echo "${NOTE} you choose not to set Thunar file manager." 2>&1 | tee -a "$LOG"
+    echo "${NOTE} you choose not to set Thunar as default file manager." 2>&1 | tee -a "$LOG"
 fi
+
+printf "\n"
 
  # Check for existing configs and copy if does not exist
 for DIR1 in gtk-3.0 Thunar xfce4; do
