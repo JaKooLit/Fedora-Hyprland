@@ -34,6 +34,6 @@ SAVEHIST=10000
 setopt appendhistory
 
 # Set-up icons for files/folders in terminal using eza
-#alias ls='eza -a --icons'
-#alias ll='eza -al --icons'
-#alias lt='eza -a --tree --level=1 --icons'
+alias ls='eza -a --icons'
+alias ll='eza -al --icons'
+alias lt='eza -a --tree --level=1 --icons'
