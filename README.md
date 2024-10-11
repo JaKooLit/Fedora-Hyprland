@@ -103,7 +103,7 @@ Installed on Nobara 38 🥰
 #### EXPERIMENTAL UNINSTALL SCRIPT
 - 04 July, 2024 - uninstall.sh . Note that it is experimental. I DO NOT GUARANTEE that it will not mess up your system. USE with caution.
 
-> [!WARNING] 
+> [!CAUTION]
 > Download this script on a directory where you have write permissions. ie. HOME. Or any directory within your home directory. Else script will fail
 
 #### ✨  Some notes on installation / Pre-requisites
