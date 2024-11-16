@@ -76,8 +76,9 @@ copr_packages=(
   wallust  
 )
 
-# List of packages to uninstall as it conflicts with swaync or causing swaync to not function properly
+# List of packages to uninstall as it conflicts some packages
 uninstall=(
+  aylurs-gtk-shell
   dunst
   mako
   rofi

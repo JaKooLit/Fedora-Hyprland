@@ -3,16 +3,21 @@
 # Aylur's GTK Shell v 1.8.2#
 
 ags=(
-    typescript 
+    typescript
     npm 
-    meson 
-    gjs-devel 
+    meson
+    gjs 
+    gjs-devel
+    gobject-introspection
+    gobject-introspection-devel 
     gtk3-devel 
     gtk-layer-shell 
     gnome-bluetooth 
     upower 
-    NetworkManager 
-    pulseaudio-libs-devel 
+    NetworkManager
+    pam-devel 
+    pulseaudio-libs-devel
+    rust-libpulse-sys-devel 
     libdbusmenu-gtk3 
     libsoup3
 )
@@ -33,6 +38,9 @@ source "$(dirname "$(readlink -f "$0")")/Global_functions.sh"
 # Set the name of the log file to include the current date and time
 LOG="Install-Logs/install-$(date +%d-%H%M%S)_ags.log"
 MLOG="install-$(date +%d-%H%M%S)_ags2.log"
+
+#install typescript by npm
+sudo npm install --global typescript 2>&1 | tee -a "$LOG"
 
 printf "\n%.0s" {1..1}
 

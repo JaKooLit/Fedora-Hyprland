@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 16 Nov 2024
+- adjusted ags v1.8.2 install script
+
 ## 15 Nov 2024
 - revert Aylurs GTK Shell (AGS) to install older version
 
