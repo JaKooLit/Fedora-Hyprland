@@ -5,6 +5,7 @@
 hypr=(
   aquamarine
   hyprland
+  hyprland-qtutils
   hyprcursor
 )
 
