@@ -1,5 +1,9 @@
 ## Changelogs
 
+## 26 Dec 2024
+- Removal of Bibata Ice cursor on assets since its integrated in the GTK Themes and Icons extract from a separate repo
+- integrated hyprcursor in Bibata Ice Cursor
+
 ## 16 Nov 2024
 - adjusted ags v1.8.2 install script
 
