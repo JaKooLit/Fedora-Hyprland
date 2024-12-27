@@ -33,8 +33,7 @@ install_package() {
     echo -e "${NOTE} Installing $package ..."
     if sudo dnf install -y "$package" 2>&1 | tee -a "$LOG"; then
       # Making sure package is installed
-      if rpm -q "$package" &>/dev/null; then
-        echo -e "\e[1A\e[K${OK} $package was installed."
+        echo -e "\e[1A\e[K${OK} Package ${!YELLOW}$1${RESET} has been successfully installed!"
         return 0
       else
         # Package installation did not succeed
