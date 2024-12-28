@@ -3,6 +3,7 @@
 # Aylur's GTK Shell v 1.8.2#
 
 ags=(
+	cmake
     typescript
     npm 
     meson
@@ -12,7 +13,6 @@ ags=(
     gobject-introspection-devel 
     gtk3-devel 
     gtk-layer-shell 
-    gnome-bluetooth 
     upower 
     NetworkManager
     pam-devel 

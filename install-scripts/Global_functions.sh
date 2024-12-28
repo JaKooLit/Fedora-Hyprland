@@ -33,16 +33,11 @@ install_package() {
     echo -e "${NOTE} Installing $package ..."
     if sudo dnf install -y "$package" 2>&1 | tee -a "$LOG"; then
       # Making sure package is installed
-        echo -e "\e[1A\e[K${OK} Package ${!YELLOW}$1${RESET} has been successfully installed!"
-        return 0
-      else
-        # Package installation did not succeed
-        echo -e "\e[1A\e[K${ERROR} $package failed to install :( , please check the install.log. You may need to install manually! Sorry I have tried :(" 2>&1 | tee -a "$LOG"
-        return 1
-      fi
+      echo -e "\e[1A\e[K${OK} Package ${YELLOW}$1${RESET} has been successfully installed!"
+      return 0
     else
-      # Installation command itself failed
-      echo -e "${ERROR} An error occurred while trying to install $package. Please check the install.log for details." 2>&1 | tee -a "$LOG"
+      # Package installation did not succeed
+      echo -e "\e[1A\e[K${ERROR} $package failed to install :( , please check the install.log. You may need to install manually! Sorry I have tried :(" 2>&1 | tee -a "$LOG"
       return 1
     fi
   fi
