@@ -109,7 +109,6 @@ Installed on Nobara 38 🥰
 #### ✨  Some notes on installation / Pre-requisites
 - This install script was tested on Minimal Fedora using Fedora Everything [`Link`](https://youtu.be/_U_WR33XNYY)
 - This script is meant to install in any Fedora Work stations and its Spins.
-- If you have Fedora Workstation and you use Brave you may want to add```exec-once = gnome-keyring-daemon --start``` to `~/.config/hypr/UserConfigs/Startup_Apps.conf` if you don't want to get asked for your password each time you reboot your machine and want to access Brave.
 - If starting from scratch, recommended spin to install is the Sway Spin. However, I have tested this script in Fedora Workstation (gnome), Plasma Spin and Sway
 - I have not tested in any other spin. However, if you decided to try, recommend to install SDDM. Apart from GDM and SDDM, any other Login Manager may not work nor launch Hyprland. However, hyprland can be launched through tty by type Hyprland
 - If you have nvidia, and wanted to use proprietary drivers, uninstall nouveau first (if installed). This script will be installing proprietary nvidia drivers and will not deal with removal of nouveau.
@@ -210,6 +209,8 @@ env = WLR_RENDERER_ALLOW_SOFTWARE,1
 - [ ] Note that Fedora 39 and older, waybar was not updated. Hyprland and older waybar build than 0.10.3, you will have no workspace
 
 - [ ] ROFI issues (scaling, unexplained scaling etc). This is most likely to experience if you are installing on a system where rofi is currently installed. To fix it uninstall rofi and install rofi-wayland . `sudo dnf autoremove rofi` . Install rofi-wayland with `sudo dnf install rofi-wayland`. Rofi-wayland is compatible with x11 so no need to worry.
+
+- [ ] If you use Brave or any Chrome based browsers, you may want to add```exec-once = gnome-keyring-daemon --start``` to `~/.config/hypr/UserConfigs/Startup_Apps.conf` if you don't want to get asked for your password each time you reboot your machine and want to access Brave. Obviously, you need to install gnome-keyring
 
 #### 🫥 Improving performance for Older Nvidia Cards using driver 470
   - [`SEE HERE`](https://github.com/JaKooLit/Hyprland-Dots/discussions/123#discussion-6035205)
