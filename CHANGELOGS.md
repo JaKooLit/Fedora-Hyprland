@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 06 Jan 2024
+- added fastfetch compact-config for fedora
+
 ## 26 Dec 2024
 - Removal of Bibata Ice cursor on assets since its integrated in the GTK Themes and Icons extract from a separate repo
 - integrated hyprcursor in Bibata Ice Cursor
