@@ -12,9 +12,10 @@
 COPR_REPOS=(
   solopasha/hyprland
   erikreider/SwayNotificationCenter
-  errornointernet/packages
-  tofik/nwg-shell 
+  errornointernet/packages 
 )
+
+ #tofik/nwg-shell 
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
 # Determine the directory where the script is located
@@ -60,8 +61,8 @@ yum_repo1="/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:errornointernet:pack
 line_to_add1="includepkgs=wallust"
 
 # Define variables for the second COPR repo
-yum_repo2="/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:tofik:nwg-shell.repo"
-line_to_add2="includepkgs=nwg-look"
+#yum_repo2="/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:tofik:nwg-shell.repo"
+#line_to_add2="includepkgs=nwg-look"
 
 # Function to add a line to a repo file
 add_line_to_repo() {

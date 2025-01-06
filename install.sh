@@ -198,7 +198,7 @@ clear
 
 # copy fastfetch config if fedora is not present
 if [ ! -f "$HOME/.config/fastfetch/fedora.png" ]; then
-    cp -r assets/fastfetch "$HOME/.config/fastfetch"
+    cp -r assets/fastfetch "$HOME/.config/"
 fi
 
 
