@@ -1,6 +1,6 @@
 ## Changelogs
 
-## 06 Jan 2024
+## 06 Jan 2025
 - added fastfetch compact-config for fedora
 
 ## 26 Dec 2024
