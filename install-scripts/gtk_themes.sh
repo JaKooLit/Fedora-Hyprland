@@ -23,11 +23,11 @@ LOG="Install-Logs/install-$(date +%d-%H%M%S)_themes.log"
 
 # installing engine needed for gtk themes
 for PKG1 in "${engine[@]}"; do
-    install_package "$PKG1" 2>&1 | tee -a "$LOG"
-    if [ $? -ne 0 ]; then
-        echo -e "\033[1A\033[K${ERROR} - $PKG1 Package installation failed, Please check the installation logs"
-        exit 1
-    fi
+  install_package "$PKG1"
+  if [ $? -ne 0 ]; then
+    echo -e "${ERROR} - $PKG1 Installation failed. Check the install log."
+    exit 1
+  fi
 done
 
 # Check if the directory exists and delete it if present
@@ -37,7 +37,7 @@ if [ -d "GTK-themes-icons" ]; then
 fi
 
 echo "$NOTE Cloning GTK themes and Icons repository..." 2>&1 | tee -a "$LOG"
-if git clone https://github.com/JaKooLit/GTK-themes-icons.git ; then
+if git clone --depth 1 https://github.com/JaKooLit/GTK-themes-icons.git ; then
     cd GTK-themes-icons
     chmod +x auto-extract.sh
     ./auto-extract.sh
@@ -46,8 +46,5 @@ if git clone https://github.com/JaKooLit/GTK-themes-icons.git ; then
 else
     echo "$ERROR Download failed for GTK themes and Icons.." 2>&1 | tee -a "$LOG"
 fi
-
-tar -xf "assets/Bibata-Modern-Ice.tar.xz" -C ~/.icons 2>&1 | tee -a "$LOG"
-echo "$OK Extracted Bibata-Modern-Ice.tar.xz to ~/.icons folder." 2>&1 | tee -a "$LOG"
 
 clear

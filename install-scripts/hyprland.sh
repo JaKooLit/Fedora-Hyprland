@@ -5,6 +5,7 @@
 hypr=(
   aquamarine
   hyprland
+  hyprland-qtutils
   hyprcursor
 )
 
@@ -24,8 +25,11 @@ LOG="Install-Logs/install-$(date +%d-%H%M%S)_hyprland.log"
 # Hyprland
 printf "${NOTE} Installing Hyprland Package...\n"
  for HYPR in "${hypr[@]}"; do
-   install_package "$HYPR" 2>&1 | tee -a "$LOG"
-   [ $? -ne 0 ] && { echo -e "\e[1A\e[K${ERROR} - $HYPR Package installation failed, Please check the installation logs"; exit 1; }
-  done
+  install_package "$HYPR"
+  if [ $? -ne 0 ]; then
+    echo -e "${ERROR} - $HYPR Installation failed. Check the install log." 2>&1 | tee -a "$LOG"
+    exit 1
+  fi
+done
 
 clear

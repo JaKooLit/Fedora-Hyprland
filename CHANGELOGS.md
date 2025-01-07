@@ -1,5 +1,34 @@
 ## Changelogs
 
+## 06 Jan 2025
+- added fastfetch compact-config for fedora
+- remove copr tofik/nwg-shell since solopasha has nwg-look plus tofik-nwg-shell copr is installing all kinds of shits
+- default theme for oh my zsh theme is now "funky" 
+
+## 26 Dec 2024
+- Removal of Bibata Ice cursor on assets since its integrated in the GTK Themes and Icons extract from a separate repo
+- integrated hyprcursor in Bibata Ice Cursor
+
+## 16 Nov 2024
+- adjusted ags v1.8.2 install script
+
+## 15 Nov 2024
+- revert Aylurs GTK Shell (AGS) to install older version
+
+## 20 Sep 2024
+- User will be ask if they want to set Thunar as default file manager if they decided to install it
+
+## 19 Sep 2024
+- Added fastfetch on tty. However, will be disabled if user decided to install pokemon colorscripts
+
+## 18 Sep 2024
+- refactored to work with Fedora 41. Tested on Fedora 41 server install
+- dotfiles will now be downloaded from main or master branch instead of from the releases version.
+
+## 14 Sep 2024
+- remove the final error checks instead, introduced a final check of essential packages to ran Hyprland
+- switched from manual build to copr repo - nwg-look
+
 ## 08 Sep 2024
 - Added final error checks on install-logs
 

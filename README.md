@@ -1,18 +1,26 @@
 <div align="center">
+
+# 💌 ** KooL's Fedora - Hyprland Install Script ** 💌
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/JaKooLit/Hyprland-Dots/main/assets/latte.png" width="400" />
+</p>
+
+<div align="center">
+
+![GitHub Repo stars](https://img.shields.io/github/stars/JaKooLit/Fedora-Hyprland?style=for-the-badge&color=cba6f7) ![GitHub last commit](https://img.shields.io/github/last-commit/JaKooLit/Fedora-Hyprland?style=for-the-badge&color=b4befe) ![GitHub repo size](https://img.shields.io/github/repo-size/JaKooLit/Fedora-Hyprland?style=for-the-badge&color=cba6f7) <a href="https://discord.gg/9JEgZsfhex"> <img src="https://img.shields.io/discord/1151869464405606400?style=for-the-badge&logo=discord&color=cba6f7&link=https%3A%2F%2Fdiscord.gg%9JEgZsfhex"> </a>
+
+<br/>
+</div>
+
+<div align="center">
 <br>
   <a href="#-announcement-"><kbd> <br> Read this First <br> </kbd></a>&ensp;&ensp;
   <a href="#-to-use-this-script"><kbd> <br> How to use this script <br> </kbd></a>&ensp;&ensp;
   <a href="#gallery-and-videos"><kbd> <br> Gallery <br> </kbd></a>&ensp;&ensp;
  </div><br>
 
-<div align="center">
 
-### 💌 ** JaKooLit's Fedora Hyprland Install Script ** 💌
-
-![GitHub Repo stars](https://img.shields.io/github/stars/JaKooLit/Fedora-Hyprland?style=for-the-badge&color=cba6f7) ![GitHub last commit](https://img.shields.io/github/last-commit/JaKooLit/Fedora-Hyprland?style=for-the-badge&color=b4befe) ![GitHub repo size](https://img.shields.io/github/repo-size/JaKooLit/Fedora-Hyprland?style=for-the-badge&color=cba6f7) <a href="https://discord.gg/9JEgZsfhex"> <img src="https://img.shields.io/discord/1151869464405606400?style=for-the-badge&logo=discord&color=cba6f7&link=https%3A%2F%2Fdiscord.gg%9JEgZsfhex"> </a>
-
-<br/>
-</div>
 
 <div align="center">
 👇 KOOL's Hyprland-Dots related Links 👇
@@ -103,26 +111,18 @@ Installed on Nobara 38 🥰
 #### EXPERIMENTAL UNINSTALL SCRIPT
 - 04 July, 2024 - uninstall.sh . Note that it is experimental. I DO NOT GUARANTEE that it will not mess up your system. USE with caution.
 
-> [!WARNING] 
+> [!CAUTION]
 > Download this script on a directory where you have write permissions. ie. HOME. Or any directory within your home directory. Else script will fail
 
 #### ✨  Some notes on installation / Pre-requisites
 - This install script was tested on Minimal Fedora using Fedora Everything [`Link`](https://youtu.be/_U_WR33XNYY)
 - This script is meant to install in any Fedora Work stations and its Spins.
-- if starting from scratch, recommended spin to install is the Sway Spin. However, I have tested this script in Fedora Workstation (gnome), Plasma Spin and Sway
+- If starting from scratch, recommended spin to install is the Sway Spin. However, I have tested this script in Fedora Workstation (gnome), Plasma Spin and Sway
 - I have not tested in any other spin. However, if you decided to try, recommend to install SDDM. Apart from GDM and SDDM, any other Login Manager may not work nor launch Hyprland. However, hyprland can be launched through tty by type Hyprland
 - If you have nvidia, and wanted to use proprietary drivers, uninstall nouveau first (if installed). This script will be installing proprietary nvidia drivers and will not deal with removal of nouveau.
 
 #### ⚠️ WARNING! If you have GDM already as log-in manager, DO NOT install SDDM
 - You will likely to encounter issues
-
-#### ⚠️ WARNING! nwg-look takes long time to install. 
-- nwg-look is a utility to costumize your GTK theme. It's a LXAppearance like. Its a good tool though but this package is entirely optional
-
-> [!IMPORTANT]
-> For Fedora 38 & 39, including nobara 38 & 39 and all based to Fedora 38 & 39:
-> edit `install-scripts/nwg-look.sh` Line 15, edit tag to `v0.2.6`. nwg-look v0.2.7 wont build as it needs a higher golang version
-> Note that Fedora 39 and older, waybar was not updated. Hyprland and older waybar build than 0.10.3, you will have no workspace
 
 #### ✨ Costumize the packages and COPR Repos
 - inside the install-scripts directory, you can edit 00-hypr-pkgs.sh, copr.sh, etc. Care though as the Hyprland Dots might not work properly
@@ -156,23 +156,22 @@ zsh
 source ~/.zshrc
 ```
 - reboot or logout
-- by default agnoster theme is installed. You can find more themes from this [`OH-MY-ZSH-THEMES`](https://github.com/ohmyzsh/ohmyzsh/wiki/Themes)
-- to change the theme, edit ~/.zshrc ZSH_THEME="desired theme"
+- by default `funky` theme is installed. You can find more themes from this [`OH-MY-ZSH-THEMES`](https://github.com/ohmyzsh/ohmyzsh/wiki/Themes)
+- to change the theme, `SUPER SHIFT O` , choose  desired theme, and close and open terminal. 
+- or manually edit `~/.zshrc` . Look for ZSH_THEME="desired theme"
 
 #### ✨ TO DO once installation done and dotfiles copied
 - SUPER H for HINT or click on the waybar HINT! Button 
 - Head over to [FAQ](https://github.com/JaKooLit/Hyprland-Dots/wiki/FAQ) and [TIPS](https://github.com/JaKooLit/Hyprland-Dots/wiki/TIPS)
 - NVIDIA users / owners, after installation, check [`THIS`](https://github.com/JaKooLit/Hyprland-Dots/wiki/Notes_to_remember#--for-nvidia-gpu-users)
 
-#### ✨ Packages that are manually downloaded and build. These packages will not be updated by dnf and have to be manually updated
-- nwg-look [`LINK`](https://github.com/nwg-piotr/nwg-look)
-- wallust [`LINK`](https://codeberg.org/explosion-mental/wallust)
-
 #### 🙋 Got a questions regarding the Hyprland Dots or configurations? 🙋
 - Head over to wiki Link [`WIKI`](https://github.com/JaKooLit/Hyprland-Dots/wiki)
 
 #### ⌨ Keybinds
 - Keybinds [`CLICK`](https://github.com/JaKooLit/Hyprland-Dots/wiki/Keybinds)
+> [!TIP]
+> KooL's Dots v2.3.7 has a searchable keybind function via rofi. (SUPER SHIFT K) or right click the `HINTS` waybar button
 
 #### 🙋 👋 Having issues or questions? 
 - for the install part, kindly open issue on this repo
@@ -219,6 +218,8 @@ env = WLR_RENDERER_ALLOW_SOFTWARE,1
 - [ ] Note that Fedora 39 and older, waybar was not updated. Hyprland and older waybar build than 0.10.3, you will have no workspace
 
 - [ ] ROFI issues (scaling, unexplained scaling etc). This is most likely to experience if you are installing on a system where rofi is currently installed. To fix it uninstall rofi and install rofi-wayland . `sudo dnf autoremove rofi` . Install rofi-wayland with `sudo dnf install rofi-wayland`. Rofi-wayland is compatible with x11 so no need to worry.
+
+- [ ] If you use Brave or any Chrome based browsers, you may want to add```exec-once = gnome-keyring-daemon --start``` to `~/.config/hypr/UserConfigs/Startup_Apps.conf` if you don't want to get asked for your password each time you reboot your machine and want to access Brave. Obviously, you need to install gnome-keyring
 
 #### 🫥 Improving performance for Older Nvidia Cards using driver 470
   - [`SEE HERE`](https://github.com/JaKooLit/Hyprland-Dots/discussions/123#discussion-6035205)

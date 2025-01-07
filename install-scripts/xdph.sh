@@ -23,11 +23,11 @@ LOG="Install-Logs/install-$(date +%d-%H%M%S)_xdph.log"
 
 # XDG-DESKTOP-PORTAL-HYPRLAND
 for xdgs in "${xdg[@]}"; do
-  install_package "$xdgs" 2>&1 | tee -a "$LOG"
-    if [ $? -ne 0 ]; then
-    echo -e "\e[1A\e[K${ERROR} - $xdph Package installation failed, Please check the installation logs"
+  install_package "$xdgs"
+  if [ $? -ne 0 ]; then
+    echo -e "${ERROR} - $xdgs Installation failed. Check the install log." 2>&1 | tee -a "$LOG"
     exit 1
-    fi
+  fi
 done
 
 printf "\n"
@@ -37,6 +37,7 @@ sleep 1
 printf "\n"
 printf "${NOTE} XDG-desktop-portal-KDE & GNOME (if installed) should be manually disabled or removed! I can't remove it... sorry...\n"
 while true; do
+    printf "\n%.0s" {1..2}
     read -rp "${CAT} Would you like to try to remove other XDG-Desktop-Portal-Implementations? (y/n) " XDPH1
     echo
     sleep 1

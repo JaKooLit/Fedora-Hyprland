@@ -32,13 +32,14 @@ done
 # Installing zsh packages
 printf "${NOTE} Installing core zsh packages...${RESET}\n"
 for ZSHP in "${zsh[@]}"; do
-  install_package "$ZSHP" 2>&1 | tee -a "$LOG"
+  install_package "$ZSHP"
   if [ $? -ne 0 ]; then
-     echo -e "\e[1A\e[K${ERROR} - $ZSHP Package installation failed, Please check the installation logs"
+    echo -e "${ERROR} - $ZSHP Installation failed. Check the install log."
+    exit 1
   fi
 done
 
-printf "\n"
+printf "\n%.0s" {1..1}
 
 ## Optional Pokemon color scripts
 while true; do
@@ -52,6 +53,10 @@ while true; do
                 cd pokemon-colorscripts && sudo ./install.sh && cd ..
             fi
             sed -i '/#pokemon-colorscripts --no-title -s -r/s/^#//' assets/.zshrc >> "$LOG" 2>&1
+
+			# commenting out fastfetch since pokemon was chosen to install
+            sed -i '/^fastfetch -c $HOME\/.config\/fastfetch\/config-compact.jsonc/s/^/#/' assets/.zshrc >> "$LOG" 2>&1
+            
 			echo "${NOTE} Pokemon Installation process completed" 2>&1 | tee -a "$LOG"
             break
             ;;

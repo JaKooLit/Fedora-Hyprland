@@ -20,6 +20,8 @@ while true; do
     echo "${WARN} This script will add your user to the 'input' group."
     echo "${NOTE} Please note that adding yourself to the 'input' group might be necessary for waybar keyboard-state functionality."
 
+    printf "\n%.0s" {1..2}
+    
     read -p "${YELLOW}Do you want to proceed? (y/n): ${RESET}" choice
 
     if [[ $choice == "y" || $choice == "Y" ]]; then
@@ -42,7 +44,7 @@ while true; do
         echo "User added to 'input' group" >> "$LOG"
         break  # Break out of the loop if 'yes' is chosen
     elif [[ $choice == "n" || $choice == "N" ]]; then
-        echo "${NOTE} No changes made. Exiting the script."
+        echo "${NOTE} No changes made. Exiting the script." 2>&1 | tee -a "$LOG"
         break  # Break out of the loop if 'no' is chosen
     else
         echo "${ERROR} Invalid choice. Please enter 'y' for yes or 'n' for no."
