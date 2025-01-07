@@ -3,6 +3,7 @@
 ## 06 Jan 2025
 - added fastfetch compact-config for fedora
 - remove copr tofik/nwg-shell since solopasha has nwg-look plus tofik-nwg-shell copr is installing all kinds of shits
+- default theme for oh my zsh theme is now "funky" 
 
 ## 26 Dec 2024
 - Removal of Bibata Ice cursor on assets since its integrated in the GTK Themes and Icons extract from a separate repo
