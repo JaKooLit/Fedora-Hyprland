@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 12 Jan 2025
+- switch to final version of aylurs-gtk-shell-v1
+
 ## 06 Jan 2025
 - added fastfetch compact-config for fedora
 - remove copr tofik/nwg-shell since solopasha has nwg-look plus tofik-nwg-shell copr is installing all kinds of shits
