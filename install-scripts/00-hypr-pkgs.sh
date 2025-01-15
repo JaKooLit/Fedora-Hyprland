@@ -18,12 +18,12 @@ hypr_package=(
   grim
   gvfs
   gvfs-mtp
+  hyprpolkitagent
   ImageMagick
-  jq
   inxi
+  jq
   kitty
   kvantum
-  mate-polkit
   nano
   network-manager-applet
   openssl
