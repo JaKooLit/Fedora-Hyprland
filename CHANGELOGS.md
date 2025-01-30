@@ -1,5 +1,8 @@
 ## Changelogs
 
+## 30 Jan 2025
+- AGS (aylur's GTK shell) v1 for desktop overview is now optional
+
 ## 13 Jan 2025
 - replaced mate polkit with hyprpolkitagent
 
