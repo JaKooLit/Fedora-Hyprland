@@ -19,7 +19,7 @@ fi
 ags=(
 	cmake
     typescript
-    npm 
+    nodejs-npm
     meson
     gjs 
     gjs-devel
