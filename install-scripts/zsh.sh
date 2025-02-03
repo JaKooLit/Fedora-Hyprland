@@ -61,7 +61,7 @@ while true; do
             break
             ;;
         [Nn]*) 
-            echo "${ORANGE} You chose not to install Pokemon Color Scripts." 2>&1 | tee -a "$LOG"
+            echo "${MAGENTA} You chose not to install Pokemon Color Scripts." 2>&1 | tee -a "$LOG"
             break
             ;;
         *)

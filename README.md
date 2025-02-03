@@ -133,7 +133,7 @@ Installed on Nobara 38 🥰
 
 #### 💫 SDDM and GTK Themes offered
 - If you opted to install SDDM theme, here's the [`LINK`](https://github.com/JaKooLit/simple-sddm-2)
-- If you opted to install GTK Themes, Icons here's the [`LINK`](https://github.com/JaKooLit/GTK-themes-icons) & Bibata Cursor Modern Ice (assets directory)
+- If you opted to install GTK Themes, Icons,  here's the [`LINK`](https://github.com/JaKooLit/GTK-themes-icons). This also includes Bibata Modern Ice cursor.
 
 #### 🔔 NOTICE TO NVIDIA OWNERS ### 
 - by default it is installing the latest and newest nvidia drivers. If you have an older nvidia-gpu (GTX 800 series and older), check out nvidia-fedora website [`LINK`](https://rpmfusion.org/Howto/NVIDIA#Installing_the_drivers) and edit nvidia.sh in install-scripts directory to install proper gpu driver
@@ -171,6 +171,9 @@ source ~/.zshrc
 
 #### 🙋 Got a questions regarding the Hyprland Dots or configurations? 🙋
 - Head over to wiki Link [`WIKI`](https://github.com/JaKooLit/Hyprland-Dots/wiki)
+
+#### 🎞️ AGS Overview DEMO
+- in case you wonder, here is a short demo of AGS overview [Youtube LINK](https://youtu.be/zY5SLNPBJTs)
 
 #### ⌨ Keybinds
 - Keybinds [`CLICK`](https://github.com/JaKooLit/Hyprland-Dots/wiki/Keybinds)

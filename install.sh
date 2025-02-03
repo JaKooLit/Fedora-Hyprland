@@ -41,9 +41,10 @@ fi
 OK="$(tput setaf 2)[OK]$(tput sgr0)"
 ERROR="$(tput setaf 1)[ERROR]$(tput sgr0)"
 NOTE="$(tput setaf 3)[NOTE]$(tput sgr0)"
-WARN="$(tput setaf 5)[WARN]$(tput sgr0)"
+WARN="$(tput setaf 1)[WARN]$(tput sgr0)"
 CAT="$(tput setaf 6)[ACTION]$(tput sgr0)"
-ORANGE=$(tput setaf 166)
+MAGENTA=$(tput setaf 5)
+WARNING=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 RESET=$(tput sgr0)
 
@@ -126,6 +127,8 @@ ask_yes_no "-Do you want to configure Bluetooth?" bluetooth
 printf "\n"
 ask_yes_no "-Do you want to install Thunar file manager?" thunar
 printf "\n"
+ask_yes_no "-Install AGS (aylur's gtk shell) v1 for Desktop Like Overview?" ags
+printf "\n"
 ask_yes_no "-Install & configure SDDM log-in Manager plus (OPTIONAL) SDDM Theme?" sddm
 printf "\n"
 ask_yes_no "-Install XDG-DESKTOP-PORTAL-HYPRLAND? (for proper Screen Share ie OBS)" xdph
@@ -152,8 +155,6 @@ execute_script "fonts.sh"
 execute_script "hyprland.sh"
 execute_script "hyprland-eco.sh"
 
-# Install AGS from source (older version)
-execute_script "ags.sh"
 
 if [ "$nvidia" == "Y" ]; then
     execute_script "nvidia.sh"
@@ -169,6 +170,10 @@ fi
 
 if [ "$thunar" == "Y" ]; then
     execute_script "thunar.sh"
+fi
+
+if [ "$ags" == "Y" ]; then
+    execute_script "ags.sh"
 fi
 
 if [ "$sddm" == "Y" ]; then
