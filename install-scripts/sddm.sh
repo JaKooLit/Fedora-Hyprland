@@ -60,25 +60,27 @@ printf "\n%.0s" {1..2}
 # SDDM-themes
 valid_input=false
 while [ "$valid_input" != true ]; do
-  read -n 1 -r -p "${CAT} OPTIONAL - Would you like to install SDDM themes? (y/n)" install_sddm_theme
+    if [[ -z $install_sddm_theme ]]; then
+      read -n 1 -r -p "${CAT} OPTIONAL - Would you like to install ${YELLOW}additional SDDM themes?${RESET} (y/n)" install_sddm_theme
+    fi
   if [[ $install_sddm_theme =~ ^[Yy]$ ]]; then
-    printf "\n%s - Installing Simple SDDM Theme\n" "${NOTE}"
+    printf "\n%s - Installing ${SKY_BLUE}Simple SDDM Theme${RESET}\n" "${NOTE}"
 
-    # Check if /usr/share/sddm/themes/simple-sddm exists and remove if it does
-    if [ -d "/usr/share/sddm/themes/simple-sddm-2" ]; then
-      sudo rm -rf "/usr/share/sddm/themes/simple-sddm-2"
-      echo -e "\e[1A\e[K${OK} - Removed existing 'simple-sddm-2' directory." 2>&1 | tee -a "$LOG"
+    # Check if /usr/share/sddm/themes/sequoia_2 exists and remove if it does
+    if [ -d "/usr/share/sddm/themes/sequoia_2" ]; then
+      sudo rm -rf "/usr/share/sddm/themes/sequoia_2"
+      echo -e "\e[1A\e[K${OK} - Removed existing 'sequoia_2' directory." 2>&1 | tee -a "$LOG"
     fi
 
-    # Check if simple-sddm directory exists in the current directory and remove if it does
-    if [ -d "simple-sddm-2" ]; then
-      rm -rf "simple-sddm-2"
-      echo -e "\e[1A\e[K${OK} - Removed existing 'simple-sddm-2' directory from the current location." 2>&1 | tee -a "$LOG"
+    # Check if sequoia_2 directory exists in the current directory and remove if it does
+    if [ -d "sequoia_2" ]; then
+      rm -rf "sequoia_2"
+      echo -e "\e[1A\e[K${OK} - Removed existing 'sequoia_2' directory from the current location." 2>&1 | tee -a "$LOG"
     fi
 
-    if git clone https://github.com/JaKooLit/simple-sddm-2.git; then
-      while [ ! -d "simple-sddm-2" ]; do
-      sleep 1
+    if git clone --depth 1 git clone https://codeberg.org/JaKooLit/sddm-sequoia sequoia_2; then
+      while [ ! -d "sequoia_2" ]; do
+        sleep 1
       done
 
       if [ ! -d "/usr/share/sddm/themes" ]; then
@@ -86,8 +88,13 @@ while [ "$valid_input" != true ]; do
         echo -e "\e[1A\e[K${OK} - Directory '/usr/share/sddm/themes' created." 2>&1 | tee -a "$LOG"
       fi
 
-      sudo mv simple-sddm-2 /usr/share/sddm/themes/
-      echo -e "[Theme]\nCurrent=simple-sddm-2" | sudo tee "$sddm_conf_dir/theme.conf.user" &>> "$LOG"
+      sudo mv sequoia_2 /usr/share/sddm/themes/sequoia_2
+      echo -e "[Theme]\nCurrent=sequoia_2" | sudo tee "$sddm_conf_dir/theme.conf.user" &>> "$LOG"
+
+      # replace current background from assets
+      sudo cp -r assets/mountain.png /usr/share/sddm/themes/sequoia_2/backgrounds/default
+      sudo sed -i 's|^wallpaper=".*"|wallpaper="backgrounds/default"|' /usr/share/sddm/themes/sequoia_2/theme.conf 
+
     else
       echo -e "\e[1A\e[K${ERROR} - Failed to clone the theme repository. Please check your internet connection" | tee -a "$LOG" >&2
     fi
@@ -101,4 +108,4 @@ while [ "$valid_input" != true ]; do
   fi
 done
 
-clear
+printf "\n%.0s" {1..2}

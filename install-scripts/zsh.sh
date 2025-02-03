@@ -3,10 +3,10 @@
 # ZSH and oh-my-zsh & Optional Pokemon Color Scrips #
 
 zsh=(
-    eza
-    fzf
-    zsh 
-    util-linux
+  eza
+  fzf
+  zsh 
+  util-linux
 )
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
@@ -43,13 +43,13 @@ printf "\n%.0s" {1..1}
 
 ## Optional Pokemon color scripts
 while true; do
-    read -p "${CAT} Do you want to install Pokemon color scripts? (y/n): " choice
+    read -p "${CAT} OPTIONAL - Do you want to add ${YELLOW}Pokemon color scripts${RESET}? (y/n): " choice
     case "$choice" in
         [Yy]*)
             if [ -d "pokemon-colorscripts" ]; then
                 cd pokemon-colorscripts && git pull && sudo ./install.sh && cd ..
             else
-                git clone https://gitlab.com/phoneybadger/pokemon-colorscripts.git &&
+                git clone --depth 1 https://gitlab.com/phoneybadger/pokemon-colorscripts.git &&
                 cd pokemon-colorscripts && sudo ./install.sh && cd ..
             fi
             sed -i '/#pokemon-colorscripts --no-title -s -r/s/^#//' assets/.zshrc >> "$LOG" 2>&1
@@ -57,7 +57,7 @@ while true; do
 			# commenting out fastfetch since pokemon was chosen to install
             sed -i '/^fastfetch -c $HOME\/.config\/fastfetch\/config-compact.jsonc/s/^/#/' assets/.zshrc >> "$LOG" 2>&1
             
-			echo "${NOTE} Pokemon Installation process completed" 2>&1 | tee -a "$LOG"
+			echo "${NOTE} ${MAGENTA}Pokemon-colorscripts${RESET} installation process completed" 2>&1 | tee -a "$LOG"
             break
             ;;
         [Nn]*) 
@@ -74,47 +74,47 @@ printf "\n"
 
 # Install Oh My Zsh, plugins, and set zsh as default shell
 if command -v zsh >/dev/null; then
-  printf "${NOTE} Installing Oh My Zsh and plugins...\n"
-	if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  		sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
-	else
-		echo "Directory .oh-my-zsh already exists. Skipping re-installation." 2>&1 | tee -a "$LOG"
-	fi
-	# Check if the directories exist before cloning the repositories
-	if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then
-    	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions || true
-	else
-    	echo "Directory zsh-autosuggestions already exists. Skipping cloning." 2>&1 | tee -a "$LOG"
-	fi
+  printf "${NOTE} Installing ${SKY_BLUE}Oh My Zsh and plugins${RESET} ...\n"
+  if [ ! -d "$HOME/.oh-my-zsh" ]; then
+      sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
+  else
+      echo "${INFO} Directory .oh-my-zsh already exists. Skipping re-installation." 2>&1 | tee -a "$LOG"
+  fi
+  # Check if the directories exist before cloning the repositories
+  if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then
+      git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions || true
+  else
+      echo "${INFO} Directory zsh-autosuggestions already exists. Skipping cloning." 2>&1 | tee -a "$LOG"
+  fi
 
-	if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then
-    	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting || true
-	else
-    	echo "Directory zsh-syntax-highlighting already exists. Skipping cloning." 2>&1 | tee -a "$LOG"
-	fi
-	
-	# Check if ~/.zshrc and .zprofile exists, create a backup, and copy the new configuration
-	if [ -f "$HOME/.zshrc" ]; then
-    	cp -b "$HOME/.zshrc" "$HOME/.zshrc-backup" || true
-	fi
+  if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then
+      git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting || true
+  else
+      echo "${INFO} Directory zsh-syntax-highlighting already exists. Skipping cloning." 2>&1 | tee -a "$LOG"
+  fi
+  
+  # Check if ~/.zshrc and .zprofile exists, create a backup, and copy the new configuration
+  if [ -f "$HOME/.zshrc" ]; then
+      cp -b "$HOME/.zshrc" "$HOME/.zshrc-backup" || true
+  fi
 
-	if [ -f "$HOME/.zprofile" ]; then
-    	cp -b "$HOME/.zprofile" "$HOME/.zprofile-backup" || true
-	fi
+  if [ -f "$HOME/.zprofile" ]; then
+      cp -b "$HOME/.zprofile" "$HOME/.zprofile-backup" || true
+  fi
+  
+  # Copying the preconfigured zsh themes and profile
+  cp -r 'assets/.zshrc' ~/
+  cp -r 'assets/.zprofile' ~/
 
-    cp -r 'assets/.zshrc' ~/
-    cp -r 'assets/.zprofile' ~/
-
-    printf "${NOTE} Changing default shell to zsh...\n"
-
-	while ! chsh -s $(which zsh); do
-    echo "${ERROR} Authentication failed. Please enter the correct password."
-    sleep 1	
-	done
-	printf "\n"
-	printf "${NOTE} Shell changed successfully to zsh.\n" 2>&1 | tee -a "$LOG"
+  printf "${NOTE} Changing default shell to ${MAGENTA}zsh${RESET}..."
+  printf "\n%.0s" {1..2}
+  while ! chsh -s $(which zsh); do
+      echo "${ERROR} Authentication failed. Please enter the correct password." 2>&1 | tee -a "$LOG"
+      sleep 1
+  done
+  printf "${INFO} Shell changed successfully to ${MAGENTA}zsh${RESET}" 2>&1 | tee -a "$LOG"
 
 fi
 
-clear
+printf "\n%.0s" {1..2}
 

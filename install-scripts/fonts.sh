@@ -26,16 +26,18 @@ source "$(dirname "$(readlink -f "$0")")/Global_functions.sh"
 # Set the name of the log file to include the current date and time
 LOG="Install-Logs/install-$(date +%d-%H%M%S)_fonts.log"
 
+
 # Installation of main components
-printf "\n%s - Installing necessary fonts.... \n" "${NOTE}"
+printf "\n%s - Installing necessary ${SKY_BLUE}fonts${RESET}.... \n" "${NOTE}"
 
 for PKG1 in "${fonts[@]}"; do
-  install_package "$PKG1"
+  install_package "$PKG1" "$LOG"
   if [ $? -ne 0 ]; then
-    echo -e "${ERROR} - $PKG1 Installation failed. Check the install log."
     exit 1
   fi
 done
+
+printf "\n%.0s" {1..2}
 
 # jetbrains nerd font. Necessary for waybar
 DOWNLOAD_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz"
@@ -43,7 +45,7 @@ DOWNLOAD_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/J
 MAX_ATTEMPTS=2
 for ((ATTEMPT = 1; ATTEMPT <= MAX_ATTEMPTS; ATTEMPT++)); do
     curl -OL "$DOWNLOAD_URL" 2>&1 | tee -a "$LOG" && break
-    echo "Download attempt $ATTEMPT failed. Retrying in 2 seconds..." 2>&1 | tee -a "$LOG"
+    echo "Download ${YELLOW}DOWNLOAD_URL${RESET} attempt $ATTEMPT failed. Retrying in 2 seconds..." 2>&1 | tee -a "$LOG"
     sleep 2
 done
 
@@ -64,4 +66,4 @@ if [ -d "JetBrainsMono.tar.xz" ]; then
 	rm -r JetBrainsMono.tar.xz 2>&1 | tee -a "$LOG"
 fi
 
-clear
+printf "\n%.0s" {1..2}

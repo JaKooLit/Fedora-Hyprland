@@ -30,16 +30,15 @@ LOG="Install-Logs/install-$(date +%d-%H%M%S)_nvidia.log"
 
 
 # Install additional Nvidia packages
-printf "${YELLOW} Installing Nvidia packages...\n"
+printf "${YELLOW} Installing ${SKY_BLUE}Nvidia Packages${RESET}...\n"
   for NVIDIA in "${nvidia_pkg[@]}"; do
   install_package "$NVIDIA"
   if [ $? -ne 0 ]; then
-    echo -e "${ERROR} - $NVIDIA Installation failed. Check the install log."
     exit 1
   fi
 done
 
-printf "${YELLOW} nvidia-stuff to /etc/default/grub..."
+printf "${INFO} adding nvidia options to ${YELLOW}/etc/default/grub${RESET} ..."
 
 # Additional options to add to GRUB_CMDLINE_LINUX
 additional_options="rd.driver.blacklist=nouveau modprobe.blacklist=nouveau nvidia-drm.modeset=1 nvidia_drm.fbdev=1"
@@ -58,4 +57,4 @@ sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 
 echo "${NOTE} Nvidia DRM modeset and additional options have been added to /etc/default/grub. Please reboot for changes to take effect." 2>&1 | tee -a "$LOG"
 
-clear
+printf "\n%.0s" {1..2}

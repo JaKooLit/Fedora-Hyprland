@@ -40,7 +40,7 @@ source "$(dirname "$(readlink -f "$0")")/Global_functions.sh"
 # Set the name of the log file to include the current date and time
 LOG="Install-Logs/00_CHECK-$(date +%d-%H%M%S)_installed.log"
 
-printf "\n%s - Final Check if Essential packages were installed \n" "${NOTE}"
+printf "\n%s - Final Check if all ${SKY_BLUE}Essential packages${RESET} were installed \n" "${NOTE}"
 # Initialize an empty array to hold missing packages
 missing=()
 local_missing=()
@@ -67,7 +67,7 @@ done
 
 # Log missing packages
 if [ ${#missing[@]} -eq 0 ] && [ ${#local_missing[@]} -eq 0 ]; then
-    echo "${OK} All essential packages are installed." | tee -a "$LOG"
+    echo "${OK} GREAT! It seems All ${YELLOW}essential packages${RESET} are installed." | tee -a "$LOG"
 else
     if [ ${#missing[@]} -ne 0 ]; then
         echo "${WARN} The following packages are not installed and will be logged:"

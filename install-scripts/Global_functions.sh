@@ -26,54 +26,68 @@ BLUE="$(tput setaf 4)"
 SKY_BLUE="$(tput setaf 6)"
 RESET="$(tput sgr0)"
 
-# Function for installing packages
-install_package() {
-  local package="$1"
 
-  # Checking if package is already installed
-  if rpm -q "$package" &>/dev/null; then
-    echo -e "${OK} $package is already installed. Skipping..." 2>&1 | tee -a "$LOG"
-    return 0
+# Function that would show a progress
+show_progress() {
+    local pid=$1
+    local package_name=$2
+    local spin_chars=("●○○○○○" "○●○○○○" "○○●○○○" "○○○●○○" "○○○○●○" "○○○○○●" \
+                      "○○○○●○" "○○○●○○" "○○●○○○" "○●○○○○")  # Growing & Shrinking Dots
+    local i=0
+
+    tput civis  # Hide cursor
+    printf "\r${NOTE} Installing ${YELLOW}%s${RESET} ..." "$package_name"
+
+    while ps -p $pid &> /dev/null; do
+        printf "\r${NOTE} Installing ${YELLOW}%s${RESET} %s" "$package_name" "${spin_chars[i]}"
+        i=$(( (i + 1) % 10 ))  
+        sleep 0.3  
+    done
+
+    printf "\r${NOTE} Installing ${YELLOW}%s${RESET} ... Done!%-20s\n" "$package_name" ""
+    tput cnorm  
+}
+
+# Function to install packages
+install_package() {
+  # Check if package is already installed
+  if rpm -q "$1" &>/dev/null ; then
+    echo -e "${INFO} ${MAGENTA}$1${RESET} is already installed. Skipping..."
   else
-    # Package not installed
-    echo -e "${NOTE} Installing $package ..."
-    if sudo dnf install -y "$package" 2>&1 | tee -a "$LOG"; then
-      # Making sure package is installed
-      echo -e "\e[1A\e[K${OK} Package ${YELLOW}$1${RESET} has been successfully installed!"
-      return 0
+    # Run dnf and redirect all output to a log file
+    (
+      stdbuf -oL sudo dnf install -y "$1" 2>&1
+    ) >> "$LOG" 2>&1 &
+    PID=$!
+    show_progress $PID "$1" 
+
+    # Double check if package is installed
+    if rpm -q "$1" &>/dev/null ; then
+      echo -e "${OK} Package ${YELLOW}$1${RESET} has been successfully installed!"
     else
-      # Package installation did not succeed
-      echo -e "\e[1A\e[K${ERROR} $package failed to install :( , please check the install.log. You may need to install manually! Sorry I have tried :(" 2>&1 | tee -a "$LOG"
-      return 1
+      echo -e "\n${ERROR} ${YELLOW}$1${RESET} failed to install. Please check the $LOG. You may need to install manually."
+      exit 1
     fi
   fi
 }
 
 # Function for uninstalling packages
 uninstall_package() {
-  local package="$1"
+  local pkg="$1"
 
   # Checking if package is installed
-  if rpm -q "$package" &>/dev/null; then
-    # Package is installed
-    echo -e "${NOTE} Uninstalling $package ..."
-    if sudo dnf remove -y "$package" 2>&1 | tee -a "$LOG"; then
-      # Making sure package is uninstalled
-      if ! rpm -q "$package" &>/dev/null; then
-        echo -e "\e[1A\e[K${OK} $package was uninstalled."
-        return 0
-      else
-        # Uninstallation did not succeed
-        echo -e "\e[1A\e[K${ERROR} $package failed to uninstall. Please check the uninstall.log."
-        return 1
-      fi
+  if rpm -q "$pkg" &>/dev/null; then
+    echo -e "${NOTE} Uninstalling $pkg ..."
+    sudo dnf remove -y "$pkg" 2>&1 | tee -a "$LOG" | grep -v "Error: Unable to find package"
+
+    if ! rpm -q "$pkg" &>/dev/null; then
+      echo -e "\e[1A\e[K${OK} $pkg was uninstalled."
     else
-      # Uninstallation command itself failed
-      echo -e "${ERROR} An error occurred while trying to uninstall $package. Please check the uninstall.log for details."
+      echo -e "\e[1A\e[K${ERROR} $pkg failed to uninstall. Please check the log."
       return 1
     fi
   else
-    echo -e "${WARN} $package is not installed. Skipping uninstallation." 2>&1 | tee -a "$LOG"
-    return 0
+    echo -e "${INFO} Package $pkg not installed, skipping."
   fi
+  return 0
 }

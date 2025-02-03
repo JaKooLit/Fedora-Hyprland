@@ -1,6 +1,21 @@
 #!/bin/bash
-
 # https://github.com/JaKooLit
+
+# Set some colors for output messages
+OK="$(tput setaf 2)[OK]$(tput sgr0)"
+ERROR="$(tput setaf 1)[ERROR]$(tput sgr0)"
+NOTE="$(tput setaf 3)[NOTE]$(tput sgr0)"
+INFO="$(tput setaf 4)[INFO]$(tput sgr0)"
+WARN="$(tput setaf 1)[WARN]$(tput sgr0)"
+CAT="$(tput setaf 6)[ACTION]$(tput sgr0)"
+MAGENTA="$(tput setaf 5)"
+ORANGE="$(tput setaf 214)"
+WARNING="$(tput setaf 1)"
+YELLOW="$(tput setaf 3)"
+GREEN="$(tput setaf 2)"
+BLUE="$(tput setaf 4)"
+SKY_BLUE="$(tput setaf 6)"
+RESET="$(tput sgr0)"
 
 # Check if running as root. If root, script will exit
 if [[ $EUID -eq 0 ]]; then
@@ -16,20 +31,31 @@ echo " \_| (_| o |\ (_) (_) |_ |  |_ "
 printf "\n%.0s" {1..2}
 
 # Welcome message
-echo "$(tput setaf 6)Welcome to JaKooLit's Fedora-Hyprland Install Script!$(tput sgr0)"
+echo "${SKY_BLUE}Welcome to JaKooLit's Fedora-Hyprland Install Script!${RESET}"
 echo
-echo "$(tput setaf 166)ATTENTION: Run a full system update and Reboot first!! (Highly Recommended) $(tput sgr0)"
+echo "${WARNING}ATTENTION: Run a full system update and Reboot first!! (Highly Recommended) ${RESET}"
 echo
-echo "$(tput setaf 3)NOTE: You will be required to answer some questions during the installation! $(tput sgr0)"
+echo "${YELLOW}NOTE: You will be required to answer some questions during the installation! ${RESET}"
 echo
-echo "$(tput setaf 3)NOTE: If you are installing on a VM, ensure to enable 3D acceleration else Hyprland wont start! $(tput sgr0)"
+echo "${YELLOW}NOTE: If you are installing on a VM, ensure to enable 3D acceleration else Hyprland wont start! ${RESET}"
 echo
 
 read -p "$(tput setaf 6)Would you like to proceed? (y/n): $(tput sgr0)" proceed
 
+printf "\n%.0s" {1..2}
+
 if [ "$proceed" != "y" ]; then
-    echo "Installation aborted."
+    echo "${INFO} Installation aborted. No changes done! Goodbye!"
+    printf "\n%.0s" {1..2}
     exit 1
+fi
+
+printf "\n%.0s" {1..2}
+
+# install pciutils if detected not installed. Necessary for detecting GPU
+if ! rpm -q pciutils > /dev/null; then
+    echo "pciutils is not installed. Installing..."
+    sudo dnf install -y pciutils
 fi
 
 # Create Directory for Install Logs
@@ -37,16 +63,17 @@ if [ ! -d Install-Logs ]; then
     mkdir Install-Logs
 fi
 
-# Set some colors for output messages
-OK="$(tput setaf 2)[OK]$(tput sgr0)"
-ERROR="$(tput setaf 1)[ERROR]$(tput sgr0)"
-NOTE="$(tput setaf 3)[NOTE]$(tput sgr0)"
-WARN="$(tput setaf 1)[WARN]$(tput sgr0)"
-CAT="$(tput setaf 6)[ACTION]$(tput sgr0)"
-MAGENTA=$(tput setaf 5)
-WARNING=$(tput setaf 1)
-YELLOW=$(tput setaf 3)
-RESET=$(tput sgr0)
+echo "${WARN} ${WARNING}ATTENTION: Choosing Y on use preset question will install also ${MAGENTA}nvidia packages!!!${RESET}"
+echo "${YELLOW}CTRL C or Q to cancel and edit the file ${MAGENTA}preset.sh${RESET} ${RESET}"  
+echo "If you are not sure what to do, answer N in here"
+read -p "${SKY_BLUE}Would you like to Use ${YELLOW}Preset Install Settings?${RESET} (See note above)? (y/n): ${RESET}" use_preset
+
+# Use of Preset Settings
+if [[ $use_preset = [Yy] ]]; then
+  source ./preset.sh
+fi
+
+printf "\n%.0s" {1..2}
 
 # Function to colorize prompts
 colorize_prompt() {
@@ -57,18 +84,6 @@ colorize_prompt() {
 
 # Set the name of the log file to include the current date and time
 LOG="install-$(date +%d-%H%M%S).log"
-
-# Initialize variables to store user responses
-bluetooth=""
-dots=""
-gtk_themes=""
-nvidia=""
-nwg=""
-rog=""
-sddm=""
-thunar=""
-xdph=""
-zsh=""
 
 # Define the directory where your scripts are located
 script_directory=install-scripts
@@ -117,44 +132,41 @@ execute_script() {
     fi
 }
 
+
 # Collect user responses to all questions
 printf "\n"
-ask_yes_no "-Do you have any nvidia gpu in your system?" nvidia
+# Check if nvidia is present
+if lspci | grep -i "nvidia" &> /dev/null; then
+    ask_yes_no "-${YELLOW}NVIDIA${RESET} GPU is detected. Do you want script to configure it?" nvidia
+fi
 printf "\n"
-ask_yes_no "-Install GTK themes? (required for Dark/Light function)" gtk_themes
+ask_yes_no "-Install ${YELLOW}GTK themes${RESET} (required for Dark/Light function)?" gtk_themes
 printf "\n"
-ask_yes_no "-Do you want to configure Bluetooth?" bluetooth
+ask_yes_no "-Do you want to configure ${YELLOW}Bluetooth${RESET}?" bluetooth
 printf "\n"
-ask_yes_no "-Do you want to install Thunar file manager?" thunar
+ask_yes_no "-Do you want to install ${YELLOW}Thunar file manager${RESET}?" thunar
 printf "\n"
-ask_yes_no "-Install AGS (aylur's gtk shell) v1 for Desktop Like Overview?" ags
+ask_yes_no "-Install ${YELLOW}AGS (aylur's GTK shell) v1${RESET} for Desktop-Like Overview?" ags
 printf "\n"
-ask_yes_no "-Install & configure SDDM log-in Manager plus (OPTIONAL) SDDM Theme?" sddm
+ask_yes_no "-Install & configure ${YELLOW}SDDM${RESET} login manager, plus (OPTIONAL) SDDM theme?" sddm
 printf "\n"
-ask_yes_no "-Install XDG-DESKTOP-PORTAL-HYPRLAND? (for proper Screen Share ie OBS)" xdph
+ask_yes_no "-Install ${YELLOW}XDG-DESKTOP-PORTAL-HYPRLAND${RESET}? (For proper Screen Share, e.g., OBS)" xdph
 printf "\n"
-ask_yes_no "-Install zsh & oh-my-zsh plus (OPTIONAL) pokemon-colorscripts?" zsh
+ask_yes_no "-Install ${YELLOW}zsh${RESET}, ${YELLOW}oh-my-zsh${RESET} & (Optional) ${YELLOW}pokemon-colorscripts${RESET}?" zsh
 printf "\n"
-
-# disabled in favor of fedora copr
-#ask_yes_no "-Install nwg-look? (Theming app / lxappearance-like) WARNING Package takes abit long to install" nwg
-#printf "\n"
-
-ask_yes_no "-Installing on ASUS ROG Laptops?" rog
+ask_yes_no "-Installing on ${YELLOW}Asus ROG laptops${RESET}?" rog
 printf "\n"
-ask_yes_no "-Do you want to download and install pre-configured Hyprland dotfiles?" dots
+ask_yes_no "-Do you want to download pre-configured ${YELLOW}KooL Hyprland dotfiles${RESET}?" dots
 printf "\n"
 
 # Ensuring all in the scripts folder are made executable
 chmod +x install-scripts/*
-
+sleep 1
 # Install hyprland packages
 execute_script "copr.sh"
 execute_script "00-hypr-pkgs.sh"
 execute_script "fonts.sh"
 execute_script "hyprland.sh"
-execute_script "hyprland-eco.sh"
-
 
 if [ "$nvidia" == "Y" ]; then
     execute_script "nvidia.sh"
@@ -214,24 +226,37 @@ printf "\n%.0s" {1..1}
 
 # Check if hyprland or hyprland-git is installed
 if rpm -q hyprland &> /dev/null || rpm -q hyprland-git &> /dev/null; then
-    printf "\n${OK} Hyprland is installed. However, some essential packages may not be installed Please see above!"
-    printf "\n${CAT} Ignore this message if it states 'All essential packages are installed.'\n"
+    printf "\n${OK} Hyprland is installed. However, some essential packages may not be installed. Please see above!"
+    printf "\n${CAT} Ignore this message if it states ${YELLOW}All essential packages${RESET} are installed as per above\n"
     sleep 2
-    printf "\n${NOTE} You can start Hyprland by typing 'Hyprland' (IF SDDM is not installed) (note the capital H!).\n"
-    printf "\n${NOTE} However, it is highly recommended to reboot your system.\n\n"
+    printf "\n${NOTE} You can start Hyprland by typing ${MAGENTA}Hyprland${RESET} (IF SDDM is not installed) (note the capital H!).\n"
+    printf "\n${NOTE} However, it is ${YELLOW}highly recommended to reboot${RESET} your system.\n\n"
 
     # Prompt user to reboot
     read -rp "${CAT} Would you like to reboot now? (y/n): " HYP
 
-    # Check if the user answered 'y' or 'Y'
-    if [[ "$HYP" =~ ^[Yy]$ ]]; then
-        if [[ "$nvidia" == "Y" ]]; then
-            echo "${NOTE} NVIDIA GPU detected. Rebooting the system..."
-        fi
-        systemctl reboot
+    # Normalize user input to lowercase
+    HYP=$(echo "$HYP" | tr '[:upper:]' '[:lower:]')
+
+    if [[ "$HYP" == "y" || "$HYP" == "yes" ]]; then
+        echo "${INFO} Rebooting now..."
+        reboot # Optionally reboot if the user agrees
+    elif [[ "$HYP" == "n" || "$HYP" == "no" ]]; then
+        echo "${INFO} You can reboot later at any time."
+    else
+        echo "${WARN} Invalid response. Please answer with 'y' or 'n'. Exiting."
+        exit 1
+    fi
+
+    # Check if NVIDIA GPU is present
+    if lspci | grep -i "nvidia" &> /dev/null; then
+        echo "${INFO} ${YELLOW}NVIDIA GPU${RESET} detected. Reminder that you must REBOOT your SYSTEM..."
+    else
+        echo -e "\n${CAT} Thanks for using ${MAGENTA}KooL's Hyprland Dots${RESET}. Enjoy and Have a good day!"
+        exit 0
     fi
 else
     # Print error message if neither package is installed
-    printf "\n${WARN} Hyprland failed to install. Please check 00_CHECK-time_installed.log and other files Install-Logs/ directory...\n\n"
+    printf "\n${WARN} Hyprland failed to install. Please check 00_CHECK-time_installed.log and other files in the Install-Logs/ directory...\n\n"
     exit 1
 fi

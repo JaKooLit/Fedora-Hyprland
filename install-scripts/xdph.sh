@@ -3,12 +3,13 @@
 # XDG-Desktop-Portals #
 
 xdg=(
-xdg-desktop-portal-hyprland
-xdg-desktop-portal-gtk
+  xdg-desktop-portal-hyprland
+  xdg-desktop-portal-gtk
 )
 
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
+
 # Determine the directory where the script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -22,50 +23,13 @@ source "$(dirname "$(readlink -f "$0")")/Global_functions.sh"
 LOG="Install-Logs/install-$(date +%d-%H%M%S)_xdph.log"
 
 # XDG-DESKTOP-PORTAL-HYPRLAND
+printf "${NOTE} Installing ${SKY_BLUE}xdg-desktop-portal-hyprland${RESET}\n\n" 
 for xdgs in "${xdg[@]}"; do
-  install_package "$xdgs"
-  if [ $? -ne 0 ]; then
-    echo -e "${ERROR} - $xdgs Installation failed. Check the install log." 2>&1 | tee -a "$LOG"
+  install_package "$xdgs" "$LOG"
+    if [ $? -ne 0 ]; then
+    echo -e "\e[1A\e[K${ERROR} - $xdph Package installation failed, Please check the installation logs"
     exit 1
-  fi
+    fi
 done
-
-printf "\n"
-
-printf "${NOTE} Checking for other XDG-Desktop-Portal-Implementations....\n"
-sleep 1
-printf "\n"
-printf "${NOTE} XDG-desktop-portal-KDE & GNOME (if installed) should be manually disabled or removed! I can't remove it... sorry...\n"
-while true; do
-    printf "\n%.0s" {1..2}
-    read -rp "${CAT} Would you like to try to remove other XDG-Desktop-Portal-Implementations? (y/n) " XDPH1
-    echo
-    sleep 1
-
-    case $XDPH1 in
-        [Yy])
-            # Clean out other portals
-            printf "${NOTE} Clearing any other xdg-desktop-portal implementations...\n"
-            # Check if packages are installed and uninstall if present
-  			if sudo dnf list installed xdg-desktop-portal-wlr &>> /dev/null; then
-    		echo "Removing xdg-desktop-portal-wlr..."
-    		sudo dnf remove -y xdg-desktop-portal-wlr 2>&1 | tee -a "$LOG"
-  			fi
-
-  			if sudo dnf list installed xdg-desktop-portal-lxqt &>> /dev/null; then
-    		echo "Removing xdg-desktop-portal-lxqt..."
-    		sudo dnf remove -y xdg-desktop-portal-lxqt 2>&1 | tee -a "$LOG"
-  			fi
-
-            break
-            ;;
-        [Nn])
-            echo "no other XDG-implementations will be removed." >> "$LOG"
-            break
-            ;;
-        *)
-            echo "Invalid input. Please enter 'y' for yes or 'n' for no."
-            ;;
-    esac
-done
-clear
+    
+printf "\n%.0s" {1..2}
