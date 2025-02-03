@@ -31,7 +31,6 @@ ags=(
     NetworkManager
     pam-devel 
     pulseaudio-libs-devel
-    rust-libpulse-sys-devel 
     libdbusmenu-gtk3 
     libsoup3
 )
