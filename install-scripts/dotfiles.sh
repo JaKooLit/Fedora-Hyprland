@@ -1,6 +1,9 @@
 #!/bin/bash
 # 💫 https://github.com/JaKooLit 💫 #
 # Hyprland-Dots to download from Releases #
+if [[ $USE_PRESET = [Yy] ]]; then
+  source ./preset.sh
+fi
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
 

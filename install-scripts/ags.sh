@@ -12,6 +12,10 @@ if command -v ags &>/dev/null; then
     fi
 fi
 
+if [[ $USE_PRESET = [Yy] ]]; then
+  source ./preset.sh
+fi
+
 ags=(
 	cmake
     typescript

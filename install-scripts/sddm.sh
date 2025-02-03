@@ -2,6 +2,10 @@
 # 💫 https://github.com/JaKooLit 💫 #
 # SDDM and SDDM Theme #
 
+if [[ $USE_PRESET = [Yy] ]]; then
+  source ./preset.sh
+fi
+
 sddm=(
 	sddm
   qt6-qt5compat 

@@ -2,6 +2,10 @@
 # 💫 https://github.com/JaKooLit 💫 #
 # Thunar and recommended additions #
 
+if [[ $USE_PRESET = [Yy] ]]; then
+  source ./preset.sh
+fi
+
 thunar=(
 ffmpegthumbnailer
 Thunar 
