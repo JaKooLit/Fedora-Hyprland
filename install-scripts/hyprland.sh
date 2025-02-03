@@ -3,10 +3,7 @@
 # Main Hyprland Package #
 
 hypr=(
-  aquamarine
   hyprland
-  hyprland-qtutils
-  hyprcursor
   hypridle
   hyprlock
   pyprland
