@@ -63,15 +63,15 @@ if [ ! -d Install-Logs ]; then
     mkdir Install-Logs
 fi
 
-echo "${WARN} ${WARNING}ATTENTION: Choosing Y on use preset question will install also ${MAGENTA}nvidia packages!!!${RESET}"
-echo "${YELLOW}CTRL C or Q to cancel and edit the file ${MAGENTA}preset.sh${RESET} ${RESET}"  
-echo "If you are not sure what to do, answer N in here"
-read -p "${SKY_BLUE}Would you like to Use ${YELLOW}Preset Install Settings?${RESET} (See note above)? (y/n): ${RESET}" use_preset
+#echo "${WARN} ${WARNING}ATTENTION: Choosing Y on use preset question will install also ${MAGENTA}nvidia packages!!!${RESET}"
+#echo "${YELLOW}CTRL C or Q to cancel and edit the file ${MAGENTA}preset.sh${RESET} ${RESET}"  
+#echo "If you are not sure what to do, answer N in here"
+#read -p "${SKY_BLUE}Would you like to Use ${YELLOW}Preset Install Settings?${RESET} (See note above)? (y/n): ${RESET}" use_preset
 
 # Use of Preset Settings
-if [[ $use_preset = [Yy] ]]; then
-  source ./preset.sh
-fi
+#if [[ $use_preset = [Yy] ]]; then
+#  source ./preset.sh
+#fi
 
 printf "\n%.0s" {1..2}
 

@@ -71,7 +71,7 @@ add_line_to_repo() {
 
   # Check if the file exists
   if [ ! -f "$repo_file" ]; then
-    echo "${WARN} File ${WARNING}$repo_file${RESET} does not exist." 2>&1 | tee -a "$LOG"
+    #echo "${WARN} File ${WARNING}$repo_file${RESET} does not exist." 2>&1 | tee -a "$LOG"
     return 2
   fi
 
