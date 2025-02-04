@@ -6,9 +6,9 @@
 
 source "$(dirname "$(readlink -f "$0")")/Global_functions.sh"
 
-# Check if Hyprland-Dots exists
-printf "${NOTE} Cloning and Installing ${SKY_BLUE}KooL's Hyprland Dots${RESET}....\n"
 
+printf "${NOTE} Cloning and Installing ${SKY_BLUE}KooL's Hyprland Dots${RESET}....\n"
+# Check if Hyprland-Dots exists
 if [ -d Hyprland-Dots ]; then
   cd Hyprland-Dots
   git stash
