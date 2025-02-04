@@ -4,7 +4,7 @@
 
 engine=(
     unzip
-    gtk-engine-murrine
+    #gtk-engine-murrine
 )
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##

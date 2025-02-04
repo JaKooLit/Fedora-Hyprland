@@ -26,12 +26,12 @@ fi
 clear
 
 printf "\n%.0s" {1..3}                            
-echo "   |  _.   |/  _   _  |  o _|_ "
-echo " \_| (_| o |\ (_) (_) |_ |  |_ "
+echo -e "\e[32m   |  _.   |/  _   _  |  o _|_  \e[39m"
+echo -e "\e[32m \_| (_| o |\ (_) (_) |_ |  |_  2025\e[39m"
 printf "\n%.0s" {1..2}
 
 # Welcome message
-echo "${SKY_BLUE}Welcome to JaKooLit's Fedora-Hyprland Install Script!${RESET}"
+echo "${SKY_BLUE}Welcome to KooL's Fedora-Hyprland (2025) Install Script!${RESET}"
 echo
 echo "${WARNING}ATTENTION: Run a full system update and Reboot first!! (Highly Recommended) ${RESET}"
 echo
@@ -73,7 +73,7 @@ fi
 #  source ./preset.sh
 #fi
 
-printf "\n%.0s" {1..2}
+#printf "\n%.0s" {1..2}
 
 # Function to colorize prompts
 colorize_prompt() {
