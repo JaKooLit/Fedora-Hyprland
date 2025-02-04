@@ -44,7 +44,8 @@ read -p "$(tput setaf 6)Would you like to proceed? (y/n): $(tput sgr0)" proceed
 
 if [ "$proceed" != "y" ]; then
     printf "\n%.0s" {1..2}
-    echo "${INFO} Installation aborted. No changes done! Goodbye!"
+    echo "${INFO} Installation aborted. No changes in your system! ${MAGENTA}Goodbye!!!${RESET} "
+    printf "\n%.0s" {1..2}
     exit 1
 fi
 
@@ -257,5 +258,6 @@ if rpm -q hyprland &> /dev/null || rpm -q hyprland-git &> /dev/null; then
 else
     # Print error message if neither package is installed
     printf "\n${WARN} Hyprland failed to install. Please check 00_CHECK-time_installed.log and other files in the Install-Logs/ directory...\n\n"
+    printf "\n%.0s" {1..2}
     exit 1
 fi
