@@ -33,7 +33,6 @@ LOG="Install-Logs/install-$(date +%d-%H%M%S)_thunar.log"
 printf "${NOTE} Installing ${SKY_BLUE}Thunar${RESET} Packages...\n\n"  
   for THUNAR in "${thunar[@]}"; do
     install_package "$THUNAR" "$LOG"
-    [ $? -ne 0 ] && { echo -e "\e[1A\e[K${ERROR} - $THUNAR Package installation failed, Please check the installation logs"; exit 1; }
   done
 
 printf "\n%.0s" {1..2}
@@ -51,7 +50,7 @@ while true; do
         [Yy]*)
             xdg-mime default thunar.desktop inode/directory
             xdg-mime default thunar.desktop application/x-wayland-gnome-saved-search
-            echo "${OK} Thunar has been set as the default file manager." | tee -a "$LOG"
+            echo "${INFO} ${MAGENTA}Thunar${RESET} has been set as the default file manager." | tee -a "$LOG"
             break
             ;;
         [Nn]*)

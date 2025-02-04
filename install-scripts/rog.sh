@@ -32,9 +32,6 @@ sudo dnf update
 printf " Installing ${SKY_BLUE}ASUS ROG packages${RESET}...\n"
   for ASUS in "${asusctl[@]}"; do
   install_package "$ASUS" "$LOG"
-  if [ $? -ne 0 ]; then
-    exit 1
-  fi
 done
 
 printf " Activating ROG services...\n"

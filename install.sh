@@ -42,11 +42,9 @@ echo
 
 read -p "$(tput setaf 6)Would you like to proceed? (y/n): $(tput sgr0)" proceed
 
-printf "\n%.0s" {1..2}
-
 if [ "$proceed" != "y" ]; then
-    echo "${INFO} Installation aborted. No changes done! Goodbye!"
     printf "\n%.0s" {1..2}
+    echo "${INFO} Installation aborted. No changes done! Goodbye!"
     exit 1
 fi
 

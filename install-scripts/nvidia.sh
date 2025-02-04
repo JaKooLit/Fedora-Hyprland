@@ -33,9 +33,6 @@ LOG="Install-Logs/install-$(date +%d-%H%M%S)_nvidia.log"
 printf "${YELLOW} Installing ${SKY_BLUE}Nvidia Packages${RESET}...\n"
   for NVIDIA in "${nvidia_pkg[@]}"; do
   install_package "$NVIDIA"
-  if [ $? -ne 0 ]; then
-    exit 1
-  fi
 done
 
 printf "${INFO} adding nvidia options to ${YELLOW}/etc/default/grub${RESET} ..."

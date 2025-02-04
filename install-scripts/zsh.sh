@@ -37,10 +37,6 @@ done
 printf "${NOTE} Installing core zsh packages...${RESET}\n"
 for ZSHP in "${zsh[@]}"; do
   install_package "$ZSHP"
-  if [ $? -ne 0 ]; then
-    echo -e "${ERROR} - $ZSHP Installation failed. Check the install log."
-    exit 1
-  fi
 done
 
 printf "\n%.0s" {1..1}
