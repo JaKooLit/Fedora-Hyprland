@@ -251,6 +251,7 @@ if rpm -q hyprland &> /dev/null || rpm -q hyprland-git &> /dev/null; then
         echo "${INFO} ${YELLOW}NVIDIA GPU${RESET} detected. Reminder that you must REBOOT your SYSTEM..."
     else
         echo -e "\n${CAT} Thanks for using ${MAGENTA}KooL's Hyprland Dots${RESET}. Enjoy and Have a good day!"
+        printf "\n%.0s" {1..3}
         exit 0
     fi
 else
