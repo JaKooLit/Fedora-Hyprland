@@ -31,7 +31,7 @@ LOG="Install-Logs/install-$(date +%d-%H%M%S)_sddm.log"
 # Installation of additional sddm stuff
 printf "\n%s - Installing ${SKY_BLUE}SDDM and dependencies${RESET} .... \n" "${NOTE}"
 for PKG2 in "${sddm[@]}"; do
-  install_package "$PKG2"
+  install_package "$PKG2" "$LOG"
 done
 
 # Check if other login managers are installed and disabling their service before enabling sddm

@@ -40,4 +40,4 @@ sudo systemctl enable --now supergfxd 2>&1 | tee -a "$LOG"
 printf " enabling power-profiles-daemon...\n"
 sudo systemctl enable power-profiles-daemon 2>&1 | tee -a "$LOG"
 
-clear
+printf "\n%.0s" {1..2}

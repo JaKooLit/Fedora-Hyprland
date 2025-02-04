@@ -25,7 +25,6 @@ LOG="Install-Logs/install-$(date +%d-%H%M%S)_themes.log"
 # installing engine needed for gtk themes
 for PKG1 in "${engine[@]}"; do
     install_package "$PKG1" "$LOG"
-    fi
 done
 
 # Check if the directory exists and delete it if present
