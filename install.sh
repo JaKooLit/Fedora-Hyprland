@@ -55,9 +55,8 @@ printf "\n%.0s" {1..1}
 if ! rpm -q pciutils > /dev/null; then
     echo "pciutils is not installed. Installing..."
     sudo dnf install -y pciutils
+    printf "\n%.0s" {1..1}
 fi
-
-printf "\n%.0s" {1..1}
 
 # Create Directory for Install Logs
 if [ ! -d Install-Logs ]; then
@@ -141,6 +140,7 @@ if lspci | grep -i "nvidia" &> /dev/null; then
     ask_yes_no "-Do you want script to configure ${YELLOW}NVIDIA${RESET} for you?" nvidia
     printf "\n"
 fi
+printf "\n"
 ask_yes_no "-Install ${YELLOW}GTK themes${RESET} (required for Dark/Light function)?" gtk_themes
 printf "\n"
 ask_yes_no "-Do you want to configure ${YELLOW}Bluetooth${RESET}?" bluetooth
