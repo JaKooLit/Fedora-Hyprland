@@ -69,12 +69,14 @@ install_package() {
   fi
 }
 
-# Function for uninstalling packages
+# Function for removing packages
 uninstall_package() {
   local pkg="$1"
+
+  # Checking if package is installed
   if rpm -q "$pkg" &>/dev/null; then
     echo -e "${NOTE} Uninstalling $pkg ..."
-    sudo dnf remove -y "$pkg" 2>&1 | tee -a "$LOG" | grep -v "Error: Unable to find package"
+    sudo dnf remove -y "$pkg" 2>&1 | tee -a "$LOG" | grep -v "error: target not found"
 
     if ! rpm -q "$pkg" &>/dev/null; then
       echo -e "\e[1A\e[K${OK} $pkg was uninstalled."
