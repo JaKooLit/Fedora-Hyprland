@@ -25,10 +25,10 @@ fi
 
 clear
 
-printf "\n%.0s" {1..3}                            
+printf "\n%.0s" {1..2}                            
 echo -e "\e[32m   |  _.   |/  _   _  |  o _|_  \e[39m"
 echo -e "\e[32m \_| (_| o |\ (_) (_) |_ |  |_  2025\e[39m"
-printf "\n%.0s" {1..2}
+printf "\n%.0s" {1..1} 
 
 # Welcome message
 echo "${SKY_BLUE}Welcome to KooL's Fedora-Hyprland (2025) Install Script!${RESET}"
@@ -49,13 +49,15 @@ if [ "$proceed" != "y" ]; then
     exit 1
 fi
 
-printf "\n%.0s" {1..2}
+printf "\n%.0s" {1..1}
 
 # install pciutils if detected not installed. Necessary for detecting GPU
 if ! rpm -q pciutils > /dev/null; then
     echo "pciutils is not installed. Installing..."
     sudo dnf install -y pciutils
 fi
+
+printf "\n%.0s" {1..1}
 
 # Create Directory for Install Logs
 if [ ! -d Install-Logs ]; then
@@ -133,14 +135,12 @@ execute_script() {
 
 
 # Collect user responses to all questions
-printf "\n"
 # Check if nvidia is present
 if lspci | grep -i "nvidia" &> /dev/null; then
     printf "${INFO} ${YELLOW}NVIDIA GPU${RESET} detected in your system \n"
-    printf "${NOTE} Script will install ${YELLOW}nvidia-dkms nvidia-utils and nvidia-settings${RESET} \n"
     ask_yes_no "-Do you want script to configure ${YELLOW}NVIDIA${RESET} for you?" nvidia
+    printf "\n"
 fi
-printf "\n"
 ask_yes_no "-Install ${YELLOW}GTK themes${RESET} (required for Dark/Light function)?" gtk_themes
 printf "\n"
 ask_yes_no "-Do you want to configure ${YELLOW}Bluetooth${RESET}?" bluetooth
