@@ -136,7 +136,9 @@ execute_script() {
 printf "\n"
 # Check if nvidia is present
 if lspci | grep -i "nvidia" &> /dev/null; then
-    ask_yes_no "-${YELLOW}NVIDIA${RESET} GPU is detected. Do you want script to configure it?" nvidia
+    printf "${INFO} ${YELLOW}NVIDIA GPU${RESET} detected in your system \n"
+    printf "${NOTE} Script will install ${YELLOW}nvidia-dkms nvidia-utils and nvidia-settings${RESET} \n"
+    ask_yes_no "-Do you want script to configure ${YELLOW}NVIDIA${RESET} for you?" nvidia
 fi
 printf "\n"
 ask_yes_no "-Install ${YELLOW}GTK themes${RESET} (required for Dark/Light function)?" gtk_themes
@@ -155,7 +157,7 @@ ask_yes_no "-Install ${YELLOW}zsh${RESET}, ${YELLOW}oh-my-zsh${RESET} & (Optiona
 printf "\n"
 ask_yes_no "-Installing on ${YELLOW}Asus ROG laptops${RESET}?" rog
 printf "\n"
-ask_yes_no "-Do you want to download pre-configured ${YELLOW}KooL Hyprland dotfiles${RESET}?" dots
+ask_yes_no "-Do you want to download pre-configured ${YELLOW}KooL Hyprland dotfiles?${RESET}" dots
 printf "\n"
 
 # Ensuring all in the scripts folder are made executable
