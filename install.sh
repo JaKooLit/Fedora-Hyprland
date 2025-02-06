@@ -30,14 +30,13 @@ fi
 # Check if --preset argument is provided
 if [[ "$1" == "--preset" ]]; then
     
+    # nvidia
     if [[ "$2" == "--nvidia" ]]; then
-        sed -i 's/nvidia="N"/nvidia="Y"/g' preset.sh
+        sed -i 's/^nvidia=".*"/nvidia="Y"/' preset.sh
     fi
+    
     source ./preset.sh
 fi
-
-# Continue with the rest of your install.sh logic (installation steps, etc.)
-printf "\n%.0s" {1..1}
 
 
 printf "\n%.0s" {1..2}  
