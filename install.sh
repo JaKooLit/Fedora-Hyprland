@@ -28,9 +28,22 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 # unattended installation using --preset function
+#!/bin/bash
+
+# Initialize the nvidia variable as empty (default is "N")
+nvidia="N"
+
+# Check if --preset argument is provided
 if [[ "$1" == "--preset" ]]; then
+    
+    if [[ "$2" == "--nvidia" ]]; then
+        sed -i 's/nvidia="N"/nvidia="Y"/g' preset.sh
+    fi
     source ./preset.sh
 fi
+
+# Continue with the rest of your install.sh logic (installation steps, etc.)
+printf "\n%.0s" {1..1}
 
 
 printf "\n%.0s" {1..2}  
