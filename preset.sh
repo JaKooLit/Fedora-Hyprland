@@ -5,6 +5,9 @@
 # Make sure proper AUR Helper is use NO Upperscript. Either paru or yay only is accepted
 # The rest Change to Y for Yes and N for No. 
 
+### - Would you like to proceed? (y/n): $(tput sgr0)" proceed
+proceed="Y"
+
 ###-Configure NVIDIA
 nvidia="Y"
 
