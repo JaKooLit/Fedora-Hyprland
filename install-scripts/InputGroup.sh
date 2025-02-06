@@ -19,6 +19,12 @@ source "$(dirname "$(readlink -f "$0")")/Global_functions.sh"
 # Set the name of the log file to include the current date and time
 LOG="Install-Logs/install-$(date +%d-%H%M%S)_input.log"
 
+# Checking if current user is in the 'input' group
+if groups "$(whoami)" | grep -q '\binput\b'; then
+    echo "USER $(whoami) is already in the 'input' group." 2>&1 > "$LOG"
+    exit 0
+fi
+
 while true; do
     echo "${WARN} This script will add your ${YELLOW}user${RESET} to the ${MAGENTA}input${RESET} group."
     echo "${NOTE} Please note that adding yourself to the ${MAGENTA}input${RESET} group might be necessary for ${MAGENTA}waybar keyboard-state functionality${RESET} ."
