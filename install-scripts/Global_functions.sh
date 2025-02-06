@@ -81,7 +81,7 @@ uninstall_package() {
     if ! rpm -q "$pkg" &>/dev/null; then
       echo -e "\e[1A\e[K${OK} $pkg was uninstalled."
     else
-      echo -e "\e[1A\e[K${ERROR} $pkg failed to uninstall. Please check the log."
+      echo -e "\e[1A\e[K${ERROR} $pkg failed to uninstall. No actions required."
       return 1
     fi
   else

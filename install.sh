@@ -44,7 +44,7 @@ read -p "$(tput setaf 6)Would you like to proceed? (y/n): $(tput sgr0)" proceed
 
 if [ "$proceed" != "y" ]; then
     printf "\n%.0s" {1..2}
-    echo "${INFO} Installation aborted. No changes in your system! ${MAGENTA}Goodbye!!!${RESET} "
+    echo "${INFO} Installation aborted. ${SKY_BLUE}No changes in your system.${RESET} ${YELLOW}Goodbye!${RESET}"
     printf "\n%.0s" {1..2}
     exit 1
 fi
