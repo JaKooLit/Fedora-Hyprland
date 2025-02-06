@@ -36,9 +36,9 @@ done
 
 # Check if other login managers are installed and disabling their service before enabling sddm
 for login_manager in lightdm gdm lxdm lxdm-gtk3; do
-  if sudo dnf list installed "$login_manager" &>> /dev/null; then
-    echo "Disabling $login_manager..."
-    sudo systemctl disable "$login_manager" 2>&1 | tee -a "$LOG"
+  if sudo dnf list installed "$login_manager" > /dev/null; then
+    echo "disabling $login_manager..."
+    sudo systemctl disable "$login_manager.service" 2>&1 | tee -a "$LOG"
   fi
 done
 
