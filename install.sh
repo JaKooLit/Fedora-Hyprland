@@ -267,7 +267,6 @@ fi
 
 if [ "$dots" == "Y" ]; then
     execute_script "dotfiles-main.sh"
-
 fi
 
 clear

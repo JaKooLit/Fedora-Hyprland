@@ -31,4 +31,17 @@ printf "${NOTE} Installing ${SKY_BLUE}Thunar${RESET} Packages...\n\n"
     install_package "$THUNAR" "$LOG"
   done
 
+printf "\n%.0s" {1..1}
+
+ # Check for existing configs and copy if does not exist
+for DIR1 in gtk-3.0 Thunar xfce4; do
+  DIRPATH=~/.config/$DIR1
+  if [ -d "$DIRPATH" ]; then
+    echo -e "${NOTE} Config for ${MAGENTA}$DIR1${RESET} found, no need to copy." 2>&1 | tee -a "$LOG"
+  else
+    echo -e "${NOTE} Config for ${YELLOW}$DIR1${RESET} not found, copying from assets." 2>&1 | tee -a "$LOG"
+    cp -r assets/$DIR1 ~/.config/ && echo "${OK} Copy $DIR1 completed!" || echo "${ERROR} Failed to copy $DIR1 config files." 2>&1 | tee -a "$LOG"
+  fi
+done
+
 printf "\n%.0s" {1..2}
