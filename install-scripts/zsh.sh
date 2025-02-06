@@ -1,10 +1,6 @@
 #!/bin/bash
 # 💫 https://github.com/JaKooLit 💫 #
-# ZSH and oh-my-zsh & Optional Pokemon Color Scrips #
-
-if [[ $USE_PRESET = [Yy] ]]; then
-  source ./preset.sh
-fi
+# ZSH and oh-my-zsh #
 
 zsh=(
   eza
@@ -40,37 +36,6 @@ for ZSHP in "${zsh[@]}"; do
 done
 
 printf "\n%.0s" {1..1}
-
-## Optional Pokemon color scripts
-while true; do
-    read -p "${CAT} OPTIONAL - Do you want to add ${YELLOW}Pokemon color scripts${RESET}? (y/n): " pokemon_choice
-    case "$pokemon_choice" in
-        [Yy]*)
-            if [ -d "pokemon-colorscripts" ]; then
-                cd pokemon-colorscripts && git pull && sudo ./install.sh && cd ..
-            else
-                git clone --depth 1 https://gitlab.com/phoneybadger/pokemon-colorscripts.git &&
-                cd pokemon-colorscripts && sudo ./install.sh && cd ..
-            fi
-            sed -i '/#pokemon-colorscripts --no-title -s -r/s/^#//' assets/.zshrc >> "$LOG" 2>&1
-
-			# commenting out fastfetch since pokemon was chosen to install
-            sed -i '/^fastfetch -c $HOME\/.config\/fastfetch\/config-compact.jsonc/s/^/#/' assets/.zshrc >> "$LOG" 2>&1
-            
-			echo "${NOTE} ${MAGENTA}Pokemon-colorscripts${RESET} installation process completed" 2>&1 | tee -a "$LOG"
-            break
-            ;;
-        [Nn]*) 
-            echo "${MAGENTA} You chose not to install Pokemon Color Scripts." 2>&1 | tee -a "$LOG"
-            break
-            ;;
-        *)
-            echo "Please enter 'y' for yes or 'n' for no." 2>&1 | tee -a "$LOG"
-            ;;
-    esac
-done
-
-printf "\n"
 
 # Install Oh My Zsh, plugins, and set zsh as default shell
 if command -v zsh >/dev/null; then

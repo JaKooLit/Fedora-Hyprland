@@ -3,10 +3,10 @@
 # Asus ROG Laptop stuff #
 
 asusctl=(
-asusctl
-supergfxctl
-asusctl-rog-gui
-power-profiles-daemon
+  asusctl
+  supergfxctl
+  asusctl-rog-gui
+  power-profiles-daemon
 )
 
 

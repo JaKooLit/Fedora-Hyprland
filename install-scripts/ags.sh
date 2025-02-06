@@ -3,10 +3,6 @@
 # Aylur's GTK Shell v 1.9.0 #
 # for desktop overview
 
-if [[ $USE_PRESET = [Yy] ]]; then
-  source ./preset.sh
-fi
-
 ags=(
 	cmake
     typescript

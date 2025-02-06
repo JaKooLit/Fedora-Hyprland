@@ -68,17 +68,15 @@ if [ ! -d Install-Logs ]; then
     mkdir Install-Logs
 fi
 
-#echo "${WARN} ${WARNING}ATTENTION: Choosing Y on use preset question will install also ${MAGENTA}nvidia packages!!!${RESET}"
-#echo "${YELLOW}CTRL C or Q to cancel and edit the file ${MAGENTA}preset.sh${RESET} ${RESET}"  
-#echo "If you are not sure what to do, answer N in here"
-#read -p "${SKY_BLUE}Would you like to Use ${YELLOW}Preset Install Settings?${RESET} (See note above)? (y/n): ${RESET}" use_preset
+echo "${WARNING}ATTENTION: Choosing Y on use preset question will install also ${MAGENTA}nvidia packages!!!${RESET}"
+echo "${YELLOW}CTRL C or Q to cancel and edit the file ${MAGENTA}preset.sh${RESET} ${RESET}"  
+echo "If you are not sure what to do, answer N in here"
+read -p "${SKY_BLUE}Would you like to Use ${YELLOW}Preset Install Settings?${RESET} (See note above)? (y/n): ${RESET}" use_preset
 
 # Use of Preset Settings
-#if [[ $use_preset = [Yy] ]]; then
-#  source ./preset.sh
-#fi
-
-#printf "\n%.0s" {1..2}
+if [[ $use_preset = [Yy] ]]; then
+  source ./preset.sh
+fi
 
 # Function to colorize prompts
 colorize_prompt() {
@@ -95,6 +93,16 @@ script_directory=install-scripts
 
 # Function to ask a yes/no question and set the response in a variable
 ask_yes_no() {
+  if [[ ! -z "${!2}" ]]; then
+    echo "$(colorize_prompt "$CAT"  "$1 (Preset): ${!2}")" 
+    if [[ "${!2}" = [Yy] ]]; then
+      return 0
+    else
+      return 1
+    fi
+  else
+    eval "$2=''" 
+  fi
     while true; do
         read -p "$(colorize_prompt "$CAT"  "$1 (y/n): ")" choice
         case "$choice" in
@@ -121,6 +129,7 @@ ask_custom_option() {
         fi
     done
 }
+
 # Function to execute a script if it exists and make it executable
 execute_script() {
     local script="$1"
@@ -128,7 +137,7 @@ execute_script() {
     if [ -f "$script_path" ]; then
         chmod +x "$script_path"
         if [ -x "$script_path" ]; then
-            "$script_path"
+            env USE_PRESET=$use_preset  "$script_path"
         else
             echo "Failed to make script '$script' executable."
         fi
@@ -137,32 +146,62 @@ execute_script() {
     fi
 }
 
-
 # Collect user responses to all questions
 # Check if nvidia is present
 if lspci | grep -i "nvidia" &> /dev/null; then
+    printf "\n"
     printf "${INFO} ${YELLOW}NVIDIA GPU${RESET} detected in your system \n"
+    printf "${NOTE} Script will install ${YELLOW}nvidia-dkms nvidia-utils and nvidia-settings${RESET} \n"
     ask_yes_no "-Do you want script to configure ${YELLOW}NVIDIA${RESET} for you?" nvidia
 fi
+
 printf "\n"
 ask_yes_no "-Install ${YELLOW}GTK themes${RESET} (required for Dark/Light function)?" gtk_themes
+
 printf "\n"
 ask_yes_no "-Do you want to configure ${YELLOW}Bluetooth${RESET}?" bluetooth
+
 printf "\n"
 ask_yes_no "-Do you want to install ${YELLOW}Thunar file manager${RESET}?" thunar
+
+if [[ "$thunar" == "Y" ]]; then
+    ask_yes_no "-Set ${YELLOW}Thunar${RESET} as the default file manager?" thunar_choice
+fi
+
+# Input group
+printf "\n"
+if ! groups "$(whoami)" | grep -q '\binput\b'; then
+    printf "${NOTE} adding to ${YELLOW}input${RESET} group might be necessary for ${YELLOW}waybar keyboard-state functionality${RESET} \n"
+    ask_yes_no "-Would you like to be added to the ${YELLOW}input${RESET} group?" input_group
+fi
+
 printf "\n"
 printf "${NOTE} ${YELLOW}AGS Desktop Overview DEMO link${RESET} on README\n"
 ask_yes_no "-Install ${YELLOW}AGS (aylur's GTK shell) v1${RESET} for Desktop-Like Overview?" ags
+
 printf "\n"
-ask_yes_no "-Install & configure ${YELLOW}SDDM${RESET} login manager, plus (OPTIONAL) SDDM theme?" sddm
+ask_yes_no "-Install & configure ${YELLOW}SDDM${RESET} as login manager?" sddm
+
+if [[ "$sddm" == "Y" ]]; then
+    ask_yes_no "-Download and Install ${YELLOW}SDDM Theme?${RESET} " sddm_theme
+fi
+
 printf "\n"
-ask_yes_no "-Install ${YELLOW}XDG-DESKTOP-PORTAL-HYPRLAND${RESET}? (For proper Screen Share, e.g., OBS)" xdph
+ask_yes_no "-Install ${YELLOW}XDG-DESKTOP-PORTAL-HYPRLAND?${RESET} (For proper Screen Share, e.g., OBS)" xdph
+
 printf "\n"
-ask_yes_no "-Install ${YELLOW}zsh${RESET}, ${YELLOW}oh-my-zsh${RESET} & (Optional) ${YELLOW}pokemon-colorscripts${RESET}?" zsh
+ask_yes_no "-Install ${YELLOW}zsh${RESET} with ${YELLOW}oh-my-zsh?${RESET}" zsh
+
+if [[ "$zsh" == "Y" ]]; then
+    ask_yes_no "-Add ${YELLOW}Pokemon color scripts?${RESET} in your terminal?" pokemon_choice
+fi
+
 printf "\n"
-ask_yes_no "-Installing on ${YELLOW}Asus ROG laptops${RESET}?" rog
+ask_yes_no "-Installing on ${YELLOW}Asus ROG laptops?${RESET}" rog
+
 printf "\n"
-ask_yes_no "-Do you want to download pre-configured ${YELLOW}KooL's Hyprland dotfiles?${RESET}" dots
+ask_yes_no "-Do you want to add pre-configured ${YELLOW}KooL's Hyprland dotfiles?${RESET}" dots
+
 printf "\n"
 
 # Ensuring all in the scripts folder are made executable
@@ -189,6 +228,9 @@ fi
 if [ "$thunar" == "Y" ]; then
     execute_script "thunar.sh"
 fi
+if [ "$thunar_choice" == "Y" ]; then
+    execute_script "thunar_default.sh"
+fi
 
 if [ "$ags" == "Y" ]; then
     execute_script "ags.sh"
@@ -196,6 +238,9 @@ fi
 
 if [ "$sddm" == "Y" ]; then
     execute_script "sddm.sh"
+fi
+if [ "$sddm_theme" == "Y" ]; then
+    execute_script "sddm_theme.sh"
 fi
 
 if [ "$xdph" == "Y" ]; then
@@ -205,12 +250,17 @@ fi
 if [ "$zsh" == "Y" ]; then
     execute_script "zsh.sh"
 fi
+if [ "$pokemon_choice" == "Y" ]; then
+    execute_script "zsh_pokemon.sh"
+fi
+
+if [ "$input_group" == "Y" ]; then
+    execute_script "InputGroup.sh"
+fi
 
 if [ "$rog" == "Y" ]; then
     execute_script "rog.sh"
 fi
-
-execute_script "InputGroup.sh"
 
 if [ "$dots" == "Y" ]; then
     execute_script "dotfiles-main.sh"

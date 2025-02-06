@@ -3,10 +3,10 @@
 # Bluetooth #
 
 blue=(
-bluez
-bluez-tools
-blueman
-python3-cairo
+  bluez
+  bluez-tools
+  blueman
+  python3-cairo
 )
 
 
