@@ -1,6 +1,8 @@
 #!/bin/bash
 # https://github.com/JaKooLit
 
+clear
+
 # Set some colors for output messages
 OK="$(tput setaf 2)[OK]$(tput sgr0)"
 ERROR="$(tput setaf 1)[ERROR]$(tput sgr0)"
@@ -17,17 +19,20 @@ BLUE="$(tput setaf 4)"
 SKY_BLUE="$(tput setaf 6)"
 RESET="$(tput sgr0)"
 
+
 # Check if running as root. If root, script will exit
 if [[ $EUID -eq 0 ]]; then
-    echo "This script should not be executed as root! Exiting......."
+    echo "${ERROR}  This script should ${WARNING}NOT${RESET} be executed as root!! Exiting......."
+    printf "\n%.0s" {1..2} 
     exit 1
 fi
 
-clear
-
-printf "\n%.0s" {1..2}                            
-echo -e "\e[32m   |  _.   |/  _   _  |  o _|_  \e[39m"
-echo -e "\e[32m \_| (_| o |\ (_) (_) |_ |  |_  2025\e[39m"
+printf "\n%.0s" {1..2}  
+echo -e "\e[35m
+	╦╔═┌─┐┌─┐╦    ╦ ╦┬ ┬┌─┐┬─┐┬  ┌─┐┌┐┌┌┬┐
+	╠╩╗│ ││ │║    ╠═╣└┬┘├─┘├┬┘│  ├─┤│││ ││ 2025
+	╩ ╩└─┘└─┘╩═╝  ╩ ╩ ┴ ┴  ┴└─┴─┘┴ ┴┘└┘─┴┘ 
+\e[0m"
 printf "\n%.0s" {1..1} 
 
 # Welcome message
