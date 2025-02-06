@@ -27,12 +27,6 @@ if [[ $EUID -eq 0 ]]; then
     exit 1
 fi
 
-# unattended installation using --preset function
-#!/bin/bash
-
-# Initialize the nvidia variable as empty (default is "N")
-nvidia="N"
-
 # Check if --preset argument is provided
 if [[ "$1" == "--preset" ]]; then
     
