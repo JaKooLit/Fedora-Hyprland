@@ -71,17 +71,17 @@ add_line_to_repo() {
 
   # Check if the file exists
   if [ ! -f "$repo_file" ]; then
-    echo "${WARN} File $repo_file does not exist." 2>&1 | tee -a "$LOG"
+    #echo "${WARN} File ${WARNING}$repo_file${RESET} does not exist." 2>&1 | tee -a "$LOG"
     return 2
   fi
 
   # Check if line_to_add already exists in the repo file
   if grep -q "^${line_to_add}$" "$repo_file"; then
-    echo "${NOTE} Line '$line_to_add' already exists in $repo_file." 2>&1 | tee -a "$LOG"
+    echo "${NOTE} Line ${MAGENTA}$line_to_add${RESET} already exists in ${YELLOW}$repo_file${RESET} ." 2>&1 | tee -a "$LOG"
   else
     echo "$line_to_add" | sudo tee -a "$repo_file" > /dev/null
     if [ $? -eq 0 ]; then
-      echo "${OK} Line '$line_to_add' added to $repo_file." 2>&1 | tee -a "$LOG"
+      echo "${OK} Line ${MAGENTA}$line_to_add${RESET} added to ${YELLOW}$repo_file${RESET} ." 2>&1 | tee -a "$LOG"
     else
       echo "${ERROR} Failed to add line '$line_to_add' to $repo_file." 2>&1 | tee -a "$LOG"
       return 3
@@ -99,4 +99,4 @@ printf "\n%.0s" {1..1}
 # Update package cache and install packages from COPR Repos
 sudo dnf update -y
 
-clear
+printf "\n%.0s" {1..2}

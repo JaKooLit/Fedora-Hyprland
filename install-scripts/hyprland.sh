@@ -3,10 +3,10 @@
 # Main Hyprland Package #
 
 hypr=(
-  aquamarine
   hyprland
-  hyprland-qtutils
-  hyprcursor
+  hypridle
+  hyprlock
+  pyprland
 )
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
@@ -19,17 +19,19 @@ cd "$PARENT_DIR" || exit 1
 
 source "$(dirname "$(readlink -f "$0")")/Global_functions.sh"
 
+
+# Create Directory for Install Logs
+if [ ! -d Install-Logs ]; then
+    mkdir Install-Logs
+fi
+
 # Set the name of the log file to include the current date and time
 LOG="Install-Logs/install-$(date +%d-%H%M%S)_hyprland.log"
 
 # Hyprland
-printf "${NOTE} Installing Hyprland Package...\n"
- for HYPR in "${hypr[@]}"; do
-  install_package "$HYPR"
-  if [ $? -ne 0 ]; then
-    echo -e "${ERROR} - $HYPR Installation failed. Check the install log." 2>&1 | tee -a "$LOG"
-    exit 1
-  fi
+printf "${NOTE} Installing ${SKY_BLUE}Hyprland packages${RESET} .......\n"
+for HYPR in "${hypr[@]}"; do
+  install_package "$HYPR" "$LOG"
 done
 
-clear
+printf "\n%.0s" {1..2}

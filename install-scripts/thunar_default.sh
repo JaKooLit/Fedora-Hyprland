@@ -1,12 +1,7 @@
 #!/bin/bash
 # 💫 https://github.com/JaKooLit 💫 #
-# hyprland-eco packages
+# Thunar-default #
 
-hypr=(
-  hypridle
-  hyprlock
-  pyprland
-)
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
 # Determine the directory where the script is located
@@ -19,16 +14,12 @@ cd "$PARENT_DIR" || exit 1
 source "$(dirname "$(readlink -f "$0")")/Global_functions.sh"
 
 # Set the name of the log file to include the current date and time
-LOG="Install-Logs/install-$(date +%d-%H%M%S)_hyprland-eco.log"
+LOG="Install-Logs/install-$(date +%d-%H%M%S)_thunar-default.log"
 
-# Hyprland
-printf "${NOTE} Installing Hyprland-ECO Package...\n"
- for HYPR in "${hypr[@]}"; do
-  install_package "$HYPR"
-  if [ $? -ne 0 ]; then
-    echo -e "${ERROR} - $HYPR Installation failed. Check the install log." 2>&1 | tee -a "$LOG"
-    exit 1
-  fi
-done
+printf "${INFO} Setting ${SKY_BLUE}Thunar${RESET} as default file manager...\n"  
+ 
+xdg-mime default thunar.desktop inode/directory
+xdg-mime default thunar.desktop application/x-wayland-gnome-saved-search
+echo "${OK} ${MAGENTA}Thunar${RESET} is now set as the default file manager." | tee -a "$LOG"
 
-clear
+printf "\n%.0s" {1..2}

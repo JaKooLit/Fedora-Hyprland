@@ -132,7 +132,7 @@ Installed on Nobara 38 🥰
 - inside the install-scripts directory, you can edit 00-hypr-pkgs.sh, copr.sh, etc. Care though as the Hyprland Dots might not work properly
 
 #### 💫 SDDM and GTK Themes offered
-- If you opted to install SDDM theme, here's the [`LINK`](https://github.com/JaKooLit/simple-sddm-2)
+- If you opted to install SDDM theme, here's the [`LINK`](https://codeberg.org/JaKooLit/sddm-sequoia) which is a fork of [`LINK`](https://codeberg.org/minMelody/sddm-sequoia)
 - If you opted to install GTK Themes, Icons,  here's the [`LINK`](https://github.com/JaKooLit/GTK-themes-icons). This also includes Bibata Modern Ice cursor.
 
 #### 🔔 NOTICE TO NVIDIA OWNERS ### 
@@ -151,6 +151,23 @@ chmod +x install.sh
 
 <p align="center">
     <img align="center" width="100%" src="https://raw.githubusercontent.com/JaKooLit/Fedora-Hyprland/main/Fedora-Install.png" />
+
+
+### 🤟 semi-unattended installation (new for 2025)
+- edit preset.sh to modify what packages you want. Make sure to change only with Y or N
+- to use preset instead of usual `./install.sh` you can ran like this
+
+```bash
+./install.sh --preset
+```
+
+- if you have nvidia you can add --nvidia argument
+
+```bash
+./install.sh --preset --nvidia
+```
+
+- its called semi-unattended it is because you still have to answer some questions when installing KooL's Hyprland Dots
 
 #### ✨ for ZSH and OH-MY-ZSH installation
 > installer should auto change your default shell to zsh. However, if it does not, do this

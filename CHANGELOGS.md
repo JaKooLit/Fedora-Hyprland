@@ -1,5 +1,14 @@
 ## Changelogs
 
+## 06 Feb 2025
+- added semi-unattended function.
+- move all the initial questions at the beginning
+
+## 04 Feb 2025
+- Re-coded for better visibility
+- Offered a new SDDM theme.
+- script will automatically detect if you have nvidia but script still offer if you want to set up for user
+
 ## 30 Jan 2025
 - AGS (aylur's GTK shell) v1 for desktop overview is now optional
 

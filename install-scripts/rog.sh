@@ -3,10 +3,10 @@
 # Asus ROG Laptop stuff #
 
 asusctl=(
-asusctl
-supergfxctl
-asusctl-rog-gui
-power-profiles-daemon
+  asusctl
+  supergfxctl
+  asusctl-rog-gui
+  power-profiles-daemon
 )
 
 
@@ -29,13 +29,9 @@ sudo dnf update
 
 
 ### Install software for Asus ROG laptops ###
-printf " Installing ASUS ROG packages...\n"
+printf " Installing ${SKY_BLUE}ASUS ROG packages${RESET}...\n"
   for ASUS in "${asusctl[@]}"; do
-  install_package "$ASUS"
-  if [ $? -ne 0 ]; then
-    echo -e "${ERROR} - $ASUS Installation failed. Check the install log."
-    exit 1
-  fi
+  install_package "$ASUS" "$LOG"
 done
 
 printf " Activating ROG services...\n"
@@ -44,4 +40,4 @@ sudo systemctl enable --now supergfxd 2>&1 | tee -a "$LOG"
 printf " enabling power-profiles-daemon...\n"
 sudo systemctl enable power-profiles-daemon 2>&1 | tee -a "$LOG"
 
-clear
+printf "\n%.0s" {1..2}

@@ -4,10 +4,11 @@
 
 engine=(
     unzip
-    gtk-murrine-engine
+    #gtk-engine-murrine
 )
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
+
 # Determine the directory where the script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -23,11 +24,7 @@ LOG="Install-Logs/install-$(date +%d-%H%M%S)_themes.log"
 
 # installing engine needed for gtk themes
 for PKG1 in "${engine[@]}"; do
-  install_package "$PKG1"
-  if [ $? -ne 0 ]; then
-    echo -e "${ERROR} - $PKG1 Installation failed. Check the install log."
-    exit 1
-  fi
+    install_package "$PKG1" "$LOG"
 done
 
 # Check if the directory exists and delete it if present
@@ -36,7 +33,7 @@ if [ -d "GTK-themes-icons" ]; then
     rm -rf "GTK-themes-icons" 2>&1 | tee -a "$LOG"
 fi
 
-echo "$NOTE Cloning GTK themes and Icons repository..." 2>&1 | tee -a "$LOG"
+echo "$NOTE Cloning ${SKY_BLUE}GTK themes and Icons${RESET} repository..." 2>&1 | tee -a "$LOG"
 if git clone --depth 1 https://github.com/JaKooLit/GTK-themes-icons.git ; then
     cd GTK-themes-icons
     chmod +x auto-extract.sh
@@ -47,4 +44,4 @@ else
     echo "$ERROR Download failed for GTK themes and Icons.." 2>&1 | tee -a "$LOG"
 fi
 
-clear
+printf "\n%.0s" {1..2}
