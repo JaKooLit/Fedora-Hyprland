@@ -34,7 +34,7 @@ done
 for login_manager in lightdm gdm3 gdm lxdm xdm lxdm-gtk3; do
   if sudo dnf list installed "$login_manager" > /dev/null; then
     echo "disabling $login_manager..."
-    sudo systemctl disable "$login_manager.service.service" >> "$LOG" 2>&1
+    sudo systemctl disable "$login_manager.service" >> "$LOG" 2>&1
     echo "$login_manager disabled."
   fi
 done
