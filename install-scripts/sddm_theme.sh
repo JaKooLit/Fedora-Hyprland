@@ -60,6 +60,25 @@ if git clone --depth 1 "$source_theme" "$theme_name"; then
   sudo cp -r assets/sddm.png "/usr/share/sddm/themes/$theme_name/backgrounds/default" 2>&1 | tee -a "$LOG"
   sudo sed -i 's|^wallpaper=".*"|wallpaper="backgrounds/default"|' "/usr/share/sddm/themes/$theme_name/theme.conf" 2>&1 | tee -a "$LOG"
 
+  printf "\n%.0s" {1..1}
+  printf "${NOTE} copying ${YELLOW}JetBrains Mono Nerd Font${RESET} to ${YELLOW}/usr/local/share/fonts${RESET} .......\n"
+  printf "${NOTE} necessary for the new SDDM theme to work properly........\n"
+
+  sudo mkdir -p /usr/local/share/fonts/JetBrainsMonoNerd && \
+  sudo cp -r "$HOME/.local/share/fonts/JetBrainsMonoNerd" /usr/local/share/fonts/JetBrainsMonoNerd
+
+  if [ $? -eq 0 ]; then
+    echo "Fonts copied successfully."
+  else
+    echo "Failed to copy fonts."
+  fi
+
+  # Update font cache and log the output
+  fc-cache -v -f 2>&1 | tee -a "$LOG"
+
+  printf "\n%.0s" {1..1}
+
+
   echo "${OK} - ${MAGENTA}Additional SDDM Theme${RESET} successfully installed." | tee -a "$LOG"
 
 else
