@@ -154,7 +154,6 @@ execute_script() {
 if lspci | grep -i "nvidia" &> /dev/null; then
     printf "\n"
     printf "${INFO} ${YELLOW}NVIDIA GPU${RESET} detected in your system \n"
-    printf "${NOTE} Script will install ${YELLOW}nvidia-dkms nvidia-utils and nvidia-settings${RESET} \n"
     ask_yes_no "-Do you want script to configure ${YELLOW}NVIDIA${RESET} for you?" nvidia
 fi
 
