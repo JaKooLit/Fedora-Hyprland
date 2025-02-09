@@ -54,50 +54,9 @@ https://github.com/user-attachments/assets/49bc12b2-abaf-45de-a21c-67aacd9bb872
 </div>
 
 ### Gallery and Videos
-<details>
-<summary>
-📷 Screenshots
-</summary>
-#### 📷 Hyprland-Dots-v2 Featuring Rofi 
-<p align="center">
-    <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Hyprland-ScreenShots/Fedora-v2/rofi.png" /> <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Hyprland-ScreenShots/Fedora-v2/Light.png" />   
-</p>
-
-<p align="center">
-    <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Hyprland-Dots-Showcase/default-waybar.png" /> <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Hyprland-Dots-Showcase/rofi.png" />   
-   <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Hyprland-Dots-Showcase/wlogout-dark.png" /> <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Hyprland-Dots-Showcase/showcase2.png"" /> 
-   <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Hyprland-Dots-Showcase/waybar-layout.png" /> <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Hyprland-Dots-Showcase/waybar-style.png"" /> 
-</p>
-
-<summary>
-Installed on Fedora 40 👍
-</summary>
- <img align="center" width="49%" src="https://raw.githubusercontent.com/JaKooLit/screenshots/main/Distro-Hyprland/Fedora/Fedora-40.png" />
-
-<summary>
-Installed on Nobara 39 🥰
-</summary>
-
-![alt text](https://github.com/JaKooLit/screenshots/blob/main/Distro-Hyprland/Fedora/nobara39.png)
-
-<summary>
-Installed on Nobara 38 🥰
-</summary>
-
-![alt text](https://github.com/JaKooLit/screenshots/blob/main/Hyprland-ScreenShots/Fedora/Hyprland-Nobara.png)
-</details>
-
-
-#### 📸 More up to date screenshots [`Link`](https://github.com/JaKooLit/screenshots/tree/main/Hyprland-Dots-Showcase)
-
-####  📷 Older Screenshots [`V1`](https://github.com/JaKooLit/screenshots/tree/main/Hyprland-ScreenShots/Fedora) & [`V2`](https://github.com/JaKooLit/screenshots/tree/main/Hyprland-ScreenShots/Fedora-v2)
-
-
-#### ✨ Youtube presentation [`v1`](https://youtu.be/w2dt4GlHjV0)
-#### ✨ Youtube presentation [`v2`](https://youtu.be/_U_WR33XNYY)
-
-#### ✨ A video walk through my dotfiles[`Link`](https://youtu.be/fO-RBHvVEcc?si=ijqxxnq_DLiyO8xb)
-#### ✨ A video walk through of My Hyprland-Dots v2[`Link`](https://youtu.be/yaVurRoXc-s?si=iDnBC5S3thPBX3ZE)
+#### 🎥 Feb 2025 Video explanation of installation with preset
+- [YOUTUBE-LINK](https://youtu.be/wQ70lo7P6vA?si=_QcbrNKh_Bg0L3wC)
+- [YOUTUBE-Hyprland-Playlist](https://youtube.com/playlist?list=PLDtGd5Fw5_GjXCznR0BzCJJDIQSZJRbxx&si=iaNjLulFdsZ6AV-t)
 
 
 ### 🪧🪧🪧 ANNOUNCEMENT 🪧🪧🪧
@@ -168,6 +127,7 @@ chmod +x install.sh
 ```
 
 - its called semi-unattended it is because you still have to answer some questions when installing KooL's Hyprland Dots
+
 
 #### ✨ for ZSH and OH-MY-ZSH installation
 > installer should auto change your default shell to zsh. However, if it does not, do this
