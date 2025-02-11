@@ -141,21 +141,21 @@ source ~/.zshrc
 - to change the theme, `SUPER SHIFT O` , choose  desired theme, and close and open terminal. 
 - or manually edit `~/.zshrc` . Look for ZSH_THEME="desired theme"
 
+#### 🎞️ AGS Overview DEMO
+- in case you wonder, here is a short demo of AGS overview [Youtube LINK](https://youtu.be/zY5SLNPBJTs)
+
 #### ✨ TO DO once installation done and dotfiles copied
 - SUPER H for HINT or click on the waybar HINT! Button 
-- Head over to [FAQ](https://github.com/JaKooLit/Hyprland-Dots/wiki/FAQ) and [TIPS](https://github.com/JaKooLit/Hyprland-Dots/wiki/TIPS)
-- NVIDIA users / owners, after installation, check [`THIS`](https://github.com/JaKooLit/Hyprland-Dots/wiki/Notes_to_remember#--for-nvidia-gpu-users)
+- Head over to [KooL Hyprland WIKI](https://github.com/JaKooLit/Hyprland-Dots/wiki)
 
 #### 🙋 Got a questions regarding the Hyprland Dots or configurations? 🙋
 - Head over to wiki Link [`WIKI`](https://github.com/JaKooLit/Hyprland-Dots/wiki)
 
-#### 🎞️ AGS Overview DEMO
-- in case you wonder, here is a short demo of AGS overview [Youtube LINK](https://youtu.be/zY5SLNPBJTs)
-
 #### ⌨ Keybinds
 - Keybinds [`CLICK`](https://github.com/JaKooLit/Hyprland-Dots/wiki/Keybinds)
+
 > [!TIP]
-> KooL's Dots v2.3.7 has a searchable keybind function via rofi. (SUPER SHIFT K) or right click the `HINTS` waybar button
+> KooL Hyprland has a searchable keybind function via rofi. (SUPER SHIFT K) or right click the `HINTS` waybar button
 
 #### 🙋 👋 Having issues or questions? 
 - for the install part, kindly open issue on this repo
