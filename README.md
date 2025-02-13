@@ -205,6 +205,9 @@ env = WLR_RENDERER_ALLOW_SOFTWARE,1
 
 - [ ] If you use Brave or any Chrome based browsers, you may want to add```exec-once = gnome-keyring-daemon --start``` to `~/.config/hypr/UserConfigs/Startup_Apps.conf` if you don't want to get asked for your password each time you reboot your machine and want to access Brave. Obviously, you need to install gnome-keyring
 
+- [ ] If you want to have a Fedora minimal installation, suggest to install using Fedora Everything. See [`THIS`](https://github.com/JaKooLit/Fedora-Hyprland/discussions/171)
+
+
 #### 🫥 Improving performance for Older Nvidia Cards using driver 470
   - [`SEE HERE`](https://github.com/JaKooLit/Hyprland-Dots/discussions/123#discussion-6035205)
   
