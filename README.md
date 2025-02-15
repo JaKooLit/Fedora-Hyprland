@@ -193,6 +193,8 @@ env = GBM_BACKEND,nvidia-drm
 env = WLR_RENDERER_ALLOW_SOFTWARE,1
 ```
 
+- [ ] If you having issues with installation and you have nvidia, [`THIS STEP`](https://github.com/JaKooLit/Fedora-Hyprland/issues/172#issuecomment-2659775375) might help
+
 #### ❗ other known issues
 > [!NOTE]
 > Auto start of Hyprland after login (no SDDM or GDM or any login managers)
