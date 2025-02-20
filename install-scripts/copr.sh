@@ -13,7 +13,7 @@ COPR_REPOS=(
   solopasha/hyprland
   erikreider/SwayNotificationCenter
   errornointernet/packages
-  tofik/nwg-shell # Added this here
+  tofik/nwg-shell 
 )
 
 # Determine the directory where the script is located
@@ -42,8 +42,7 @@ add_config_if_not_present "/etc/dnf/dnf.conf" "fastestmirror=True"
 add_config_if_not_present "/etc/dnf/dnf.conf" "defaultyes=True"
 
 # Enable RPM Fusion repositories
-sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
-                     https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm &&
 
 # Enable COPR Repositories
 for repo in "${COPR_REPOS[@]}"; do
@@ -55,7 +54,7 @@ printf "\n%.0s" {1..1}
 # Limit package installation to specific packages from certain COPRs
 declare -A COPR_PACKAGE_LIMITS=(
   ["errornointernet/packages"]="wallust"
-  ["tofik/nwg-shell"]="nwg-displays"  # Changed from nwg-look to nwg-displays
+  ["tofik/nwg-shell"]="nwg-displays"  
 )
 
 # Function to modify repo files to restrict package installation
