@@ -68,7 +68,7 @@ hypr_package_2=(
 )
 
 copr_packages=(
-  #aylurs-gtk-shell
+  nwg-displays
   cliphist
   nwg-look
   SwayNotificationCenter
