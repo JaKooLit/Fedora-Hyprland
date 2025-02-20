@@ -6,16 +6,16 @@
 # solopasha/hyprland - most packages
 # erikreider/SwayNotificationCenter swaync
 # errornointernet/packages - wallust ONLY
-# tofik/nwg-shell - nwg-look only
+# tofik/nwg-shell - nwg-displays only
 
 # List of COPR repositories to be added and enabled
 COPR_REPOS=(
   solopasha/hyprland
   erikreider/SwayNotificationCenter
-  errornointernet/packages 
+  errornointernet/packages
+  tofik/nwg-shell 
 )
 
- #tofik/nwg-shell 
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
 # Determine the directory where the script is located
@@ -55,14 +55,14 @@ done
 printf "\n%.0s" {1..1}
 
 # FEDORA COPRS need to only install a single package
-# single packages to install are: wallust, nwg-look
+# single packages to install are: wallust, nwg-displays
 # Define variables for the first COPR repo
 yum_repo1="/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:errornointernet:packages.repo"
 line_to_add1="includepkgs=wallust"
 
 # Define variables for the second COPR repo
-#yum_repo2="/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:tofik:nwg-shell.repo"
-#line_to_add2="includepkgs=nwg-look"
+yum_repo2="/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:tofik:nwg-shell.repo"
+line_to_add2="includepkgs=nwg-displays"
 
 # Function to add a line to a repo file
 add_line_to_repo() {
