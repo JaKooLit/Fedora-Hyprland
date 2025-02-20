@@ -11,7 +11,8 @@ Extra=(
 )
 
 # packages neeeded
-hypr_package=( 
+hypr_package=(
+  bc
   curl
   gawk
   git

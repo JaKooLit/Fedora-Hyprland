@@ -48,17 +48,62 @@ if git clone --depth 1 "$source_theme" "$theme_name"; then
   # Move cloned theme to the themes directory
   sudo mv "$theme_name" "/usr/share/sddm/themes/$theme_name" 2>&1 | tee -a "$LOG"
 
-  # Set up new theme
-  echo -e "${NOTE} Setting up the login screen."
-  sddm_conf_dir=/etc/sddm.conf.d
-  [ ! -d "$sddm_conf_dir" ] && { printf "$CAT - $sddm_conf_dir not found, creating...\n"; sudo mkdir -p "$sddm_conf_dir" 2>&1 | tee -a "$LOG"; }
+  # setting up SDDM theme
+  sddm_conf_dir="/etc/sddm.conf.d"
+  BACKUP_SUFFIX=".bak"
   
-  # Configure theme settings
-  echo -e "[Theme]\nCurrent=$theme_name" | sudo tee "$sddm_conf_dir/theme.conf.user" >> "$LOG"
+  echo -e "${NOTE} Setting up the login screen." | tee -a "$LOG"
+
+  if [ -d "$sddm_conf_dir" ]; then
+    echo "Backing up files in $sddm_conf_dir" | tee -a "$LOG"
+    for file in "$sddm_conf_dir"/*; do
+      if [ -f "$file" ]; then
+        if [[ "$file" == *$BACKUP_SUFFIX ]]; then
+          echo "Skipping backup file: $file" | tee -a "$LOG"
+          continue
+        fi
+        # Backup each original file
+        sudo cp "$file" "$file$BACKUP_SUFFIX" 2>&1 | tee -a "$LOG"
+        echo "Backup created for $file" | tee -a "$LOG"
+        
+        # Edit existing "Current=" 
+        if grep -q '^[[:space:]]*Current=' "$file"; then
+          sudo sed -i "s/^[[:space:]]*Current=.*/Current=$theme_name/" "$file" 2>&1 | tee -a "$LOG"
+          echo "Updated theme in $file" | tee -a "$LOG"
+        fi
+      fi
+    done
+  else
+    # If the directory doesn't exist, create it and set up the new theme
+    echo "$CAT - $sddm_conf_dir not found, creating..." | tee -a "$LOG"
+    sudo mkdir -p "$sddm_conf_dir" 2>&1 | tee -a "$LOG"
+
+    echo -e "[Theme]\nCurrent=$theme_name" | sudo tee "$sddm_conf_dir/theme.conf.user" 2>&1 | tee -a "$LOG"
+    echo "Created and configured $sddm_conf_dir/theme.conf.user with theme $theme_name" | tee -a "$LOG"
+  fi
 
   # Replace current background from assets
   sudo cp -r assets/sddm.png "/usr/share/sddm/themes/$theme_name/backgrounds/default" 2>&1 | tee -a "$LOG"
   sudo sed -i 's|^wallpaper=".*"|wallpaper="backgrounds/default"|' "/usr/share/sddm/themes/$theme_name/theme.conf" 2>&1 | tee -a "$LOG"
+
+  printf "\n%.0s" {1..1}
+  printf "${NOTE} copying ${YELLOW}JetBrains Mono Nerd Font${RESET} to ${YELLOW}/usr/local/share/fonts${RESET} .......\n"
+  printf "${NOTE} necessary for the new SDDM theme to work properly........\n"
+
+  sudo mkdir -p /usr/local/share/fonts/JetBrainsMonoNerd && \
+  sudo cp -r "$HOME/.local/share/fonts/JetBrainsMonoNerd" /usr/local/share/fonts/JetBrainsMonoNerd
+
+  if [ $? -eq 0 ]; then
+    echo "Fonts copied successfully."
+  else
+    echo "Failed to copy fonts."
+  fi
+
+  # Update font cache and log the output
+  fc-cache -v -f 2>&1 | tee -a "$LOG"
+
+  printf "\n%.0s" {1..1}
+
 
   echo "${OK} - ${MAGENTA}Additional SDDM Theme${RESET} successfully installed." | tee -a "$LOG"
 
