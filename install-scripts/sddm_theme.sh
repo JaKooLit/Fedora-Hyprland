@@ -77,10 +77,11 @@ if git clone --depth 1 "$source_theme" "$theme_name"; then
     # If the directory doesn't exist, create it and set up the new theme
     echo "$CAT - $sddm_conf_dir not found, creating..." | tee -a "$LOG"
     sudo mkdir -p "$sddm_conf_dir" 2>&1 | tee -a "$LOG"
-    
+
+    sudo touch "$sddm_conf_dir/theme.conf.user" 2>&1 | tee -a "$LOG"
+
     sudo printf "[Theme]\nCurrent = %s\n" "$theme_name" > "$sddm_conf_dir/theme.conf.user"
     
-    # Check if file was created successfully
     if [ -f "$sddm_conf_dir/theme.conf.user" ]; then
       echo "Created and configured $sddm_conf_dir/theme.conf.user with theme $theme_name" | tee -a "$LOG"
     else
