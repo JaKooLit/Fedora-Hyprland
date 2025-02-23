@@ -60,6 +60,13 @@ if [ -d "JetBrainsMono.tar.xz" ]; then
 	rm -r JetBrainsMono.tar.xz 2>&1 | tee -a "$LOG"
 fi
 
+# Fantasque Mono Nerd Font
+if wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/FantasqueSansMono.zip; then
+    mkdir -p "$HOME/.local/share/fonts/FantasqueSansMonoNerd" && unzip -o -q "FantasqueSansMono.zip" -d "$HOME/.local/share/fonts/FantasqueSansMono" && echo "FantasqueSansMono installed successfully" | tee -a "$LOG"
+else
+    echo -e "\n${ERROR} Failed to download ${YELLOW}Fantasque Sans Mono Nerd Font${RESET} Please check your connection\n" | tee -a "$LOG"
+fi
+
 # Victor Mono-Font
 if wget -q https://rubjo.github.io/victor-mono/VictorMonoAll.zip; then
     mkdir -p "$HOME/.local/share/fonts/VictorMono" && unzip -o -q "VictorMonoAll.zip" -d "$HOME/.local/share/fonts/VictorMono" && echo "Victor Font installed successfully" | tee -a "$LOG"
