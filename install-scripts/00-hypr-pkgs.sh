@@ -42,6 +42,7 @@ hypr_package=(
   rofi-wayland
   slurp
   swappy
+  unzip # required later
   waybar
   wget2
   wl-clipboard
