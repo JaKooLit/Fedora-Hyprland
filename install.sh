@@ -46,7 +46,7 @@ print_header() {
     echo "  ██╔══╝  ██╔══╝  ██╔══██╗██║   ██║██╔══██╗██╔══██║"
     echo "  ██║     ███████╗██║  ██║╚██████╔╝██║  ██║██║  ██║"
     echo "  ╚═╝     ╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝"
-    echo "  ${BOLD}Fedora-Hyprland Installation Script 2025${RESET}"
+    echo "  ${BOLD}Kool's cool FEDORA hyprland install script.${RESET}"
     echo "${SEPARATOR}"
 }
 
