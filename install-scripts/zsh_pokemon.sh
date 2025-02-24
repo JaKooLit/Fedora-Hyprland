@@ -37,8 +37,8 @@ fi
 
 # Check if ~/.zshrc exists
 if [ -f "$HOME/.zshrc" ]; then
-    sed -i '/#pokemon-colorscripts --no-title -s -r | fastfetch -c $HOME\/.config\/fastfetch\/config-pokemon.jsonc --logo-type file-raw --logo-height 10 --logo-width 5 --logo -/s/^#//' "$HOME/.zshrc" >> "$LOG" 2>&1
-    sed -i '/^fastfetch -c $HOME\/.config\/fastfetch\/config-compact.jsonc/s/^/#/' "$HOME/.zshrc" >> "$LOG" 2>&1
+    sed -i "/#pokemon-colorscripts --no-title -s -r | fastfetch -c $HOME\/.config\/fastfetch\/config-pokemon.jsonc --logo-type file-raw --logo-height 10 --logo-width 5 --logo -/s/^#//" "$HOME/.zshrc" >> "$LOG" 2>&1
+    sed -i "/^fastfetch -c $HOME\/.config\/fastfetch\/config-compact.jsonc/s/^/#/" "$HOME/.zshrc" >> "$LOG" 2>&1
 else
     echo "$HOME/.zshrc not found. Cant enable ${YELLOW}Pokemon color scripts${RESET}" >> "$LOG" 2>&1
 fi
