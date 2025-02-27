@@ -250,7 +250,7 @@ execute_script "copr.sh"
 
 echo "Installing KooL Hyprland additional packages..."
 sleep 1
-execute_script "01-hypr-pkgs.sh"
+execute_script "00-hypr-pkgs.sh"
 
 echo "Installing necessary fonts..."
 sleep 1
