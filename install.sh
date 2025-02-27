@@ -38,6 +38,13 @@ if [[ "$1" == "--preset" ]]; then
     source ./preset.sh
 fi
 
+if ! command -v whiptail >/dev/null; then
+    echo "${NOTE} - whiptail is not installed. Installing..."
+    sudo dnf install -y whiptail
+    printf "\n%.0s" {1..1}
+fi
+
+clear
 
 printf "\n%.0s" {1..2}  
 echo -e "\e[35m
@@ -46,6 +53,7 @@ echo -e "\e[35m
 	╩ ╩└─┘└─┘╩═╝  ╩ ╩ ┴ ┴  ┴└─┴─┘┴ ┴┘└┘─┴┘ 
 \e[0m"
 printf "\n%.0s" {1..1} 
+
 
 # Welcome message using whiptail (for displaying information)
 whiptail --title "KooL Fedora-Hyprland (2025) Install Script" \
@@ -71,12 +79,6 @@ printf "\n%.0s" {1..1}
 if ! rpm -q pciutils > /dev/null; then
     echo "pciutils is not installed. Installing..."
     sudo dnf install -y pciutils
-    printf "\n%.0s" {1..1}
-fi
-
-if ! command -v whiptail >/dev/null; then
-    echo "${NOTE} - whiptail is not installed. Installing..."
-    sudo dnf install -y whiptail
     printf "\n%.0s" {1..1}
 fi
 
