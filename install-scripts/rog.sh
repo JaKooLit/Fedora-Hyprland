@@ -6,7 +6,7 @@ asusctl=(
   asusctl
   supergfxctl
   asusctl-rog-gui
-  power-profiles-daemon
+  tuned-ppd
 )
 
 
@@ -37,7 +37,7 @@ done
 printf " Activating ROG services...\n"
 sudo systemctl enable --now supergfxd 2>&1 | tee -a "$LOG"
 
-printf " enabling power-profiles-daemon...\n"
-sudo systemctl enable power-profiles-daemon 2>&1 | tee -a "$LOG"
+printf " enabling tuned (power-profiles-daemon) ...\n"
+sudo systemctl enable tuned 2>&1 | tee -a "$LOG"
 
 printf "\n%.0s" {1..2}
