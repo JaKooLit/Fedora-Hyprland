@@ -124,7 +124,6 @@ rog="OFF"
 dots="OFF"
 input_group="OFF"
 nvidia="OFF"
-nouveau="OFF"
 
 # Function to load preset file
 load_preset() {
@@ -178,7 +177,6 @@ options_command=(
 if [ "$nvidia_detected" == "true" ]; then
     options_command+=(
         "nvidia" "Do you want script to configure NVIDIA GPU?" "OFF"
-        "nouveau" "Do you want Nouveau to be blacklisted?" "OFF"
     )
 fi
 

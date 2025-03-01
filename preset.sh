@@ -6,8 +6,6 @@
 ### Script will install nvidia-dkms nvidia-utils & nvidia-settings
 ###-Would you like script to Configure NVIDIA for you?
 nvidia="OFF"
-### Would you like to blacklist nouveau? (y/n)
-nouveau="OFF"
 
 ###-Install GTK themes (required for Dark/Light function)?
 gtk_themes="ON"
