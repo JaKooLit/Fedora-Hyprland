@@ -154,6 +154,14 @@ check_services_running() {
     return 1  
 }
 
+if check_services_running; then
+    active_list=$(printf "%s\n" "${active_services[@]}")
+
+    # Display the active login manager(s) in the whiptail message box
+    whiptail --title "Active non-SDDM login manager(s) detected" \
+        --msgbox "The following non-SDDM login manager(s) are active:\n\n$active_list\n\nWARN: DO NOT install or choose to install SDDM & SDDM theme" 12 60
+fi
+
 # Check if NVIDIA GPU is detected
 nvidia_detected=false
 if lspci | grep -i "nvidia" &> /dev/null; then
@@ -271,8 +279,8 @@ for option in "${options[@]}"; do
     case "$option" in
         sddm)
             if check_services_running; then
-                # If any log in managers are active
-                whiptail --title "Error" --msgbox "One of the following login services is running:\n$(IFS=$'\n'; echo "${services[*]}")\n\nPlease stop it or DO not choose SDDM." 12 60
+                active_list=$(printf "%s\n" "${active_services[@]}")
+                whiptail --title "Error" --msgbox "One of the following login services is running:\n$active_list\n\nPlease stop & disable it or DO not choose SDDM." 12 60
                 exec "$0"  
             else
                 echo "Installing and configuring SDDM..."
@@ -332,6 +340,17 @@ for option in "${options[@]}"; do
             echo "Unknown option: $option"
             ;;
     esac
+done
+
+# Perform cleanup
+printf "\n${OK} Performing some clean up.\n"
+files_to_delete=("JetBrainsMono.tar.xz" "VictorMonoAll.zip" "FantasqueSansMono.zip")
+for file in "${files_to_delete[@]}"; do
+    if [ -e "$file" ]; then
+        echo "$file found. Deleting..."
+        rm "$file"
+        echo "$file deleted successfully."
+    fi
 done
 
 clear
