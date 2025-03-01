@@ -38,6 +38,7 @@ if [[ "$1" == "--preset" ]]; then
     source ./preset.sh
 fi
 
+# install whiptails if detected not installed. Necessary for this version
 if ! command -v whiptail >/dev/null; then
     echo "${NOTE} - whiptail is not installed. Installing..."
     sudo dnf install -y whiptail
@@ -53,7 +54,6 @@ echo -e "\e[35m
 	╩ ╩└─┘└─┘╩═╝  ╩ ╩ ┴ ┴  ┴└─┴─┘┴ ┴┘└┘─┴┘ 
 \e[0m"
 printf "\n%.0s" {1..1} 
-
 
 # Welcome message using whiptail (for displaying information)
 whiptail --title "KooL Fedora-Hyprland (2025) Install Script" \
