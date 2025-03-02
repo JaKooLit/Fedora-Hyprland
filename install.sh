@@ -19,28 +19,24 @@ BLUE="$(tput setaf 4)"
 SKY_BLUE="$(tput setaf 6)"
 RESET="$(tput sgr0)"
 
+# Create Directory for Install Logs
+if [ ! -d Install-Logs ]; then
+    mkdir Install-Logs
+fi
+
+# Set the name of the log file to include the current date and time
+LOG="Install-Logs/01-Hyprland-Install-Scripts-$(date +%d-%H%M%S).log"
 
 # Check if running as root. If root, script will exit
 if [[ $EUID -eq 0 ]]; then
-    echo "${ERROR}  This script should ${WARNING}NOT${RESET} be executed as root!! Exiting......."
+    echo "${ERROR}  This script should ${WARNING}NOT${RESET} be executed as root!! Exiting......." | tee -a "$LOG"
     printf "\n%.0s" {1..2} 
     exit 1
 fi
 
-# Check if --preset argument is provided
-if [[ "$1" == "--preset" ]]; then
-    
-    # nvidia
-    if [[ "$2" == "--nvidia" ]]; then
-        sed -i 's/^nvidia=".*"/nvidia="Y"/' preset.sh
-    fi
-    
-    source ./preset.sh
-fi
-
 # install whiptails if detected not installed. Necessary for this version
 if ! command -v whiptail >/dev/null; then
-    echo "${NOTE} - whiptail is not installed. Installing..."
+    echo "${NOTE} - whiptail is not installed. Installing..." | tee -a "$LOG"
     sudo dnf install -y newt
     printf "\n%.0s" {1..1}
 fi
@@ -66,28 +62,21 @@ NOTE: If you are installing on a VM, ensure to enable 3D acceleration else Hyprl
 if ! whiptail --title "Proceed with Installation?" \
     --yesno "Would you like to proceed?" 7 50; then
     echo -e "\n"
-    echo "❌ ${INFO} You 🫵 chose ${YELLOW}NOT${RESET} to proceed. ${YELLOW}Exiting...${RESET}"
+    echo "❌ ${INFO} You 🫵 chose ${YELLOW}NOT${RESET} to proceed. ${YELLOW}Exiting...${RESET}" | tee -a "$LOG"
     echo -e "\n"
     exit 1
 fi
 
-echo "👌 ${OK} 🇵🇭 ${MAGENTA}KooL..${RESET} ${SKY_BLUE}lets continue with the installation...${RESET}"
+echo "👌 ${OK} 🇵🇭 ${MAGENTA}KooL..${RESET} ${SKY_BLUE}lets continue with the installation...${RESET}" | tee -a "$LOG"
 
+sleep 1
 printf "\n%.0s" {1..1}
 
 # install pciutils if detected not installed. Necessary for detecting GPU
 if ! rpm -q pciutils > /dev/null; then
-    echo "pciutils is not installed. Installing..."
+    echo "pciutils is not installed. Installing..." | tee -a "$LOG"
     sudo dnf install -y pciutils
     printf "\n%.0s" {1..1}
-fi
-
-# Set the name of the log file to include the current date and time
-LOG="install-$(date +%d-%H%M%S).log"
-
-# Create Directory for Install Logs
-if [ ! -d Install-Logs ]; then
-    mkdir Install-Logs
 fi
 
 # Path to the install-scripts directory
@@ -102,10 +91,10 @@ execute_script() {
         if [ -x "$script_path" ]; then
             env "$script_path"
         else
-            echo "Failed to make script '$script' executable."
+            echo "Failed to make script '$script' executable." | tee -a "$LOG"
         fi
     else
-        echo "Script '$script' not found in '$script_directory'."
+        echo "Script '$script' not found in '$script_directory'." | tee -a "$LOG"
     fi
 }
 
@@ -170,7 +159,7 @@ fi
 
 # Initialize the options array for whiptail checklist
 options_command=(
-    whiptail --title "Select Options" --checklist "Choose options to install or configure\nNOTE: spacebar to select" 28 85 20
+    whiptail --title "Select Options" --checklist "Choose options to install or configure\nNOTE: 'SPACEBAR' to select & 'TAB' key to change selection" 28 85 20
 )
 
 # Add NVIDIA options if detected
@@ -209,60 +198,86 @@ options_command+=(
     "dots" "Download and install pre-configured KooL Hyprland dotfiles?" "OFF"
 )
 
+# Capture the selected options before the while loop starts
 while true; do
-    # Execute the checklist and capture the selected options
     selected_options=$("${options_command[@]}" 3>&1 1>&2 2>&3)
 
     # Check if the user pressed Cancel (exit status 1)
     if [ $? -ne 0 ]; then
-    	echo -e "\n"
-        echo "❌ ${INFO} You 🫵 cancelled the selection. ${YELLOW}Goodbye!${RESET}"
+        echo -e "\n"
+        echo "❌ ${INFO} You 🫵 cancelled the selection. ${YELLOW}Goodbye!${RESET}" | tee -a "$LOG"
         exit 0  # Exit the script if Cancel is pressed
     fi
 
     # If no option was selected, notify and restart the selection
     if [ -z "$selected_options" ]; then
-        whiptail --title "Warning" --msgbox "⚠️ No options were selected. Please select at least one option." 10 60
+        whiptail --title "Warning" --msgbox "No options were selected. Please select at least one option." 10 60
         continue  # Return to selection if no options selected
     fi
+
+    # Strip the quotes and trim spaces if necessary (sanitize the input)
+    selected_options=$(echo "$selected_options" | tr -d '"' | tr -s ' ')
 
     # Convert selected options into an array (preserving spaces in values)
     IFS=' ' read -r -a options <<< "$selected_options"
 
-    # Prepare Confirmation Message
+    # Check if the "dots" option was selected
+    dots_selected="OFF"
+    for option in "${options[@]}"; do
+        if [[ "$option" == "dots" ]]; then
+            dots_selected="ON"
+            break
+        fi
+    done
+
+    # If "dots" is not selected, show a note and ask the user to proceed or return to choices
+    if [[ "$dots_selected" == "OFF" ]]; then
+        # Show a note about not selecting the "dots" option
+        if ! whiptail --title "KooL Hyprland Dot Files" --yesno \
+        "❓ You have not selected to install the pre-configured KooL Hyprland dotfiles.\n\nKindly NOTE that if you proceed without Dots, Hyprland will start with default vanilla Hyprland configuration and I won't be able to give you support.\n\n🔙 Would you like to continue install without KooL Hyprland Dots or return to choices/options?" \
+        --yes-button "Continue" --no-button "Return" 15 90; then
+            echo "🔙 Returning to options..." | tee -a "$LOG"
+            continue
+        else
+            # User chose to continue
+            echo "${INFO} ⚠️ Continuing WITHOUT the dotfiles installation..." | tee -a "$LOG"
+			printf "\n%.0s" {1..1}
+        fi
+    fi
+
+    # Prepare the confirmation message
     confirm_message="You have selected the following options:\n\n"
     for option in "${options[@]}"; do
         confirm_message+=" - $option\n"
     done
-    confirm_message+="\nAre you happy with these choices?"
+    confirm_message+="\n😀 Are you happy with these choices?"
 
-    # onfirmation prompt
+    # Confirmation prompt
     if ! whiptail --title "Confirm Your Choices" --yesno "$(printf "%s" "$confirm_message")" 25 80; then
-    	echo -e "\n"
+        echo -e "\n"
         echo "❌ ${SKY_BLUE}You 🫵 cancelled the confirmation${RESET}. ${YELLOW}Exiting...${RESET}"
         exit 0  
     fi
 
-    echo "👌 ${OK} You confirmed your choices. Proceeding with ${SKY_BLUE}KooL 🇵🇭 Hyprland Installation...${RESET}"
-    break
+    echo "👌 ${OK} You confirmed your choices. Proceeding with ${SKY_BLUE}KooL 🇵🇭 Hyprland Installation...${RESET}" | tee -a "$LOG"
+    break  
 done
 
-# Proceed with installation
-echo "${OK} - Proceeding with selected options..."
+printf "\n%.0s" {1..1}
 
-echo "Adding some COPR repos..."
+echo "Adding some COPR repos..." | tee -a "$LOG"
 sleep 1
 execute_script "copr.sh"
 
-echo "Installing KooL Hyprland additional packages..."
+echo "Installing KooL Hyprland additional packages..." | tee -a "$LOG"
 sleep 1
 execute_script "00-hypr-pkgs.sh"
 
-echo "Installing necessary fonts..."
+echo "Installing necessary fonts..." | tee -a "$LOG"
 sleep 1
 execute_script "fonts.sh"
 
-echo "Installing Hyprland..."
+echo "Installing Hyprland..." | tee -a "$LOG"
 sleep 1
 execute_script "hyprland.sh"
 
@@ -281,61 +296,61 @@ for option in "${options[@]}"; do
                 whiptail --title "Error" --msgbox "One of the following login services is running:\n$active_list\n\nPlease stop & disable it or DO not choose SDDM." 12 60
                 exec "$0"  
             else
-                echo "Installing and configuring SDDM..."
+                echo "Installing and configuring SDDM..." | tee -a "$LOG"
                 execute_script "sddm.sh"
             fi
             ;;
         nvidia)
-            echo "Configuring nvidia stuff"
+            echo "Configuring nvidia stuff" | tee -a "$LOG"
             execute_script "nvidia.sh"
             ;;
         gtk_themes)
-            echo "Installing GTK themes..."
+            echo "Installing GTK themes..." | tee -a "$LOG"
             execute_script "gtk_themes.sh"
             ;;
         input_group)
-            echo "Adding user into input group..."
+            echo "Adding user into input group..." | tee -a "$LOG"
             execute_script "InputGroup.sh"
             ;;
         ags)
-            echo "Installing AGS..."
+            echo "Installing AGS..." | tee -a "$LOG"
             execute_script "ags.sh"
             ;;
         xdph)
-            echo "Installing XDG-DESKTOP-PORTAL-HYPRLAND..."
+            echo "Installing XDG-DESKTOP-PORTAL-HYPRLAND..." | tee -a "$LOG"
             execute_script "xdph.sh"
             ;;
         bluetooth)
-            echo "Configuring Bluetooth..."
+            echo "Configuring Bluetooth..." | tee -a "$LOG"
             execute_script "bluetooth.sh"
             ;;
         thunar)
-            echo "Installing Thunar file manager..."
+            echo "Installing Thunar file manager..." | tee -a "$LOG"
             execute_script "thunar.sh"
             execute_script "thunar_default.sh"
             ;;
         sddm_theme)
-            echo "Downloading & Installing Additional SDDM theme..."
+            echo "Downloading & Installing Additional SDDM theme..." | tee -a "$LOG"
             execute_script "sddm_theme.sh"
             ;;
         zsh)
-            echo "Installing zsh with Oh-My-Zsh..."
+            echo "Installing zsh with Oh-My-Zsh..." | tee -a "$LOG"
             execute_script "zsh.sh"
             ;;
         pokemon)
-            echo "Adding Pokemon color scripts to terminal..."
+            echo "Adding Pokemon color scripts to terminal..." | tee -a "$LOG"
             execute_script "zsh_pokemon.sh"
             ;;
         rog)
-            echo "Installing ROG packages..."
+            echo "Installing ROG packages..." | tee -a "$LOG"
             execute_script "rog.sh"
             ;;
         dots)
-            echo "Installing pre-configured Hyprland dotfiles..."
+            echo "Installing pre-configured Hyprland dotfiles..." | tee -a "$LOG"
             execute_script "dotfiles-main.sh"
             ;;
         *)
-            echo "Unknown option: $option"
+            echo "Unknown option: $option" | tee -a "$LOG"
             ;;
     esac
 done
@@ -345,9 +360,9 @@ printf "\n${OK} Performing some clean up.\n"
 files_to_delete=("JetBrainsMono.tar.xz" "VictorMonoAll.zip" "FantasqueSansMono.zip")
 for file in "${files_to_delete[@]}"; do
     if [ -e "$file" ]; then
-        echo "$file found. Deleting..."
+        echo "$file found. Deleting..." | tee -a "$LOG"
         rm "$file"
-        echo "$file deleted successfully."
+        echo "$file deleted successfully." | tee -a "$LOG"
     fi
 done
 
