@@ -3,8 +3,9 @@
 # ZSH and oh-my-zsh #
 
 zsh=(
-  eza
+  lsd
   fzf
+  mercurial
   zsh 
   util-linux
 )
