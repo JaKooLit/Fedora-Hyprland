@@ -19,119 +19,68 @@ BLUE="$(tput setaf 4)"
 SKY_BLUE="$(tput setaf 6)"
 RESET="$(tput sgr0)"
 
-
-# Check if running as root. If root, script will exit
-if [[ $EUID -eq 0 ]]; then
-    echo "${ERROR}  This script should ${WARNING}NOT${RESET} be executed as root!! Exiting......."
-    printf "\n%.0s" {1..2} 
-    exit 1
-fi
-
-# Check if --preset argument is provided
-if [[ "$1" == "--preset" ]]; then
-    
-    # nvidia
-    if [[ "$2" == "--nvidia" ]]; then
-        sed -i 's/^nvidia=".*"/nvidia="Y"/' preset.sh
-    fi
-    
-    source ./preset.sh
-fi
-
-
-printf "\n%.0s" {1..2}  
-echo -e "\e[35m
-	╦╔═┌─┐┌─┐╦    ╦ ╦┬ ┬┌─┐┬─┐┬  ┌─┐┌┐┌┌┬┐
-	╠╩╗│ ││ │║    ╠═╣└┬┘├─┘├┬┘│  ├─┤│││ ││ 2025
-	╩ ╩└─┘└─┘╩═╝  ╩ ╩ ┴ ┴  ┴└─┴─┘┴ ┴┘└┘─┴┘ 
-\e[0m"
-printf "\n%.0s" {1..1} 
-
-# Welcome message
-echo "${SKY_BLUE}Welcome to KooL's Fedora-Hyprland (2025) Install Script!${RESET}"
-echo
-echo "${WARNING}ATTENTION: Run a full system update and Reboot first!! (Highly Recommended) ${RESET}"
-echo
-echo "${YELLOW}NOTE: You will be required to answer some questions during the installation! ${RESET}"
-echo
-echo "${YELLOW}NOTE: If you are installing on a VM, ensure to enable 3D acceleration else Hyprland wont start! ${RESET}"
-echo
-
-read -p "$(tput setaf 6)Would you like to proceed? (y/n): $(tput sgr0)" proceed
-
-if [ "$proceed" != "y" ]; then
-    printf "\n%.0s" {1..2}
-    echo "${INFO} Installation aborted. ${SKY_BLUE}No changes in your system.${RESET} ${YELLOW}Goodbye!${RESET}"
-    printf "\n%.0s" {1..2}
-    exit 1
-fi
-
-printf "\n%.0s" {1..1}
-
-# install pciutils if detected not installed. Necessary for detecting GPU
-if ! rpm -q pciutils > /dev/null; then
-    echo "pciutils is not installed. Installing..."
-    sudo dnf install -y pciutils
-    printf "\n%.0s" {1..1}
-fi
-
 # Create Directory for Install Logs
 if [ ! -d Install-Logs ]; then
     mkdir Install-Logs
 fi
 
-
-# Function to colorize prompts
-colorize_prompt() {
-    local color="$1"
-    local message="$2"
-    echo -n "${color}${message}$(tput sgr0)"
-}
-
 # Set the name of the log file to include the current date and time
-LOG="install-$(date +%d-%H%M%S).log"
+LOG="Install-Logs/01-Hyprland-Install-Scripts-$(date +%d-%H%M%S).log"
 
-# Define the directory where your scripts are located
+# Check if running as root. If root, script will exit
+if [[ $EUID -eq 0 ]]; then
+    echo "${ERROR}  This script should ${WARNING}NOT${RESET} be executed as root!! Exiting......." | tee -a "$LOG"
+    printf "\n%.0s" {1..2} 
+    exit 1
+fi
+
+# install whiptails if detected not installed. Necessary for this version
+if ! command -v whiptail >/dev/null; then
+    echo "${NOTE} - whiptail is not installed. Installing..." | tee -a "$LOG"
+    sudo dnf install -y newt
+    printf "\n%.0s" {1..1}
+fi
+
+clear
+
+printf "\n%.0s" {1..2}  
+echo -e "\e[35m
+	╦╔═┌─┐┌─┐╦    ╦ ╦┬ ┬┌─┐┬─┐┬  ┌─┐┌┐┌┌┬┐
+	╠╩╗│ ││ │║    ╠═╣└┬┘├─┘├┬┘│  ├─┤│││ ││ 2025
+	╩ ╩└─┘└─┘╩═╝  ╩ ╩ ┴ ┴  ┴└─┴─┘┴ ┴┘└┘─┴┘ Fedora Linux
+\e[0m"
+printf "\n%.0s" {1..1} 
+
+# Welcome message using whiptail (for displaying information)
+whiptail --title "KooL Fedora-Hyprland (2025) Install Script" \
+    --msgbox "Welcome to KooL Fedora-Hyprland (2025) Install Script!!!\n\n\
+ATTENTION: Run a full system update and Reboot first !!! (Highly Recommended)\n\n\
+NOTE: If you are installing on a VM, ensure to enable 3D acceleration else Hyprland may NOT start!" \
+    15 80
+
+# Ask if the user wants to proceed
+if ! whiptail --title "Proceed with Installation?" \
+    --yesno "Would you like to proceed?" 7 50; then
+    echo -e "\n"
+    echo "❌ ${INFO} You 🫵 chose ${YELLOW}NOT${RESET} to proceed. ${YELLOW}Exiting...${RESET}" | tee -a "$LOG"
+    echo -e "\n"
+    exit 1
+fi
+
+echo "👌 ${OK} 🇵🇭 ${MAGENTA}KooL..${RESET} ${SKY_BLUE}lets continue with the installation...${RESET}" | tee -a "$LOG"
+
+sleep 1
+printf "\n%.0s" {1..1}
+
+# install pciutils if detected not installed. Necessary for detecting GPU
+if ! rpm -q pciutils > /dev/null; then
+    echo "pciutils is not installed. Installing..." | tee -a "$LOG"
+    sudo dnf install -y pciutils
+    printf "\n%.0s" {1..1}
+fi
+
+# Path to the install-scripts directory
 script_directory=install-scripts
-
-# Function to ask a yes/no question and set the response in a variable
-ask_yes_no() {
-  if [[ ! -z "${!2}" ]]; then
-    echo "$(colorize_prompt "$CAT"  "$1 (Preset): ${!2}")" 
-    if [[ "${!2}" = [Yy] ]]; then
-      return 0
-    else
-      return 1
-    fi
-  else
-    eval "$2=''" 
-  fi
-    while true; do
-        read -p "$(colorize_prompt "$CAT"  "$1 (y/n): ")" choice
-        case "$choice" in
-            [Yy]* ) eval "$2='Y'"; return 0;;
-            [Nn]* ) eval "$2='N'"; return 1;;
-            * ) echo "Please answer with y or n.";;
-        esac
-    done
-}
-
-# Function to ask a custom question with specific options and set the response in a variable
-ask_custom_option() {
-    local prompt="$1"
-    local valid_options="$2"
-    local response_var="$3"
-
-    while true; do
-        read -p "$(colorize_prompt "$CAT"  "$prompt ($valid_options): ")" choice
-        if [[ " $valid_options " == *" $choice "* ]]; then
-            eval "$response_var='$choice'"
-            return 0
-        else
-            echo "Please choose one of the provided options: $valid_options"
-        fi
-    done
-}
 
 # Function to execute a script if it exists and make it executable
 execute_script() {
@@ -140,147 +89,294 @@ execute_script() {
     if [ -f "$script_path" ]; then
         chmod +x "$script_path"
         if [ -x "$script_path" ]; then
-            env USE_PRESET=$use_preset  "$script_path"
+            env "$script_path"
         else
-            echo "Failed to make script '$script' executable."
+            echo "Failed to make script '$script' executable." | tee -a "$LOG"
         fi
     else
-        echo "Script '$script' not found in '$script_directory'."
+        echo "Script '$script' not found in '$script_directory'." | tee -a "$LOG"
     fi
 }
 
-# Collect user responses to all questions
-# Check if nvidia is present
-if lspci | grep -i "nvidia" &> /dev/null; then
-    printf "\n"
-    printf "${INFO} ${YELLOW}NVIDIA GPU${RESET} detected in your system \n"
-    ask_yes_no "-Do you want script to configure ${YELLOW}NVIDIA${RESET} for you?" nvidia
+#################
+## Default values for the options (will be overwritten by preset file if available)
+gtk_themes="OFF"
+bluetooth="OFF"
+thunar="OFF"
+ags="OFF"
+sddm="OFF"
+sddm_theme="OFF"
+xdph="OFF"
+zsh="OFF"
+pokemon="OFF"
+rog="OFF"
+dots="OFF"
+input_group="OFF"
+nvidia="OFF"
+
+# Function to load preset file
+load_preset() {
+    if [ -f "$1" ]; then
+        echo "✅ Loading preset: $1"
+        source "$1"
+    else
+        echo "⚠️ Preset file not found: $1. Using default values."
+    fi
+}
+
+# Check if --preset argument is passed
+if [[ "$1" == "--preset" && -n "$2" ]]; then
+    load_preset "$2"
 fi
 
-printf "\n"
-ask_yes_no "-Install ${YELLOW}GTK themes${RESET} (required for Dark/Light function)?" gtk_themes
+# List of services to check for active login managers
+services=("gdm.service" "gdm3.service" "lightdm.service" "lxdm.service")
 
-printf "\n"
-ask_yes_no "-Do you want to configure ${YELLOW}Bluetooth${RESET}?" bluetooth
-
-printf "\n"
-ask_yes_no "-Do you want to install ${YELLOW}Thunar file manager${RESET}?" thunar
-
-if [[ "$thunar" == "Y" ]]; then
-    ask_yes_no "-Set ${YELLOW}Thunar${RESET} as the default file manager?" thunar_choice
-fi
-
-# Input group
-printf "\n"
-if ! groups "$(whoami)" | grep -q '\binput\b'; then
-    printf "${NOTE} adding to ${YELLOW}input${RESET} group might be necessary for ${YELLOW}waybar keyboard-state functionality${RESET} \n"
-    ask_yes_no "-Would you like to be added to the ${YELLOW}input${RESET} group?" input_group
-fi
-
-printf "\n"
-printf "${NOTE} ${YELLOW}AGS Desktop Overview DEMO link${RESET} on README\n"
-ask_yes_no "-Install ${YELLOW}AGS (aylur's GTK shell) v1${RESET} for Desktop-Like Overview?" ags
-
-printf "\n"
-ask_yes_no "-Install & configure ${YELLOW}SDDM${RESET} as login manager?" sddm
-# check if any known login managers are active when users choose to install sddm
-if [ "$sddm" == "y" ] || [ "$sddm" == "Y" ]; then
-    # List of services to check
-    services=("gdm.service" "gdm3.service" "lightdm.service" "lxdm.service")
-
-    # Loop through each service
+# Function to check if any login services are active
+check_services_running() {
+    active_services=()  # Array to store active services
     for svc in "${services[@]}"; do
         if systemctl is-active --quiet "$svc"; then
-            echo "${ERROR} ${MAGENTA}$svc${RESET} is active.  stop or disable it first or ${YELLOW}DO NOT choose SDDM${RESET} to install."
-            echo "${NOTE} If you have GDM, no need to install SDDM. GDM will work fine as Login Manager for Hyprland."
-            printf "\n%.0s" {1..2}            
-            exit 1  
+            active_services+=("$svc")  
         fi
     done
+
+    if [ ${#active_services[@]} -gt 0 ]; then
+        return 0  
+    else
+        return 1  
+    fi
+}
+
+if check_services_running; then
+    active_list=$(printf "%s\n" "${active_services[@]}")
+
+    # Display the active login manager(s) in the whiptail message box
+    whiptail --title "Active non-SDDM login manager(s) detected" \
+        --msgbox "The following login manager(s) are active:\n\n$active_list\n\nIf you want to install SDDM and SDDM theme, stop and disable first the active services above first before running this script\n\nYour option to install SDDM and SDDM theme has now been removed\n\n😎 Ja " 22 80
 fi
-if [[ "$sddm" == "Y" ]]; then
-    ask_yes_no "-Download and Install ${YELLOW}SDDM Theme?${RESET} " sddm_theme
+
+# Check if NVIDIA GPU is detected
+nvidia_detected=false
+if lspci | grep -i "nvidia" &> /dev/null; then
+    nvidia_detected=true
+    whiptail --title "NVIDIA GPU Detected" --msgbox "NVIDIA GPU detected in your system.\n\nNOTE: The script will install akmod-nvidia,  xorg-x11-drv-nvidia-cuda, etc if you choose to configure." 12 60
 fi
 
-printf "\n"
-ask_yes_no "-Install ${YELLOW}XDG-DESKTOP-PORTAL-HYPRLAND?${RESET} (For proper Screen Share, e.g., OBS)" xdph
+# Initialize the options array for whiptail checklist
+options_command=(
+    whiptail --title "Select Options" --checklist "Choose options to install or configure\nNOTE: 'SPACEBAR' to select & 'TAB' key to change selection" 28 85 20
+)
 
-printf "\n"
-ask_yes_no "-Install ${YELLOW}zsh${RESET} with ${YELLOW}oh-my-zsh?${RESET}" zsh
-
-if [[ "$zsh" == "Y" ]]; then
-    ask_yes_no "-Add ${YELLOW}Pokemon color scripts?${RESET} in your terminal?" pokemon_choice
+# Add NVIDIA options if detected
+if [ "$nvidia_detected" == "true" ]; then
+    options_command+=(
+        "nvidia" "Do you want script to configure NVIDIA GPU?" "OFF"
+    )
 fi
 
-printf "\n"
-ask_yes_no "-Installing on ${YELLOW}Asus ROG laptops?${RESET}" rog
+# Check if user is already in the 'input' group
+input_group_detected=false
+if ! groups "$(whoami)" | grep -q '\binput\b'; then
+    input_group_detected=true
+    whiptail --title "Input Group" --msgbox "You are not currently in the input group.\n\nAdding you to the input group might be necessary for the Waybar keyboard-state functionality." 12 60
+fi
 
-printf "\n"
-ask_yes_no "-Do you want to add pre-configured ${YELLOW}KooL's Hyprland dotfiles?${RESET}" dots
+# Add 'input_group' option if necessary
+if [ "$input_group_detected" == "true" ]; then
+    options_command+=(
+        "input_group" "Add your USER to input group for some waybar functionality?" "OFF"
+    )
+fi
 
-printf "\n"
+# Conditionally add SDDM and SDDM theme options if no active login manager is found
+if ! check_services_running; then
+    options_command+=(
+        "sddm" "Install & configure SDDM login manager?" "OFF"
+        "sddm_theme" "Download & Install Additional SDDM theme?" "OFF"
+    )
+fi
 
-# Ensuring all in the scripts folder are made executable
-chmod +x install-scripts/*
+# Add the remaining static options
+options_command+=(
+    "gtk_themes" "Install GTK themes (required for Dark/Light function)" "OFF"
+    "bluetooth" "Do you want script to configure Bluetooth?" "OFF"
+    "thunar" "Do you want Thunar file manager to be installed?" "OFF"
+    "ags" "Install AGS v1 for Desktop-Like Overview" "OFF"
+    "xdph" "Install XDG-DESKTOP-PORTAL-HYPRLAND (for screen share)?" "OFF"
+    "zsh" "Install zsh shell with Oh-My-Zsh?" "OFF"
+    "pokemon" "Add Pokemon color scripts to your terminal?" "OFF"
+    "rog" "Are you installing on Asus ROG laptops?" "OFF"
+    "dots" "Download and install pre-configured KooL Hyprland dotfiles?" "OFF"
+)
+
+# Capture the selected options before the while loop starts
+while true; do
+    selected_options=$("${options_command[@]}" 3>&1 1>&2 2>&3)
+
+    # Check if the user pressed Cancel (exit status 1)
+    if [ $? -ne 0 ]; then
+        echo -e "\n"
+        echo "❌ ${INFO} You 🫵 cancelled the selection. ${YELLOW}Goodbye!${RESET}" | tee -a "$LOG"
+        exit 0  # Exit the script if Cancel is pressed
+    fi
+
+    # If no option was selected, notify and restart the selection
+    if [ -z "$selected_options" ]; then
+        whiptail --title "Warning" --msgbox "No options were selected. Please select at least one option." 10 60
+        continue  # Return to selection if no options selected
+    fi
+
+    # Strip the quotes and trim spaces if necessary (sanitize the input)
+    selected_options=$(echo "$selected_options" | tr -d '"' | tr -s ' ')
+
+    # Convert selected options into an array (preserving spaces in values)
+    IFS=' ' read -r -a options <<< "$selected_options"
+
+    # Check if the "dots" option was selected
+    dots_selected="OFF"
+    for option in "${options[@]}"; do
+        if [[ "$option" == "dots" ]]; then
+            dots_selected="ON"
+            break
+        fi
+    done
+
+    # If "dots" is not selected, show a note and ask the user to proceed or return to choices
+    if [[ "$dots_selected" == "OFF" ]]; then
+        # Show a note about not selecting the "dots" option
+        if ! whiptail --title "KooL Hyprland Dot Files" --yesno \
+        "❓ You have not selected to install the pre-configured KooL Hyprland dotfiles.\n\nKindly NOTE that if you proceed without Dots, Hyprland will start with default vanilla Hyprland configuration and I won't be able to give you support.\n\n🔙 Would you like to continue install without KooL Hyprland Dots or return to choices/options?" \
+        --yes-button "Continue" --no-button "Return" 15 90; then
+            echo "🔙 Returning to options..." | tee -a "$LOG"
+            continue
+        else
+            # User chose to continue
+            echo "${INFO} ⚠️ Continuing WITHOUT the dotfiles installation..." | tee -a "$LOG"
+			printf "\n%.0s" {1..1}
+        fi
+    fi
+
+    # Prepare the confirmation message
+    confirm_message="You have selected the following options:\n\n"
+    for option in "${options[@]}"; do
+        confirm_message+=" - $option\n"
+    done
+    confirm_message+="\nAre you happy with these choices?"
+
+    # Confirmation prompt
+    if ! whiptail --title "Confirm Your Choices" --yesno "$(printf "%s" "$confirm_message")" 25 80; then
+        echo -e "\n"
+        echo "❌ ${SKY_BLUE}You 🫵 cancelled the confirmation${RESET}. ${YELLOW}Exiting...${RESET}"
+        exit 0  
+    fi
+
+    echo "👌 ${OK} You confirmed your choices. Proceeding with ${SKY_BLUE}KooL 🇵🇭 Hyprland Installation...${RESET}" | tee -a "$LOG"
+    break  
+done
+
+printf "\n%.0s" {1..1}
+
+echo "${INFO} Adding ${SKY_BLUE}some COPR repos...${RESET}" | tee -a "$LOG"
 sleep 1
-# Install hyprland packages
 execute_script "copr.sh"
+
+echo "${INFO} Installing ${SKY_BLUE}necessary dependencies...${RESET}" | tee -a "$LOG"
+sleep 1
 execute_script "00-hypr-pkgs.sh"
+
+echo "${INFO} Installing ${SKY_BLUE}necessary fonts...${RESET}" | tee -a "$LOG"
+sleep 1
 execute_script "fonts.sh"
+
+echo "${INFO} Installing ${SKY_BLUE}Hyprland...${RESET}" | tee -a "$LOG"
+sleep 1
 execute_script "hyprland.sh"
 
-if [ "$nvidia" == "Y" ]; then
-    execute_script "nvidia.sh"
-fi
+# Clean up the selected options (remove quotes and trim spaces)
+selected_options=$(echo "$selected_options" | tr -d '"' | tr -s ' ')
 
-if [ "$gtk_themes" == "Y" ]; then
-    execute_script "gtk_themes.sh"
-fi
+# Convert selected options into an array (splitting by spaces)
+IFS=' ' read -r -a options <<< "$selected_options"
 
-if [ "$bluetooth" == "Y" ]; then
-    execute_script "bluetooth.sh"
-fi
+# Loop through selected options
+for option in "${options[@]}"; do
+    case "$option" in
+        sddm)
+            if check_services_running; then
+                active_list=$(printf "%s\n" "${active_services[@]}")
+                whiptail --title "Error" --msgbox "One of the following login services is running:\n$active_list\n\nPlease stop & disable it or DO not choose SDDM." 12 60
+                exec "$0"  
+            else
+                echo "${INFO} Installing and configuring ${SKY_BLUE}SDDM...${RESET}" | tee -a "$LOG"
+                execute_script "sddm.sh"
+            fi
+            ;;
+        nvidia)
+            echo "${INFO} Configuring ${SKY_BLUE}nvidia stuff${RESET}" | tee -a "$LOG"
+            execute_script "nvidia.sh"
+            ;;
+        gtk_themes)
+            echo "${INFO} Installing ${SKY_BLUE}GTK themes...${RESET}" | tee -a "$LOG"
+            execute_script "gtk_themes.sh"
+            ;;
+        input_group)
+            echo "${INFO} Adding user into ${SKY_BLUE}input group...${RESET}" | tee -a "$LOG"
+            execute_script "InputGroup.sh"
+            ;;
+        ags)
+            echo "${INFO} Installing ${SKY_BLUE}AGS v1 for Desktop Overview...${RESET}" | tee -a "$LOG"
+            execute_script "ags.sh"
+            ;;
+        xdph)
+            echo "${INFO} Installing ${SKY_BLUE}xdg-desktop-portal-hyprland...${RESET}" | tee -a "$LOG"
+            execute_script "xdph.sh"
+            ;;
+        bluetooth)
+            echo "${INFO} Configuring ${SKY_BLUE}Bluetooth...${RESET}" | tee -a "$LOG"
+            execute_script "bluetooth.sh"
+            ;;
+        thunar)
+            echo "${INFO} Installing ${SKY_BLUE}Thunar file manager...${RESET}" | tee -a "$LOG"
+            execute_script "thunar.sh"
+            execute_script "thunar_default.sh"
+            ;;
+        sddm_theme)
+            echo "${INFO} Downloading & Installing ${SKY_BLUE}Additional SDDM theme...${RESET}" | tee -a "$LOG"
+            execute_script "sddm_theme.sh"
+            ;;
+        zsh)
+            echo "${INFO} Installing ${SKY_BLUE}zsh with Oh-My-Zsh...${RESET}" | tee -a "$LOG"
+            execute_script "zsh.sh"
+            ;;
+        pokemon)
+            echo "${INFO} Adding ${SKY_BLUE}Pokemon color scripts to terminal...${RESET}" | tee -a "$LOG"
+            execute_script "zsh_pokemon.sh"
+            ;;
+        rog)
+            echo "${INFO} Installing ${SKY_BLUE}ROG laptop packages...${RESET}" | tee -a "$LOG"
+            execute_script "rog.sh"
+            ;;
+        dots)
+            echo "${INFO} Installing pre-configured ${SKY_BLUE}KooL Hyprland dotfiles...${RESET}" | tee -a "$LOG"
+            execute_script "dotfiles-main.sh"
+            ;;
+        *)
+            echo "Unknown option: $option" | tee -a "$LOG"
+            ;;
+    esac
+done
 
-if [ "$thunar" == "Y" ]; then
-    execute_script "thunar.sh"
-fi
-if [ "$thunar_choice" == "Y" ]; then
-    execute_script "thunar_default.sh"
-fi
-
-if [ "$ags" == "Y" ]; then
-    execute_script "ags.sh"
-fi
-
-if [ "$sddm" == "Y" ]; then
-    execute_script "sddm.sh"
-fi
-if [ "$sddm_theme" == "Y" ]; then
-    execute_script "sddm_theme.sh"
-fi
-
-if [ "$xdph" == "Y" ]; then
-    execute_script "xdph.sh"
-fi
-
-if [ "$zsh" == "Y" ]; then
-    execute_script "zsh.sh"
-fi
-if [ "$pokemon_choice" == "Y" ]; then
-    execute_script "zsh_pokemon.sh"
-fi
-
-if [ "$input_group" == "Y" ]; then
-    execute_script "InputGroup.sh"
-fi
-
-if [ "$rog" == "Y" ]; then
-    execute_script "rog.sh"
-fi
-
-if [ "$dots" == "Y" ]; then
-    execute_script "dotfiles-main.sh"
-fi
+# Perform cleanup
+printf "\n${OK} Performing some clean up.\n"
+files_to_delete=("JetBrainsMono.tar.xz" "VictorMonoAll.zip" "FantasqueSansMono.zip")
+for file in "${files_to_delete[@]}"; do
+    if [ -e "$file" ]; then
+        echo "$file found. Deleting..." | tee -a "$LOG"
+        rm "$file"
+        echo "$file deleted successfully." | tee -a "$LOG"
+    fi
+done
 
 clear
 
@@ -297,12 +393,12 @@ printf "\n%.0s" {1..1}
 
 # Check if hyprland or hyprland-git is installed
 if rpm -q hyprland &> /dev/null || rpm -q hyprland-git &> /dev/null; then
-    printf "\n${OK} Hyprland is installed. However, some essential packages may not be installed. Please see above!"
+    printf "\n ${OK} 👌 Hyprland is installed. However, some essential packages may not be installed. Please see above!"
     printf "\n${CAT} Ignore this message if it states ${YELLOW}All essential packages${RESET} are installed as per above\n"
     sleep 2
     printf "\n%.0s" {1..2}
 
-    printf "${SKY_BLUE}Thank you${RESET} for using ${MAGENTA}KooL's Hyprland Dots${RESET}. ${YELLOW}Enjoy and Have a good day!${RESET}"
+    printf "${SKY_BLUE}Thank you${RESET} 🫰 for using 🇵🇭 ${MAGENTA}KooL's Hyprland Dots${RESET}. ${YELLOW}Enjoy and Have a good day!${RESET}"
     printf "\n%.0s" {1..2}
 
     printf "\n${NOTE} You can start Hyprland by typing ${SKY_BLUE}Hyprland${RESET} (IF SDDM is not installed) (note the capital H!).\n"
@@ -316,7 +412,7 @@ if rpm -q hyprland &> /dev/null || rpm -q hyprland-git &> /dev/null; then
         echo "${INFO} Rebooting now..."
         systemctl reboot 
     elif [[ "$HYP" == "n" || "$HYP" == "no" ]]; then
-        echo "${OK} You choose NOT to reboot"
+        echo "👌 ${OK} You choose NOT to reboot"
         printf "\n%.0s" {1..1}
         # Check if NVIDIA GPU is present
         if lspci | grep -i "nvidia" &> /dev/null; then
