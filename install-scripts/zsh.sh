@@ -5,6 +5,7 @@
 zsh=(
   eza
   fzf
+  mercurial
   zsh 
   util-linux
 )
