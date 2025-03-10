@@ -23,7 +23,7 @@ printf "${INFO} Installing ${SKY_BLUE}Pokemon color scripts${RESET} ..."
 if [ -d "pokemon-colorscripts" ]; then
     cd pokemon-colorscripts && git pull && sudo ./install.sh && cd ..
     else
-    git clone --depth 1 https://gitlab.com/phoneybadger/pokemon-colorscripts.git &&
+    git clone --depth=1 https://gitlab.com/phoneybadger/pokemon-colorscripts.git &&
     cd pokemon-colorscripts && sudo ./install.sh && cd ..
 fi
 
