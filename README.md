@@ -71,8 +71,12 @@ https://github.com/user-attachments/assets/49bc12b2-abaf-45de-a21c-67aacd9bb872
 > [!NOTE]
 > Main reason why I have not included an uninstallation script is simple. Some packages maybe already installed on your system by default. If I create an uninstall script with packages that I have set to install, you may end up a unrecoverable system. 
 
-#### EXPERIMENTAL UNINSTALL SCRIPT
-- 04 July, 2024 - uninstall.sh . Note that it is experimental. I DO NOT GUARANTEE that it will not mess up your system. USE with caution.
+### 💥 💥  UNINSTALL SCRIPT / Removal of Config Files
+- 11 March 2025, due to popular request, created a guided `uninstall.sh` script. USE this with caution as it may render your system unstable.
+- I will not be responsible if your system breaks
+- The best still to revert to previous state of your system is via timeshift of snapper
+
+- The old uninstall.sh is renamed to uninstall-old.sh . This is made by other party. I DO NOT GUARANTEE that it will not mess up your system. USE with caution.
 
 > [!CAUTION]
 > Download this script on a directory where you have write permissions. ie. HOME. Or any directory within your home directory. Else script will fail
