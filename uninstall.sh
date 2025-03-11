@@ -101,9 +101,7 @@ packages=(
     "fastfetch" "fastfetch" "off"
     "ffmpegthumbnailer" "FFmpeg Thumbnailer" "off"
     "grim" "screenshot tool" "off"
-    "Imagemagick" "imagemagick" "off"
-    "inxi" "CLI system information" "off"
-    "jq" "json data" "off"
+    "ImageMagick" "Image manipulation tool" "off"
     "kitty" "kitty-terminal" "off"
     "kvantum" "QT apps theming" "off"
     "mousepad" "simple text editor" "off"
@@ -273,7 +271,7 @@ COPR_REPOS=(
   errornointernet/packages
   tofik/nwg-shell 
 )
-remove_copr @COPR_REPOS
+remove_copr "${COPR_REPOS[@]}" 
 
 printf "\n%.0s" {1..1}
 echo -e "$MAGENTA Hyprland and related components have been uninstalled.$RESET"
