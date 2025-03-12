@@ -88,8 +88,11 @@ https://github.com/user-attachments/assets/49bc12b2-abaf-45de-a21c-67aacd9bb872
 - I have not tested in any other spin. However, if you decided to try, recommend to install SDDM. Apart from GDM and SDDM, any other Login Manager may not work nor launch Hyprland. However, hyprland can be launched through tty by type Hyprland
 - If you have nvidia, and wanted to use proprietary drivers, uninstall nouveau first (if installed). This script will be installing proprietary nvidia drivers and will not deal with removal of nouveau.
 
-#### ⚠️ WARNING! If you have GDM already as log-in manager, DO NOT install SDDM
-- You will likely to encounter issues
+#### 🚩 Switching to SDDM assuming you have GDM installed and running
+- if you really want switch to SDDM from GDM, you need to disable the gdm first.
+- `sudo systemctl disable gdm.service` then reboot
+- after reboot, need to ran the install script via tty. So suggest download the install script first. Then disable gdm. reboot and once logged in, cd into Distro-Hyprland then `./install.sh` and then choose SDDM and SDDM theme in the options. 
+- NOTE: Distro-Hyprland is Arch-Hyprland, or Fedora-Hyprland .. depends on which install scripts you downloaded.
 
 #### ✨ Costumize the packages and COPR Repos
 - inside the install-scripts directory, you can edit 00-hypr-pkgs.sh, copr.sh, etc. Care though as the Hyprland Dots might not work properly
@@ -107,6 +110,10 @@ https://github.com/user-attachments/assets/49bc12b2-abaf-45de-a21c-67aacd9bb872
 - you can use this command to automatically clone the installer and ran the script for you
 ```bash
 sh <(curl -L https://raw.githubusercontent.com/JaKooLit/Fedora-Hyprland/main/auto-install.sh)
+```
+- if you are using say fish or a non-POSIX compliant
+```bash
+curl -sL https://raw.githubusercontent.com/JaKooLit/Fedora-Hyprland/main/auto-install.sh | bash
 ```
 
 ## ✨ to use this script
