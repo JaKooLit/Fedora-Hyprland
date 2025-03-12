@@ -66,17 +66,7 @@ https://github.com/user-attachments/assets/49bc12b2-abaf-45de-a21c-67aacd9bb872
 - the wallpaper offered to be downloaded towards the end is from this [`REPO`](https://github.com/JaKooLit/Wallpaper-Bank)
 
 > [!IMPORTANT]
-> install a backup tool like `snapper` or `timeshift`. and Backup your system before installing hyprland using this script. This script does NOT include uninstallation of packages
-
-> [!NOTE]
-> Main reason why I have not included an uninstallation script is simple. Some packages maybe already installed on your system by default. If I create an uninstall script with packages that I have set to install, you may end up a unrecoverable system. 
-
-### 💥 💥  UNINSTALL SCRIPT / Removal of Config Files
-- 11 March 2025, due to popular request, created a guided `uninstall.sh` script. USE this with caution as it may render your system unstable.
-- I will not be responsible if your system breaks
-- The best still to revert to previous state of your system is via timeshift of snapper
-
-- The old uninstall.sh is renamed to uninstall-old.sh . This is made by other party. I DO NOT GUARANTEE that it will not mess up your system. USE with caution.
+> install a backup tool like `snapper` or `timeshift`. and Backup your system before installing hyprland using this script (HIGHLY RECOMMENDED).
 
 > [!CAUTION]
 > Download this script on a directory where you have write permissions. ie. HOME. Or any directory within your home directory. Else script will fail
@@ -104,7 +94,7 @@ https://github.com/user-attachments/assets/49bc12b2-abaf-45de-a21c-67aacd9bb872
 #### 🔔 NOTICE TO NVIDIA OWNERS ### 
 - by default it is installing the latest and newest nvidia drivers. If you have an older nvidia-gpu (GTX 800 series and older), check out nvidia-fedora website [`LINK`](https://rpmfusion.org/Howto/NVIDIA#Installing_the_drivers) and edit nvidia.sh in install-scripts directory to install proper gpu driver
 > [!IMPORTANT]
-> If you want to use nouveau driver, choose N when asked if you have nvidia gpu. This is because the nvidia installer part, it will blacklist nouveau. Hyprland will still be installed but it will skip blacklisting nouveau.
+> If you want to use nouveau driver, dont choose nvidia in the option. This is because the nvidia installer part, it will blacklist nouveau. Hyprland will still be installed but it will skip blacklisting nouveau.
 
 ## ✨ Auto clone and install
 - you can use this command to automatically clone the installer and ran the script for you
@@ -124,6 +114,13 @@ cd ~/Fedora-Hyprland
 chmod +x install.sh
 ./install.sh
 ```
+
+### 💥 💥  UNINSTALL SCRIPT / Removal of Config Files
+- 11 March 2025, due to popular request, created a guided `uninstall.sh` script. USE this with caution as it may render your system unstable.
+- I will not be responsible if your system breaks
+- The best still to revert to previous state of your system is via timeshift of snapper
+
+- The old uninstall.sh is renamed to uninstall-old.sh . This is made by other party. I DO NOT GUARANTEE that it will not mess up your system. USE with caution.
 
 #### ✨ for ZSH and OH-MY-ZSH installation
 > installer should auto change your default shell to zsh. However, if it does not, do this
