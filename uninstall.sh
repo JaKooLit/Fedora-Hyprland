@@ -1,221 +1,281 @@
 #!/bin/bash
+# 💫 https://github.com/JaKooLit 💫 #
+# KooL Fedora-Hyprland uninstall script #
 
-# Exit immediately if a command exits with a non-zero status
-set -e
+clear
 
-# Colors
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-MAGENTA='\033[0;35m'
-CYAN='\033[0;36m'
-CLEAR='\033[0m'
+# Set some colors for output messages
+OK="$(tput setaf 2)[OK]$(tput sgr0)"
+ERROR="$(tput setaf 1)[ERROR]$(tput sgr0)"
+NOTE="$(tput setaf 3)[NOTE]$(tput sgr0)"
+INFO="$(tput setaf 4)[INFO]$(tput sgr0)"
+WARN="$(tput setaf 1)[WARN]$(tput sgr0)"
+CAT="$(tput setaf 6)[ACTION]$(tput sgr0)"
+MAGENTA="$(tput setaf 5)"
+ORANGE="$(tput setaf 214)"
+WARNING="$(tput setaf 1)"
+YELLOW="$(tput setaf 3)"
+GREEN="$(tput setaf 2)"
+BLUE="$(tput setaf 4)"
+SKY_BLUE="$(tput setaf 6)"
+RESET="$(tput sgr0)"
 
-# Function to print colorful text
-print_color() {
-    printf "%b%s%b\n" "$1" "$2" "$CLEAR"
-}
+printf "\n%.0s" {1..2}
+echo -e "\e[35m
+	╦╔═┌─┐┌─┐╦    ╦ ╦┬ ┬┌─┐┬─┐┬  ┌─┐┌┐┌┌┬┐
+	╠╩╗│ ││ │║    ╠═╣└┬┘├─┘├┬┘│  ├─┤│││ ││ UNINSTALL
+	╩ ╩└─┘└─┘╩═╝  ╩ ╩ ┴ ┴  ┴└─┴─┘┴ ┴┘└┘─┴┘ Fedora Linux
+\e[0m"
+printf "\n%.0s" {1..1}
 
-# Function to print centered text
-print_centered() {
-    local text="$1"
-    local color="$2"
-    local width=$(tput cols)
-    local padding=$(( (width - ${#text}) / 2 ))
-    printf "%b%*s%s%*s%b\n" "$color" $padding "" "$text" $padding "" "$CLEAR"
-}
+# Welcome Message
+whiptail --title "Fedora-Hyprland KooL Dots Uninstall Script" --yesno \
+"Hello! This script will uninstall KooL Hyprland packages and configs.
 
-# Function to safely remove packages
-safe_remove() {
-    for package in "$@"; do
-        if rpm -q "$package" &> /dev/null; then
-            sudo dnf remove -y "$package"
+You can choose packages and directories you want to remove.
+NOTE: This will remove configs from ~/.config
+
+WARNING: After uninstallation, your system may become unstable.
+
+Shall we Proceed?" 20 80
+
+if [ $? -eq 1 ]; then
+    echo "$INFO uninstall process canceled."
+    exit 0
+fi
+
+# Function to remove selected packages on Fedora
+remove_packages() {
+    local selected_packages_file=$1
+    while read -r package; do
+        # Check if the package is installed using dnf
+        if dnf list installed "$package" &> /dev/null; then
+            echo "Removing package: $package"
+            if ! sudo dnf remove -y "$package"; then
+                echo "$ERROR Failed to remove package: $package"
+            else
+                echo "$OK Successfully removed package: $package"
+            fi
         else
-            print_color $YELLOW "Package $package is not installed, skipping."
+            echo "$INFO Package ${YELLOW}$package${RESET} not found. Skipping."
         fi
-    done
+    done < "$selected_packages_file"
+}
+
+# Function to remove selected directories
+remove_directories() {
+    local selected_dirs_file=$1
+    while read -r dir; do
+        pattern="$HOME/.config/$dir*"        
+        # Loop through directories matching the pattern
+        for dir_to_remove in $pattern; do
+            if [ -d "$dir_to_remove" ]; then
+                echo "Removing directory: $dir_to_remove"
+                if ! rm -rf "$dir_to_remove"; then
+                    echo "$ERROR Failed to remove directory: $dir_to_remove"
+                else
+                    echo "$OK Successfully removed directory: $dir_to_remove"
+                fi
+            else
+                echo "$INFO Directory ${YELLOW}$dir_to_remove${RESET} not found. Skipping."
+            fi
+        done
+    done < "$selected_dirs_file"
 }
 
 # Function to safely remove COPR repositories
-safe_remove_copr() {
+remove_copr() {
     for repo in "$@"; do
         if sudo dnf copr list | grep -q "$repo"; then
             sudo dnf copr remove -y "$repo"
         else
-            print_color $YELLOW "COPR repository $repo is not enabled, skipping."
+            # Print message in yellow when the repository is not enabled
+            echo -e "${YELLOW}COPR repository $repo is not enabled, skipping.${RESET}"
         fi
     done
 }
 
-# Function to safely remove directories and files
-safe_remove_item() {
-    local item="$1"
-    if [ -e "$item" ]; then
-        rm -rf "$item"
-        print_color $GREEN "Removed: $item"
-    else
-        print_color $YELLOW "Item $item does not exist, skipping."
-    fi
-}
 
-# Function to ask user before removing an item
-ask_before_remove() {
-    local item="$1"
-    read -p "Do you want to remove $item? (y/n): " choice
-    case "$choice" in 
-        y|Y ) safe_remove_item "$item";;
-        n|N ) print_color $YELLOW "Keeping $item";;
-        * ) print_color $YELLOW "Invalid input. Keeping $item";;
-    esac
-}
-
-# Print banner
-print_color $MAGENTA "UNINSTALL HYPRLAND"
-
-print_centered "Made with ♥ by vdcds" $CYAN
-
-# Warning message
-print_color $RED "
-█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-█                                                      █
-█               ╔═╗╔╦╗╔═╗╔═╗  ┬                        █
-█               ╚═╗ ║ ║ ║╠═╝  │                        █
-█               ╚═╝ ╩ ╚═╝╩    o                        █
-█                                                      █
-█               ╔═╗╔╗╔╔╦╗  ╦═╗╔═╗╔═╗╔╦╗                █
-█               ╠═╣║║║ ║║  ╠╦╝║╣ ╠═╣ ║║                █
-█               ╩ ╩╝╚╝═╩╝  ╩╚═╚═╝╩ ╩═╩╝                █
-█                                                      █
-█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
-
-                  !!! IMPORTANT WARNING !!!
-
-This script will UNINSTALL Hyprland and related components.
-
-  • All Hyprland configurations will be DELETED
-  • Related packages will be REMOVED
-  • This action is IRREVERSIBLE
-
-BEFORE PROCEEDING:
-  1. Ensure you have a BACKUP of any important configurations
-  2. Close all running applications
-  3. Be prepared for potential system changes
-
-If you're unsure about any aspect of this process, 
-please STOP now and seek additional information.
-"
-
-# Confirmation to proceed
-print_color $YELLOW "Are you ABSOLUTELY SURE you want to proceed with the uninstallation?"
-read -p "Type 'yes' to continue or any other key to cancel: " confirm
-if [[ $confirm != "yes" ]]; then
-    print_color $GREEN "Uninstallation cancelled. No changes were made to your system."
-    exit 1
-fi
-
-# Main uninstallation process
-print_color $BLUE "Starting Hyprland uninstallation process..."
-
-# Uninstall Hyprland and related packages
-print_color $YELLOW "Removing Hyprland and related packages..."
-safe_remove hyprland hyprcursor waybar kvantum polkit-gnome swappy SwayNotificationCenter wlogout kitty rofi-wayland aylurs-gtk-shell cliphist hypridle hyprlock pamixer pyprland swww
-
-# Remove COPR repositories
-print_color $YELLOW "Removing COPR repositories..."
-safe_remove_copr solopasha/hyprland erikreider/SwayNotificationCenter
-
-# Remove additional components
-print_color $YELLOW "Removing additional components..."
-safe_remove blueman thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman sddm xdg-desktop-portal-hyprland
-
-# Ask before removing zsh and related packages
-ask_before_remove zsh
-ask_before_remove util-linux-user
-ask_before_remove pokemon-colorscripts-git
-
-# Remove ROG-related packages
-safe_remove asusctl supergfxctl
-
-# Remove fonts
-print_color $YELLOW "Removing fonts..."
-safe_remove 'jetbrains-mono-fonts*' 'fira-code-fonts*'
-
-# Remove configuration files
-print_color $YELLOW "Removing configuration files..."
-config_items=(
-    ~/.config/ags
-    ~/.config/hypr
-    ~/.config/waybar
-    ~/.config/wofi
-    ~/.config/dunst
-    ~/.config/swappy
-    ~/.config/wlogout
-    ~/.config/kitty
-    ~/.config/rofi
-    ~/.config/gtk-3.0
-    ~/.config/gtk-4.0
-    ~/.config/xdg-desktop-portal-hyprland
-    ~/.config/btop
-    ~/.config/cava
-    ~/.config/Thunar
-    ~/.config/xfce4
-    ~/.config/wallust
-    ~/.zshrc
-    ~/.p10k.zsh
-    /etc/environment.d/hyprland.conf
+# Define the list of packages to choose from (with options_command tags)
+packages=(
+    "btop" "resource monitor" "off"
+    "brightnessctl" "brightnessctl" "off"
+    "cava" "Cross-platform Audio Visualizer" "off"
+    "cliphist" "clipboard manager" "off"
+    "fastfetch" "fastfetch" "off"
+    "ffmpegthumbnailer" "FFmpeg Thumbnailer" "off"
+    "grim" "screenshot tool" "off"
+    "ImageMagick" "Image manipulation tool" "off"
+    "kitty" "kitty-terminal" "off"
+    "kvantum" "QT apps theming" "off"
+    "mousepad" "simple text editor" "off"
+    "mpv" "multi-media player" "off"
+    "mpv-mpris" "mpv-plugin" "off"
+    "network-manager-applet" "network-manager-applet" "off"
+    "nvtop" "gpu resource monitor" "off"
+    "nwg-displays" "display monitor configuration app" "off"
+    "nwg-look" "gtk settings app" "off"
+    "pamixer" "pamixer" "off"
+    "pavucontrol" "pavucontrol" "off"
+    "playerctl" "playerctl" "off"
+    "pyprland" "pyprland" "off"
+    "qalculate-gtk" "calculater - QT" "off"
+    "qt5ct" "qt5ct" "off"
+    "qt6ct" "qt6ct" "off"
+    "rofi-wayland" "rofi-wayland" "off"
+    "slurp" "screenshot tool" "off"
+    "swappy" "screenshot tool" "off"
+    "SwayNotificationCenter" "notification agent" "off"
+    "swww" "wallpaper engine" "off"
+    "Thunar" "File Manager" "off"
+    "thunar-archive-plugin" "Archive Plugin" "off"
+    "thunar-volman" "Volume Management" "off"
+    "tumbler" "Thumbnail Service" "off"
+    "wallust" "color pallete generator" "off"
+    "waybar" "wayland bar" "off"
+    "wl-clipboard" "clipboard manager" "off"
+    "wlogout" "logout menu" "off"
+    "xdg-desktop-portal-hyprland" "hyprland file picker" "off"
+    "yad" "dialog box" "off"
+    "yt-dlp" "video downloader" "off"
+    "xarchiver" "Archive Manager" "off"
+    "hypridle" "hyprland idling agent" "off"
+    "hyprlock" "lockscreen" "off"
+    "hyprpolkitagent" "hyprland polkit agent" "off"
+    "hyprland" "hyprland main package" "off"
 )
 
-for item in "${config_items[@]}"; do
-    ask_before_remove "$item"
+# Define the list of directories to choose from (with options_command tags)
+directories=(
+    "ags" "AGS desktop overview configuration" "off"
+    "btop" "btop configuration" "off"
+    "cava" "cava configuration" "off"
+    "fastfetch" "fastfetch configuration" "off"
+    "hypr" "main hyprland configuration" "off"
+    "kitty" "kitty terminal configuration" "off"
+    "Kvantum" "Kvantum-manager configuration" "off"
+    "qt5ct" "qt5ct configuration" "off"
+    "qt6ct" "qt6ct configuration" "off"
+    "rofi" "rofi configuration" "off"
+    "swappy" "swappy (screenshot tool) configuration" "off"
+    "swaync" "swaync (notification agent) configuration" "off"
+    "Thunar" "Thunar file manager configuration" "off"
+    "wallust" "wallust (color pallete) configuration" "off"
+    "waybar" "waybar configuration" "off"
+    "wlogout" "wlogout (logout menu) configuration" "off"    
+)
+
+# Loop for package selection until user selects something or cancels
+while true; do
+    package_choices=$(whiptail --title "Select Packages to Uninstall" --checklist \
+    "Select the packages you want to remove\nNOTE: 'SPACEBAR' to select & 'TAB' key to change selection" 35 90 25 \
+    "${packages[@]}" 3>&1 1>&2 2>&3)
+
+    # Check if the user canceled the operation
+    if [ $? -eq 1 ]; then
+        echo "$INFO uninstall process canceled."
+        exit 0
+    fi
+
+    # If no packages are selected, ask again
+    if [[ -z "$package_choices" ]]; then
+        echo "$NOTE No packages selected. Please select at least one package."
+    else
+        echo "$package_choices" | tr -d '"' | tr ' ' '\n' > /tmp/selected_packages.txt
+        echo "Packages to remove: $package_choices"
+        break
+    fi
 done
 
-# Ask about wallpaper collection
-ask_before_remove ~/Pictures/wallpapers
+# Loop for directory selection until user selects something or cancels
+while true; do
+    dir_choices=$(whiptail --title "Select Directories to Remove" --checklist \
+    "Select the directories you want to remove\nNOTE: This will remove configs from ~/.config\n\nNOTE: 'SPACEBAR' to select & 'TAB' key to change selection" 28 90 18 \
+    "${directories[@]}" 3>&1 1>&2 2>&3)
 
-# Remove Fedora-Hyprland directory
-ask_before_remove ~/Fedora-Hyprland
+    # Check if the user canceled the operation
+    if [ $? -eq 1 ]; then
+        echo "$INFO uninstall process canceled."
+        exit 0
+    fi
 
-# Remove nwg-look (installed from source)
-print_color $YELLOW "Removing nwg-look..."
-if [ -d ~/nwg-look ]; then
-    cd ~/nwg-look
-    if [ -f Makefile ]; then
-        sudo make uninstall
+    # If no directories are selected, ask again
+    if [[ -z "$dir_choices" ]]; then
+        echo "$NOTE No directories selected. Please select at least one directory."
+    else
+        # Save each selected directory to a new line in the temporary file
+        echo "$dir_choices" | tr -d '"' | tr ' ' '\n' > /tmp/selected_directories.txt
+        echo "Directories to remove: $dir_choices"
+        break
     fi
-    cd ~
-    safe_remove_item ~/nwg-look
-    
-    # Remove binary if it exists
-    if [ -f /usr/local/bin/nwg-look ]; then
-        sudo rm /usr/local/bin/nwg-look
-    fi
-    
-    print_color $GREEN "Removed nwg-look."
-else
-    print_color $YELLOW "nwg-look directory not found, skipping."
+done
+
+# First confirmation - Warning about potential instability
+if ! whiptail --title "Warning" --yesno \
+"Warning: Removing these packages and directories may cause your system to become unstable and you may not be able to recover it.\n\nAre you sure you want to proceed?" \
+10 80; then
+    echo "$INFO uninstall process canceled."
+    exit 0
 fi
 
-# Ask before removing Oh My Zsh
-if [ -d ~/.oh-my-zsh ]; then
-    ask_before_remove ~/.oh-my-zsh
+# Second confirmation - Final confirmation to proceed
+if ! whiptail --title "Final Confirmation" --yesno \
+"Are you absolutely sure you want to remove the selected packages and directories?\n\nWARNING! This action is irreversible." \
+10 80; then
+    echo "$INFO uninstall process canceled."
+    exit 0
 fi
 
-# Clean up any leftover dependencies
-print_color $YELLOW "Cleaning up leftover dependencies..."
-sudo dnf autoremove -y
+printf "\n%.0s" {1..1}
+printf "\n%s${SKY_BLUE}Attempting to remove selected packages${RESET}\n" "${NOTE}"
+MAX_ATTEMPTS=2
+ATTEMPT=0
 
-print_color $GREEN "Hyprland and related components have been uninstalled."
-print_color $YELLOW "It's recommended to reboot your system now."
-print_color $CYAN "To reset to the default Fedora desktop environment, run:"
-print_color $CYAN "sudo dnf group install @workstation-product-environment"
+while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
+    # Remove packages
+    remove_packages /tmp/selected_packages.txt
 
-# Final ASCII Art
-print_color $MAGENTA "
+    # Check if any packages still need to be removed, retry if needed
+    MISSING_PACKAGE_COUNT=0
+    while read -r package; do
+        if dnf list installed "$package" &> /dev/null; then
+            MISSING_PACKAGE_COUNT=$((MISSING_PACKAGE_COUNT + 1))
+        fi
+    done < /tmp/selected_packages.txt
 
-THANK YOU FOR USING THIS AMAZING HYPRLAND CONFIG IN FIRST PLACE!  
+    if [ $MISSING_PACKAGE_COUNT -gt 0 ]; then
+        ATTEMPT=$((ATTEMPT + 1))
+        echo "Attempt #$ATTEMPT failed, retrying..."
+    else
+        break
+    fi
+done
 
+printf "\n%.0s" {1..1}
+printf "\n%s${SKY_BLUE}Attempting to remove locally installed packages${RESET}\n" "${NOTE}"
+for file in ags; do
+    if [ -f "/usr/local/bin/$file" ]; then
+        sudo rm "/usr/local/bin/$file"
+        echo "$file removed."
+    fi
+done
 
-"
+printf "\n%.0s" {1..1}
+printf "\n%s${SKY_BLUE}Attempting to remove selected directories${RESET}\n" "${NOTE}"
+remove_directories /tmp/selected_directories.txt
 
-print_centered "Made by vdcds" $CYAN
+# Remove COPR repositories
+printf "\n%.0s" {1..1}
+printf "\n%s ${INFO} Removing COPR repositories..."
+COPR_REPOS=(
+  solopasha/hyprland
+  erikreider/SwayNotificationCenter
+  errornointernet/packages
+  tofik/nwg-shell 
+)
+remove_copr "${COPR_REPOS[@]}" 
+
+printf "\n%.0s" {1..1}
+echo -e "$MAGENTA Hyprland and related components have been uninstalled.$RESET"
+echo -e "$YELLOW It is recommended to reboot your system now.$RESET"
+printf "\n%.0s" {1..1}
