@@ -49,13 +49,13 @@ for ((ATTEMPT = 1; ATTEMPT <= MAX_ATTEMPTS; ATTEMPT++)); do
     sleep 2
 done
 
-# Check if the JetBrainsMono folder exists and delete it if it does
+# Check if the JetBrainsMono directory exists and delete it if it does
 if [ -d ~/.local/share/fonts/JetBrainsMonoNerd ]; then
     rm -rf ~/.local/share/fonts/JetBrainsMonoNerd 2>&1 | tee -a "$LOG"
 fi
 
 mkdir -p ~/.local/share/fonts/JetBrainsMonoNerd 2>&1 | tee -a "$LOG"
-# Extract the new files into the JetBrainsMono folder and log the output
+# Extract the new files into the JetBrainsMono directory and log the output
 tar -xJkf JetBrainsMono.tar.xz -C ~/.local/share/fonts/JetBrainsMonoNerd 2>&1 | tee -a "$LOG"
 
 # clean up 

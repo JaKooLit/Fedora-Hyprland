@@ -156,7 +156,7 @@ source ~/.zshrc
 - for the Pre-configured Hyprland dots / configuration, submit issue [`here`](https://github.com/JaKooLit/Hyprland-Dots/issues)
 
 #### 🔧 Proper way to re-installing a particular script from install-scripts directory
-- CD into Fedora-Hyprland Folder and then ran the below command. 
+- CD into Fedora-Hyprland directory and then ran the below command. 
 - i.e. `./install-scripts/gtk-themes.sh` - For reinstall GTK Themes or
 - `./install-scripts/sddm.sh` - For reinstall sddm
 > [!IMPORTANT]
