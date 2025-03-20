@@ -14,6 +14,7 @@ Extra=(
 hypr_package=(
   bc
   curl
+  findutils
   gawk
   git
   grim
