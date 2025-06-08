@@ -97,14 +97,13 @@ https://github.com/user-attachments/assets/49bc12b2-abaf-45de-a21c-67aacd9bb872
 > If you want to use nouveau driver, dont choose nvidia in the option. This is because the nvidia installer part, it will blacklist nouveau. Hyprland will still be installed but it will skip blacklisting nouveau.
 
 ## ✨ Auto clone and install
+> [!CAUTION] 
+> If you are using FISH SHELL, DO NOT use this function. Clone and ran install.sh instead
+
 - you can use this command to automatically clone the installer and ran the script for you
 - NOTE: `curl` package is required before running this command
 ```bash
 sh <(curl -L https://raw.githubusercontent.com/JaKooLit/Fedora-Hyprland/main/auto-install.sh)
-```
-- if you are using say fish or a non-POSIX compliant
-```bash
-curl -sL https://raw.githubusercontent.com/JaKooLit/Fedora-Hyprland/main/auto-install.sh | bash
 ```
 
 ## ✨ to use this script
@@ -211,10 +210,13 @@ env = WLR_RENDERER_ALLOW_SOFTWARE,1
 - join my discord channel [`Discord`](https://discord.com/invite/kool-tech-world)
 - Feel free to copy, re-distribute, and use this script however you want. Would appreciate if you give me some loves by crediting my work :)
 
-#### ⏩ Contributing
+
+#### ✍️ Contributing
 - As stated above, these script does not contain actual config files. These are only the installer of packages
-- The development branch of this script is pulling the latest "stable" releases of the Hyprland-Dotfiles.
-- If you want to contribute and/or test the Hyprland-Dotfiles (development branch), [`Hyprland-Dots-Development`](https://github.com/JaKooLit/Hyprland-Dots/tree/development) 
+- If you want to contribute and/or test the Hyprland-Dotfiles (development branch), [`Hyprland-Dots-Development`](https://github.com/JaKooLit/Hyprland-Dots/tree/development)
+- Want to contribute on KooL-Hyprland-Dots Click [`HERE`](https://github.com/JaKooLit/Hyprland-Dots/blob/main/CONTRIBUTING.md) for a guide how to contribute
+- Want to contribute on This Installer? Click [`HERE`](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/CONTRIBUTING.md) for a guide how to contribute 
+
 
 #### 👍👍👍 Thanks and Credits!
 - [`Hyprland`](https://hyprland.org/) Of course to Hyprland and @vaxerski for this awesome Dynamic Tiling Manager.
