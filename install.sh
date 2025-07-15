@@ -1,5 +1,6 @@
 #!/bin/bash
-# https://github.com/JaKooLit
+# HyprFedora Setup Script
+# Based on JaKooLit's Fedora-Hyprland: https://github.com/JaKooLit/Fedora-Hyprland
 
 clear
 
@@ -45,6 +46,7 @@ clear
 
 printf "\n%.0s" {1..2}  
 echo -e "\e[35m
+        HyprFedora based on
 	╦╔═┌─┐┌─┐╦    ╦ ╦┬ ┬┌─┐┬─┐┬  ┌─┐┌┐┌┌┬┐
 	╠╩╗│ ││ │║    ╠═╣└┬┘├─┘├┬┘│  ├─┤│││ ││ 2025
 	╩ ╩└─┘└─┘╩═╝  ╩ ╩ ┴ ┴  ┴└─┴─┘┴ ┴┘└┘─┴┘ Fedora Linux
@@ -52,9 +54,11 @@ echo -e "\e[35m
 printf "\n%.0s" {1..1} 
 
 # Welcome message using whiptail (for displaying information)
-whiptail --title "KooL Fedora-Hyprland (2025) Install Script" \
-    --msgbox "Welcome to KooL Fedora-Hyprland (2025) Install Script!!!\n\n\
-ATTENTION: Run a full system update and Reboot first !!! (Highly Recommended)\n\n\
+whiptail --title "HyprFedora (2025) Install Script" \
+    --msgbox "Welcome to HyprFedora based on KooL Fedora-Hyprland (2025)!\n\n\
+ATTENTION:\n\
+This script is intended to run on a fresh install of Fedora.\n\
+Run a full system update and Reboot first !!! (Highly Recommended)\n\n\
 NOTE: If you are installing on a VM, ensure to enable 3D acceleration else Hyprland may NOT start!" \
     15 80
 
@@ -67,7 +71,7 @@ if ! whiptail --title "Proceed with Installation?" \
     exit 1
 fi
 
-echo "👌 ${OK} 🇵🇭 ${MAGENTA}KooL..${RESET} ${SKY_BLUE}lets continue with the installation...${RESET}" | tee -a "$LOG"
+echo "👌 ${OK} ${MAGENTA}KooL..${RESET} ${SKY_BLUE}lets continue with the installation...${RESET}" | tee -a "$LOG"
 
 sleep 1
 printf "\n%.0s" {1..1}
@@ -100,18 +104,12 @@ execute_script() {
 
 #################
 ## Default values for the options (will be overwritten by preset file if available)
-gtk_themes="OFF"
-bluetooth="OFF"
-thunar="OFF"
-ags="OFF"
-sddm="OFF"
-sddm_theme="OFF"
-xdph="OFF"
-zsh="OFF"
+sddm="ON"
+sddm_theme="ON"
 pokemon="OFF"
 rog="OFF"
-dots="OFF"
-input_group="OFF"
+hyperfedora_dots="ON"
+hyprland-dots="OFF"
 nvidia="OFF"
 
 # Function to load preset file
@@ -165,7 +163,7 @@ fi
 
 # Initialize the options array for whiptail checklist
 options_command=(
-    whiptail --title "Select Options" --checklist "Choose options to install or configure\nNOTE: 'SPACEBAR' to select & 'TAB' key to change selection" 28 85 20
+    whiptail --title "Select Options" --checklist "Choose options to install or configure\nNOTE: 'SPACEBAR' to select & 'TAB' key to change selection\nATTENTION: Select only 1 dots option. HyprFedora dots or Kool dots by JaKooLit" 25 85 10
 )
 
 # Add NVIDIA options if detected
@@ -175,39 +173,20 @@ if [ "$nvidia_detected" == "true" ]; then
     )
 fi
 
-# Check if user is already in the 'input' group
-input_group_detected=false
-if ! groups "$(whoami)" | grep -q '\binput\b'; then
-    input_group_detected=true
-    whiptail --title "Input Group" --msgbox "You are not currently in the input group.\n\nAdding you to the input group might be necessary for the Waybar keyboard-state functionality." 12 60
-fi
-
-# Add 'input_group' option if necessary
-if [ "$input_group_detected" == "true" ]; then
-    options_command+=(
-        "input_group" "Add your USER to input group for some waybar functionality?" "OFF"
-    )
-fi
-
 # Conditionally add SDDM and SDDM theme options if no active login manager is found
 if ! check_services_running; then
     options_command+=(
-        "sddm" "Install & configure SDDM login manager?" "OFF"
-        "sddm_theme" "Download & Install Additional SDDM theme?" "OFF"
+        "sddm" "Install & configure SDDM login manager?" "ON"
+        "sddm_theme" "Download & Install Additional SDDM theme?" "ON"
     )
 fi
 
 # Add the remaining static options
 options_command+=(
-    "gtk_themes" "Install GTK themes (required for Dark/Light function)" "OFF"
-    "bluetooth" "Do you want script to configure Bluetooth?" "OFF"
-    "thunar" "Do you want Thunar file manager to be installed?" "OFF"
-    "ags" "Install AGS v1 for Desktop-Like Overview" "OFF"
-    "xdph" "Install XDG-DESKTOP-PORTAL-HYPRLAND (for screen share)?" "OFF"
-    "zsh" "Install zsh shell with Oh-My-Zsh?" "OFF"
     "pokemon" "Add Pokemon color scripts to your terminal?" "OFF"
     "rog" "Are you installing on Asus ROG laptops?" "OFF"
-    "dots" "Download and install pre-configured KooL Hyprland dotfiles?" "OFF"
+    "hyperfedora_dots" "Download and install pre-configured HyprFedora dots?" "ON"
+    "hyprland-dots" "Download and install pre-configured KooL Hyprland dotfiles?" "OFF"
 )
 
 # Capture the selected options before the while loop starts
@@ -233,20 +212,30 @@ while true; do
     # Convert selected options into an array (preserving spaces in values)
     IFS=' ' read -r -a options <<< "$selected_options"
 
-    # Check if the "dots" option was selected
-    dots_selected="OFF"
+    # Check if a "dots" option was selected
+    hyperfedora_selected="OFF"
+    hyprland_jakoolit_selected="OFF"
     for option in "${options[@]}"; do
-        if [[ "$option" == "dots" ]]; then
-            dots_selected="ON"
-            break
-        fi
+        case "$option" in
+            "hyperfedora_dots")
+                hyperfedora_selected="ON"
+                ;;
+            "hyprland-dots")
+                hyprland_jakoolit_selected="ON"
+                ;;
+        esac
     done
 
-    # If "dots" is not selected, show a note and ask the user to proceed or return to choices
-    if [[ "$dots_selected" == "OFF" ]]; then
+    # Check for mutually exclusive or missing selection of dotfiles
+    if [[ "$hyperfedora_selected" == "ON" && "$hyprland_jakoolit_selected" == "ON" ]]; then
+        whiptail --title "Dotfiles Selection Error" --msgbox \
+        "You have selected BOTH dotfile options.\nPlease select only ONE:\n- HyprFedora dotfiles\n- Hyprland-Dots by JaKooLit" 12 70
+        echo "⚠️ You selected both dotfiles — returning to selection menu." | tee -a "$LOG"
+        continue
+    elif [[ "$hyperfedora_selected" == "OFF" && "$hyprland_jakoolit_selected" == "OFF" ]]; then
         # Show a note about not selecting the "dots" option
         if ! whiptail --title "KooL Hyprland Dot Files" --yesno \
-        "You have not selected to install the pre-configured KooL Hyprland dotfiles.\n\nKindly NOTE that if you proceed without Dots, Hyprland will start with default vanilla Hyprland configuration and I won't be able to give you support.\n\nWould you like to continue install without KooL Hyprland Dots or return to choices/options?" \
+        "You have not selected to install the pre-configured dotfiles.\n\nNOTE that if you proceed without Dots, Hyprland will start with default vanilla Hyprland configuration.\n\nWould you like to continue install without pre-configured dotfiles or return to choices/options?" \
         --yes-button "Continue" --no-button "Return" 15 90; then
             echo "🔙 Returning to options..." | tee -a "$LOG"
             continue
@@ -293,6 +282,40 @@ echo "${INFO} Installing ${SKY_BLUE}Hyprland...${RESET}" | tee -a "$LOG"
 sleep 1
 execute_script "hyprland.sh"
 
+
+
+echo "${INFO} Installing ${SKY_BLUE}GTK themes...${RESET}" | tee -a "$LOG"
+execute_script "gtk_themes.sh"
+
+# Check if user is already in the 'input' group
+input_group_detected=false
+if ! groups "$(whoami)" | grep -q '\binput\b'; then
+    input_group_detected=true
+    whiptail --title "Input Group" --msgbox "You are not currently in the input group.\n\nAdding you to the input group might be necessary for the Waybar keyboard-state functionality." 12 60
+fi
+
+# Add 'input_group' option if necessary
+if [ "$input_group_detected" == "true" ]; then
+    echo "${INFO} Adding user into ${SKY_BLUE}input group...${RESET}" | tee -a "$LOG"
+    execute_script "InputGroup.sh"
+fi
+
+echo "${INFO} Installing ${SKY_BLUE}AGS v1 for Desktop Overview...${RESET}" | tee -a "$LOG"
+execute_script "ags.sh"
+
+echo "${INFO} Installing ${SKY_BLUE}xdg-desktop-portal-hyprland...${RESET}" | tee -a "$LOG"
+execute_script "xdph.sh"
+
+echo "${INFO} Configuring ${SKY_BLUE}Bluetooth...${RESET}" | tee -a "$LOG"
+execute_script "bluetooth.sh"
+
+echo "${INFO} Installing ${SKY_BLUE}Thunar file manager...${RESET}" | tee -a "$LOG"
+execute_script "thunar.sh"
+execute_script "thunar_default.sh"
+
+echo "${INFO} Installing ${SKY_BLUE}zsh with Oh-My-Zsh...${RESET}" | tee -a "$LOG"
+execute_script "zsh.sh"
+
 # Clean up the selected options (remove quotes and trim spaces)
 selected_options=$(echo "$selected_options" | tr -d '"' | tr -s ' ')
 
@@ -316,38 +339,9 @@ for option in "${options[@]}"; do
             echo "${INFO} Configuring ${SKY_BLUE}nvidia stuff${RESET}" | tee -a "$LOG"
             execute_script "nvidia.sh"
             ;;
-        gtk_themes)
-            echo "${INFO} Installing ${SKY_BLUE}GTK themes...${RESET}" | tee -a "$LOG"
-            execute_script "gtk_themes.sh"
-            ;;
-        input_group)
-            echo "${INFO} Adding user into ${SKY_BLUE}input group...${RESET}" | tee -a "$LOG"
-            execute_script "InputGroup.sh"
-            ;;
-        ags)
-            echo "${INFO} Installing ${SKY_BLUE}AGS v1 for Desktop Overview...${RESET}" | tee -a "$LOG"
-            execute_script "ags.sh"
-            ;;
-        xdph)
-            echo "${INFO} Installing ${SKY_BLUE}xdg-desktop-portal-hyprland...${RESET}" | tee -a "$LOG"
-            execute_script "xdph.sh"
-            ;;
-        bluetooth)
-            echo "${INFO} Configuring ${SKY_BLUE}Bluetooth...${RESET}" | tee -a "$LOG"
-            execute_script "bluetooth.sh"
-            ;;
-        thunar)
-            echo "${INFO} Installing ${SKY_BLUE}Thunar file manager...${RESET}" | tee -a "$LOG"
-            execute_script "thunar.sh"
-            execute_script "thunar_default.sh"
-            ;;
         sddm_theme)
             echo "${INFO} Downloading & Installing ${SKY_BLUE}Additional SDDM theme...${RESET}" | tee -a "$LOG"
             execute_script "sddm_theme.sh"
-            ;;
-        zsh)
-            echo "${INFO} Installing ${SKY_BLUE}zsh with Oh-My-Zsh...${RESET}" | tee -a "$LOG"
-            execute_script "zsh.sh"
             ;;
         pokemon)
             echo "${INFO} Adding ${SKY_BLUE}Pokemon color scripts to terminal...${RESET}" | tee -a "$LOG"
@@ -357,9 +351,13 @@ for option in "${options[@]}"; do
             echo "${INFO} Installing ${SKY_BLUE}ROG laptop packages...${RESET}" | tee -a "$LOG"
             execute_script "rog.sh"
             ;;
-        dots)
+        hyperfedora_dots)
+            echo "${INFO} Installing pre-configured ${SKY_BLUE}HyprFedora dotfiles...${RESET}" | tee -a "$LOG"
+            execute_script "hyperfedora-dotfiles-main.sh"
+            ;;
+        hyprland-dots)
             echo "${INFO} Installing pre-configured ${SKY_BLUE}KooL Hyprland dotfiles...${RESET}" | tee -a "$LOG"
-            execute_script "dotfiles-main.sh"
+            execute_script "kool-dotfiles-main.sh"
             ;;
         *)
             echo "Unknown option: $option" | tee -a "$LOG"
@@ -398,7 +396,7 @@ if rpm -q hyprland &> /dev/null || rpm -q hyprland-git &> /dev/null; then
     sleep 2
     printf "\n%.0s" {1..2}
 
-    printf "${SKY_BLUE}Thank you${RESET} 🫰 for using 🇵🇭 ${MAGENTA}KooL's Hyprland Dots${RESET}. ${YELLOW}Enjoy and Have a good day!${RESET}"
+    printf "${SKY_BLUE}Thank you${RESET} 🫰 for using ${MAGENTA}KooL's Hyprland Dots${RESET}. ${YELLOW}Enjoy and Have a good day!${RESET}"
     printf "\n%.0s" {1..2}
 
     printf "\n${NOTE} You can start Hyprland by typing ${SKY_BLUE}Hyprland${RESET} (IF SDDM is not installed) (note the capital H!).\n"
