@@ -14,6 +14,7 @@ COPR_REPOS=(
   erikreider/SwayNotificationCenter
   errornointernet/packages
   tofik/nwg-shell 
+  scottames/ghostty # HyprFedora
 )
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
