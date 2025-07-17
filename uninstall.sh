@@ -120,9 +120,9 @@ packages=(
     "playerctl" "playerctl" "off"
     "pyprland" "pyprland" "off"
     "qalculate-gtk" "calculator - QT" "off"
-    "quickshell" "quickshell" "off"
     "qt5ct" "qt5ct" "off"
     "qt6ct" "qt6ct" "off"
+    "quickshell" "quickshell" "off"
     "rofi-wayland" "rofi-wayland" "off"
     "slurp" "screenshot tool" "off"
     "swappy" "screenshot tool" "off"
@@ -155,6 +155,7 @@ directories=(
     "hypr" "main hyprland configuration" "off"
     "kitty" "kitty terminal configuration" "off"
     "Kvantum" "Kvantum-manager configuration" "off"
+    "quickshell" "quickshell configuration" "off"
     "qt5ct" "qt5ct configuration" "off"
     "qt6ct" "qt6ct configuration" "off"
     "rofi" "rofi configuration" "off"
@@ -272,7 +273,8 @@ COPR_REPOS=(
   solopasha/hyprland
   erikreider/SwayNotificationCenter
   errornointernet/packages
-  tofik/nwg-shell 
+  tofik/nwg-shell
+  errornointernet/quickshell 
 )
 remove_copr "${COPR_REPOS[@]}" 
 
