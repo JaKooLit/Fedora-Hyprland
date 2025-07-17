@@ -119,7 +119,8 @@ packages=(
     "pavucontrol" "pavucontrol" "off"
     "playerctl" "playerctl" "off"
     "pyprland" "pyprland" "off"
-    "qalculate-gtk" "calculater - QT" "off"
+    "qalculate-gtk" "calculator - QT" "off"
+    "quickshell" "quickshell" "off"
     "qt5ct" "qt5ct" "off"
     "qt6ct" "qt6ct" "off"
     "rofi-wayland" "rofi-wayland" "off"
@@ -147,7 +148,7 @@ packages=(
 
 # Define the list of directories to choose from (with options_command tags)
 directories=(
-    "ags" "AGS desktop overview configuration" "off"
+    "quickshell" "QUICKSHELL desktop overview configuration" "off"
     "btop" "btop configuration" "off"
     "cava" "cava configuration" "off"
     "fastfetch" "fastfetch configuration" "off"

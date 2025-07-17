@@ -1,5 +1,8 @@
 ## CHANGELOGS
 
+## 17 July 2025
+- Added quickshell.sh for installing quickshell for desktop overview (replacing ags with quickshell)
+
 ## 08 June 2025
 - updated SDDM theme. 
 
