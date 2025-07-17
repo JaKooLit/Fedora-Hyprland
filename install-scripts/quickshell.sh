@@ -41,4 +41,7 @@ for pkg in "${quick[@]}"; do
     install_package "$pkg" "$LOG"
 done
 
+# starting quickshell so KooL Hyprland Dots Quickshell config can be copied
+qs || true
+
 printf "\n%.0s" {1..1}
