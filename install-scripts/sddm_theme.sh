@@ -52,7 +52,6 @@ if git clone --depth=1 "$source_theme" "$theme_name"; then
   # Move cloned theme to the themes directory
   sudo mv "$theme_name" "/usr/share/sddm/themes/$theme_name" 2>&1 | tee -a "$LOG"
 
-
   # setting up SDDM theme
   sddm_conf="/etc/sddm.conf"
   BACKUP_SUFFIX=".bak"
@@ -86,10 +85,25 @@ if git clone --depth=1 "$source_theme" "$theme_name"; then
     echo "Added [Theme] section with Current=$theme_name in $sddm_conf" | tee -a "$LOG"
   fi
 
+  # Add [General] section with InputMethod=qtvirtualkeyboard if it doesn't exist
+  if ! grep -q '^\[General\]' "$sddm_conf"; then
+    echo -e "\n[General]\nInputMethod=qtvirtualkeyboard" | sudo tee -a "$sddm_conf" > /dev/null
+    echo "Added [General] section with InputMethod=qtvirtualkeyboard in $sddm_conf" | tee -a "$LOG"
+  else
+    # Update InputMethod line if section exists
+    if grep -q '^\s*InputMethod=' "$sddm_conf"; then
+      sudo sed -i '/^\[General\]/,/^\[/{s/^\s*InputMethod=.*/InputMethod=qtvirtualkeyboard/}' "$sddm_conf" 2>&1 | tee -a "$LOG"
+      echo "Updated InputMethod to qtvirtualkeyboard in $sddm_conf" | tee -a "$LOG"
+    else
+      sudo sed -i '/^\[General\]/a InputMethod=qtvirtualkeyboard' "$sddm_conf" 2>&1 | tee -a "$LOG"
+      echo "Appended InputMethod=qtvirtualkeyboard under [General] in $sddm_conf" | tee -a "$LOG"
+    fi
+  fi
+
   # Replace current background from assets
   sudo cp -r assets/sddm.png "/usr/share/sddm/themes/$theme_name/Backgrounds/default" 2>&1 | tee -a "$LOG"
   sudo sed -i 's|^wallpaper=".*"|wallpaper="Backgrounds/default"|' "/usr/share/sddm/themes/$theme_name/theme.conf" 2>&1 | tee -a "$LOG"
-
+  
   printf "\n%.0s" {1..1}
   printf "${NOTE} copying ${YELLOW}JetBrains Mono Nerd Font${RESET} to ${YELLOW}/usr/local/share/fonts${RESET} .......\n"
   printf "${NOTE} necessary for the new SDDM theme to work properly........\n"
@@ -107,7 +121,7 @@ if git clone --depth=1 "$source_theme" "$theme_name"; then
   fc-cache -v -f 2>&1 | tee -a "$LOG"
 
   printf "\n%.0s" {1..1}
-  
+
   echo "${OK} - ${MAGENTA}Additional SDDM Theme${RESET} successfully installed." | tee -a "$LOG"
 
 else

@@ -4,7 +4,8 @@
 
 sddm=(
 	sddm
-  qt6-qt5compat 
+  qt6-qtvirtualkeyboard
+  qt6-qtmultimedia
   qt6-qtdeclarative 
   qt6-qtsvg
 )
