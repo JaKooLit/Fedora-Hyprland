@@ -119,9 +119,10 @@ packages=(
     "pavucontrol" "pavucontrol" "off"
     "playerctl" "playerctl" "off"
     "pyprland" "pyprland" "off"
-    "qalculate-gtk" "calculater - QT" "off"
+    "qalculate-gtk" "calculator - QT" "off"
     "qt5ct" "qt5ct" "off"
     "qt6ct" "qt6ct" "off"
+    "quickshell" "quickshell" "off"
     "rofi-wayland" "rofi-wayland" "off"
     "slurp" "screenshot tool" "off"
     "swappy" "screenshot tool" "off"
@@ -147,13 +148,14 @@ packages=(
 
 # Define the list of directories to choose from (with options_command tags)
 directories=(
-    "ags" "AGS desktop overview configuration" "off"
+    "quickshell" "QUICKSHELL desktop overview configuration" "off"
     "btop" "btop configuration" "off"
     "cava" "cava configuration" "off"
     "fastfetch" "fastfetch configuration" "off"
     "hypr" "main hyprland configuration" "off"
     "kitty" "kitty terminal configuration" "off"
     "Kvantum" "Kvantum-manager configuration" "off"
+    "quickshell" "quickshell configuration" "off"
     "qt5ct" "qt5ct configuration" "off"
     "qt6ct" "qt6ct configuration" "off"
     "rofi" "rofi configuration" "off"
@@ -271,7 +273,8 @@ COPR_REPOS=(
   solopasha/hyprland
   erikreider/SwayNotificationCenter
   errornointernet/packages
-  tofik/nwg-shell 
+  tofik/nwg-shell
+  errornointernet/quickshell 
 )
 remove_copr "${COPR_REPOS[@]}" 
 
