@@ -18,9 +18,9 @@ SKY_BLUE="$(tput setaf 6)"
 RESET="$(tput sgr0)"
 
 # Variables
-Distro="Fedora-Hyprland"
-Github_URL="https://github.com/JaKooLit/$Distro.git"
-Distro_DIR="$HOME/$Distro"
+Distro="HyprFedora"
+Github_URL="https://github.com/francisco-cardenas/$Distro.git"
+Distro_DIR="~/.local/share/$Distro"
 
 printf "\n%.0s" {1..1}
 

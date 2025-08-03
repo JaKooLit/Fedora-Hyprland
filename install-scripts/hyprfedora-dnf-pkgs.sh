@@ -8,8 +8,6 @@ hyprfedora_package=(
   libreoffice
   chromium
   brave-browser
-  install gnome-software-plugin-flatpak 
-  gnome-software-plugin-rpm-ostree
   cups
   hplip
 )

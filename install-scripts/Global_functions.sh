@@ -78,7 +78,7 @@ install_flatpak() {
     echo -e "${INFO} ${MAGENTA}$app_id${RESET} is already installed. Skipping..."
   else
     (
-      stdbuf -oL flatpak install -y "$remote" "$app_id" 2>&1
+      stdbuf -oL sudo flatpak install -y "$remote" "$app_id" 2>&1
     ) >> "$LOG" 2>&1 &
     PID=$!
     show_progress $PID "$app_id"

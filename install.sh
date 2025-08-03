@@ -111,6 +111,8 @@ rog="OFF"
 hyperfedora_dots="ON"
 hyprland-dots="OFF"
 nvidia="OFF"
+git="ON"
+devpod="ON"
 
 # Function to load preset file
 load_preset() {
@@ -187,6 +189,8 @@ options_command+=(
     "rog" "Are you installing on Asus ROG laptops?" "OFF"
     "hyperfedora_dots" "Download and install pre-configured HyprFedora dots?" "ON"
     "hyprland-dots" "Download and install pre-configured KooL Hyprland dotfiles?" "OFF"
+    "git"    "Configure global Git settings" "ON"
+    "devpod" "Install and configure DevPod" "ON"
 )
 
 # Capture the selected options before the while loop starts
@@ -331,6 +335,20 @@ selected_options=$(echo "$selected_options" | tr -d '"' | tr -s ' ')
 # Convert selected options into an array (splitting by spaces)
 IFS=' ' read -r -a options <<< "$selected_options"
 
+# Ask for Git info if selected
+if [[ " ${options[*]} " =~ " git " ]]; then
+    GIT_NAME=$(whiptail --inputbox "Enter your full name for Git:" 8 60 --title "Git User Name" 3>&1 1>&2 2>&3)
+    GIT_EMAIL=$(whiptail --inputbox "Enter your email for Git:" 8 60 --title "Git Email" 3>&1 1>&2 2>&3)
+    export GIT_NAME GIT_EMAIL
+fi
+
+# Ask for dotfiles URL if devpod selected
+if [[ " ${options[*]} " =~ " devpod " ]]; then
+    dotfiles_url=$(whiptail --inputbox "Enter your dotfiles Git repo URL (optional):" 8 60 --title "Dotfiles URL" 3>&1 1>&2 2>&3)
+    export dotfiles_url
+fi
+
+
 # Loop through selected options
 for option in "${options[@]}"; do
     case "$option" in
@@ -368,6 +386,12 @@ for option in "${options[@]}"; do
             echo "${INFO} Installing pre-configured ${SKY_BLUE}KooL Hyprland dotfiles...${RESET}" | tee -a "$LOG"
             execute_script "kool-dotfiles-main.sh"
             ;;
+	git)
+	    execute_script "hyprfedora-setup-git.sh" 
+	    ;;
+	devpod) 
+	    execute_script "hyprfedora-setup-devpod.sh"
+	    ;;
         *)
             echo "Unknown option: $option" | tee -a "$LOG"
             ;;

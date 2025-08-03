@@ -3,7 +3,6 @@
 
 # packages neeeded
 docker_packages=(
-  install
   docker-ce
   docker-ce-cli
   containerd.io
