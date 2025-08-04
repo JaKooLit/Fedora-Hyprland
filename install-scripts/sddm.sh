@@ -7,6 +7,7 @@ sddm=(
   qt6-qt5compat 
   qt6-qtdeclarative 
   qt6-qtsvg
+  qt6-qtmultimedia
 )
 
 # login managers to attempt to disable

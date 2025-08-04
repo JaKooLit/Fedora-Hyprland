@@ -108,7 +108,7 @@ sddm="ON"
 sddm_theme="ON"
 pokemon="OFF"
 rog="OFF"
-hyperfedora_dots="ON"
+hyprfedora_dots="ON"
 hyprland-dots="OFF"
 nvidia="OFF"
 git="ON"
@@ -187,7 +187,7 @@ fi
 options_command+=(
     "pokemon" "Add Pokemon color scripts to your terminal?" "OFF"
     "rog" "Are you installing on Asus ROG laptops?" "OFF"
-    "hyperfedora_dots" "Download and install pre-configured HyprFedora dots?" "ON"
+    "hyprfedora_dots" "Download and install pre-configured HyprFedora dots?" "ON"
     "hyprland-dots" "Download and install pre-configured KooL Hyprland dotfiles?" "OFF"
     "git"    "Configure global Git settings" "ON"
     "devpod" "Install and configure DevPod" "ON"
@@ -217,12 +217,12 @@ while true; do
     IFS=' ' read -r -a options <<< "$selected_options"
 
     # Check if a "dots" option was selected
-    hyperfedora_selected="OFF"
+    hyprfedora_selected="OFF"
     hyprland_jakoolit_selected="OFF"
     for option in "${options[@]}"; do
         case "$option" in
-            "hyperfedora_dots")
-                hyperfedora_selected="ON"
+            "hyprfedora_dots")
+                hyprfedora_selected="ON"
                 ;;
             "hyprland-dots")
                 hyprland_jakoolit_selected="ON"
@@ -231,12 +231,12 @@ while true; do
     done
 
     # Check for mutually exclusive or missing selection of dotfiles
-    if [[ "$hyperfedora_selected" == "ON" && "$hyprland_jakoolit_selected" == "ON" ]]; then
+    if [[ "$hyprfedora_selected" == "ON" && "$hyprland_jakoolit_selected" == "ON" ]]; then
         whiptail --title "Dotfiles Selection Error" --msgbox \
         "You have selected BOTH dotfile options.\nPlease select only ONE:\n- HyprFedora dotfiles\n- Hyprland-Dots by JaKooLit" 12 70
         echo "⚠️ You selected both dotfiles — returning to selection menu." | tee -a "$LOG"
         continue
-    elif [[ "$hyperfedora_selected" == "OFF" && "$hyprland_jakoolit_selected" == "OFF" ]]; then
+    elif [[ "$hyprfedora_selected" == "OFF" && "$hyprland_jakoolit_selected" == "OFF" ]]; then
         # Show a note about not selecting the "dots" option
         if ! whiptail --title "KooL Hyprland Dot Files" --yesno \
         "You have not selected to install the pre-configured dotfiles.\n\nNOTE that if you proceed without Dots, Hyprland will start with default vanilla Hyprland configuration.\n\nWould you like to continue install without pre-configured dotfiles or return to choices/options?" \
@@ -378,20 +378,20 @@ for option in "${options[@]}"; do
             echo "${INFO} Installing ${SKY_BLUE}ROG laptop packages...${RESET}" | tee -a "$LOG"
             execute_script "rog.sh"
             ;;
-        hyperfedora_dots)
+        hyprfedora_dots)
             echo "${INFO} Installing pre-configured ${SKY_BLUE}HyprFedora dotfiles...${RESET}" | tee -a "$LOG"
-            execute_script "hyperfedora-dotfiles-main.sh"
+            execute_script "hyprfedora-dotfiles-main.sh"
             ;;
         hyprland-dots)
             echo "${INFO} Installing pre-configured ${SKY_BLUE}KooL Hyprland dotfiles...${RESET}" | tee -a "$LOG"
             execute_script "kool-dotfiles-main.sh"
             ;;
-	git)
-	    execute_script "hyprfedora-setup-git.sh" 
-	    ;;
-	devpod) 
-	    execute_script "hyprfedora-setup-devpod.sh"
-	    ;;
+	    git)
+	        execute_script "hyprfedora-setup-git.sh" 
+	        ;;
+	    devpod) 
+	        execute_script "hyprfedora-setup-devpod.sh"
+	        ;;
         *)
             echo "Unknown option: $option" | tee -a "$LOG"
             ;;
