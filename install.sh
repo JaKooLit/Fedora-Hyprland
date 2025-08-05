@@ -328,6 +328,7 @@ execute_script "hyprfedora-dnf-pkgs.sh"
 execute_script "hyprfedora-flatpak-pkgs.sh"
 execute_script "hyprfedora-webapps.sh"
 execute_script "hyprfedora-snapper.sh"
+execute_script "hyprfedora-plymouth.sh"
 
 # Clean up the selected options (remove quotes and trim spaces)
 selected_options=$(echo "$selected_options" | tr -d '"' | tr -s ' ')
