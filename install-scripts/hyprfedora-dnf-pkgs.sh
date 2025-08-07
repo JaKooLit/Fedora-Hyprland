@@ -10,6 +10,7 @@ hyprfedora_package=(
   brave-browser
   cups
   hplip
+  papirus-icon-theme
 )
 
 copr_packages=(

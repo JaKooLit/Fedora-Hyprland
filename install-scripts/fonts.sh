@@ -87,6 +87,14 @@ else
     echo -e "\n${ERROR} Failed to download ${YELLOW}Victor Mono Font${RESET} Please check your connection\n" | tee -a "$LOG"
 fi
 
+# Iosevka Nerd Font
+if $wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Iosevka.zip; then
+    mkdir -p "$HOME/.local/share/fonts/Iosevka" && unzip -o -q "Iosevka.zip" -d "$HOME/.local/share/fonts/Iosevka" && echo "Iosevka Font installed successfully" | tee -a "$LOG"
+else
+    echo -e "\n${ERROR} Failed to download ${YELLOW}Iosevka Mono Font${RESET} Please check your connection\n" | tee -a "$LOG"
+fi
+
+
 # Update font cache and log the output
 fc-cache -v 2>&1 | tee -a "$LOG"
 
