@@ -161,8 +161,9 @@ source ~/.zshrc
 > [!IMPORTANT]
 > DO NOT cd into install-scripts directory as script will most likely to fail
 
-#### 🛠️ Optional monitor scripts (usage and re-run)
-- These installer helpers will set up user-level services/timers and install required packages automatically.
+#### 🛠️ Optional system monitor scripts (cross-distro compatible)
+- These installer helpers will set up user-level services and install required packages automatically.
+- Works on Fedora, Arch, and other distributions using standard tools.
 - Re-run any time from the repo root (do not `cd` into `install-scripts`).
 
 - `./install-scripts/battery-monitor.sh`
@@ -181,13 +182,7 @@ source ~/.zshrc
   - Creates: `~/.config/hypr/scripts/temp-monitor.sh` and user service `temp-monitor.service`
   - Manage: `systemctl --user status|start|stop temp-monitor`
 
-- `./install-scripts/update-notifier.sh`
-  - Installs: `dnf5-plugin-automatic`, `libnotify`
-  - Creates: `~/.config/hypr/scripts/update-notifier.sh`, user service `update-notifier.service`, and `update-notifier.timer`
-  - Timer: checks for updates every 6 hours after boot
-  - Manage: `systemctl --user status update-notifier.timer` (enable/disable/start/stop)
-
-> Packages above are installed by the respective installer scripts; no manual action is required. If you prefer package pre-install via the main package list, ensure `acpi`, `lm_sensors`, `dnf5-plugin-automatic`, and `libnotify` are present in your setup.
+> Packages above are installed by the respective installer scripts; no manual action is required. If you prefer package pre-install via the main package list, ensure `acpi`, `lm_sensors`, and `libnotify` are present in your setup.
 
 #### 🛣️ Roadmap:
 - [ ] possibly adding gruvbox themes, cursors, icons
