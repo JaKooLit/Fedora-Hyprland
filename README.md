@@ -161,6 +161,34 @@ source ~/.zshrc
 > [!IMPORTANT]
 > DO NOT cd into install-scripts directory as script will most likely to fail
 
+#### 🛠️ Optional monitor scripts (usage and re-run)
+- These installer helpers will set up user-level services/timers and install required packages automatically.
+- Re-run any time from the repo root (do not `cd` into `install-scripts`).
+
+- `./install-scripts/battery-monitor.sh`
+  - Installs: `acpi`, `libnotify`
+  - Creates: `~/.config/hypr/scripts/battery-monitor.sh` and user service `battery-monitor.service`
+  - Manage: `systemctl --user status|start|stop battery-monitor`
+
+- `./install-scripts/disk-monitor.sh`
+  - Installs: `libnotify`
+  - Creates: `~/.config/hypr/scripts/disk-monitor.sh` and user service `disk-monitor.service`
+  - Manage: `systemctl --user status|start|stop disk-monitor`
+
+- `./install-scripts/temp-monitor.sh`
+  - Installs: `lm_sensors`, `libnotify`
+  - Detects sensors (runs `sudo sensors-detect --auto` once)
+  - Creates: `~/.config/hypr/scripts/temp-monitor.sh` and user service `temp-monitor.service`
+  - Manage: `systemctl --user status|start|stop temp-monitor`
+
+- `./install-scripts/update-notifier.sh`
+  - Installs: `dnf-automatic`, `libnotify`
+  - Creates: `~/.config/hypr/scripts/update-notifier.sh`, user service `update-notifier.service`, and `update-notifier.timer`
+  - Timer: checks for updates every 6 hours after boot
+  - Manage: `systemctl --user status update-notifier.timer` (enable/disable/start/stop)
+
+> Packages above are installed by the respective installer scripts; no manual action is required. If you prefer package pre-install via the main package list, ensure `acpi`, `lm_sensors`, `dnf-automatic`, and `libnotify` are present in your setup.
+
 #### 🛣️ Roadmap:
 - [ ] possibly adding gruvbox themes, cursors, icons
 
