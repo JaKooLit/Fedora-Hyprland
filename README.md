@@ -182,12 +182,12 @@ source ~/.zshrc
   - Manage: `systemctl --user status|start|stop temp-monitor`
 
 - `./install-scripts/update-notifier.sh`
-  - Installs: `dnf-automatic`, `libnotify`
+  - Installs: `dnf5-plugin-automatic`, `libnotify`
   - Creates: `~/.config/hypr/scripts/update-notifier.sh`, user service `update-notifier.service`, and `update-notifier.timer`
   - Timer: checks for updates every 6 hours after boot
   - Manage: `systemctl --user status update-notifier.timer` (enable/disable/start/stop)
 
-> Packages above are installed by the respective installer scripts; no manual action is required. If you prefer package pre-install via the main package list, ensure `acpi`, `lm_sensors`, `dnf-automatic`, and `libnotify` are present in your setup.
+> Packages above are installed by the respective installer scripts; no manual action is required. If you prefer package pre-install via the main package list, ensure `acpi`, `lm_sensors`, `dnf5-plugin-automatic`, and `libnotify` are present in your setup.
 
 #### 🛣️ Roadmap:
 - [ ] possibly adding gruvbox themes, cursors, icons

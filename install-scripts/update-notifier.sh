@@ -3,7 +3,7 @@
 # Package Update Notifier #
 
 update=(
-  dnf-automatic
+  dnf5-plugin-automatic
   libnotify
 )
 
