@@ -64,6 +64,7 @@ Thank you for your interest in contributing to Community Standards! We welcome a
   - [CONTRIBUTING.md](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/CONTRIBUTING.md) - Read this file to learn about the contributing guidelines.
   - [LICENSE](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/LICENSE.md) - Read this file to learn about the license.
   - [README.md](https://github.com/JaKooLit/Fedora-Hyprland/blob/main/README.md) - Read this file to learn about the project.
+  - No update readme
 
 ## Contact
 
