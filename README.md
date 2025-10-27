@@ -198,7 +198,7 @@ env = WLR_RENDERER_ALLOW_SOFTWARE,1
 
 - [ ] ROFI issues (scaling, unexplained scaling etc). This is most likely to experience if you are installing on a system where rofi is currently installed. To fix it uninstall rofi and install rofi-wayland . `sudo dnf autoremove rofi` . Install rofi-wayland with `sudo dnf install rofi-wayland`. Rofi-wayland is compatible with x11 so no need to worry.
 
-- [ ] If you use Brave or any Chrome based browsers, you may want to add```exec-once = gnome-keyring-daemon --start``` to `~/.config/hypr/UserConfigs/Startup_Apps.conf` if you don't want to get asked for your password each time you reboot your machine and want to access Brave. Obviously, you need to install gnome-keyring
+- [ ] If you use Brave or any Chrome based browser and don't want to get asked for your password each time you reboot your machine, you may want to add ```exec-once = gnome-keyring-daemon --start``` if on _gnome_ or ```exec-once = /usr/libexec/pam_kwallet_init``` if on _KDE_ to `~/.config/hypr/UserConfigs/Startup_Apps.conf`. Obviously, you need to install _gnome-keyring_ if on _gnome_.
 
 - [ ] If you want to have a Fedora minimal installation, suggest to install using Fedora Everything. See [`THIS`](https://github.com/JaKooLit/Fedora-Hyprland/discussions/171)
 
