@@ -66,9 +66,9 @@ printf "\n%.0s" {1..1}
 printf "${NOTE} Install and Compiling ${SKY_BLUE}Aylur's GTK shell $ags_tag${RESET}..\n"
 
 # Check if directory exists and remove it
-if [ -d "ags" ]; then
+if [ -d "ags_v1.9.0" ]; then
     printf "${NOTE} Removing existing ags directory...\n"
-    rm -rf "ags"
+    rm -rf "ags_v1.9.0"
 fi
 
 printf "\n%.0s" {1..1}
@@ -81,8 +81,43 @@ if git clone --depth=1 https://github.com/JaKooLit/ags_v1.9.0.git; then
     meson setup build
    if sudo meson install -C build 2>&1 | tee -a "$MLOG"; then
     printf "\n${OK} ${YELLOW}Aylur's GTK shell $ags_tag${RESET} installed successfully.\n" 2>&1 | tee -a "$MLOG"
+
+    # Patch installed AGS launchers to ensure GI typelibs in /usr/local/lib are discoverable in GJS ESM
+    printf "${NOTE} Applying AGS launcher patch for GI typelibs search path...\n"
+
+    patch_ags_launcher() {
+      local target="$1"
+      if ! sudo test -f "$target"; then
+        return 1
+      fi
+
+      # Replace GIRepository import with GLib and drop deprecated GIR repository path calls
+      sudo sed -i \
+        -e 's|^import GIR from \"gi://GIRepository?version=2.0\";$|import GLib from \"gi://GLib\";|' \
+        -e '/GIR.Repository.prepend_search_path/d' \
+        -e '/GIR.Repository.prepend_library_path/d' \
+        "$target"
+
+      # Inject GI_TYPELIB_PATH export right after the GLib import, if not already present
+      if ! sudo grep -q 'GLib.setenv(\"GI_TYPELIB_PATH\"' "$target"; then
+        sudo awk '{print} $0 ~ /^import GLib from \"gi:\/\/GLib\";$/ {print "const __old = GLib.getenv(\"GI_TYPELIB_PATH\");"; print "GLib.setenv(\"GI_TYPELIB_PATH\", \"/usr/local/lib\" + (__old ? \":\" + __old : \"\"), true);"}' "$target" | sudo tee "$target" >/dev/null
+      fi
+
+      printf "${OK} Patched: %s\n" "$target"
+      return 0
+    }
+
+    # Try common locations
+    for CAND in \
+      "/usr/local/share/com.github.Aylur.ags/com.github.Aylur.ags" \
+      "/usr/share/com.github.Aylur.ags/com.github.Aylur.ags" \
+      "/usr/local/bin/ags" \
+      "/usr/bin/ags"; do
+      patch_ags_launcher "$CAND" || true
+    done
+
   else
-    echo -e "\n${ERROR} ${YELLOW}Aylur's GTK shell $ags_tag${RESET} Installation failed\n " 2>&1 | tee -a "$MLOG"
+    echo -e "\n${ERROR} ${YELLOW} Aylur's GTK shell $ags_tag${RESET} Installation failed\n " 2>&1 | tee -a "$MLOG"
    fi
     # Move logs to Install-Logs directory
     mv "$MLOG" ../Install-Logs/ || true
