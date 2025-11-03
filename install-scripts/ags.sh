@@ -114,6 +114,13 @@ if git clone --depth=1 https://github.com/JaKooLit/ags_v1.9.0.git; then
         sudo mv "$TMPF" "$target"
       fi
 
+      # Restore executable bit for bin wrappers (mv from mktemp resets mode to 0600)
+      case "$target" in
+        */bin/ags)
+          sudo chmod 0755 "$target" || true
+          ;;
+      esac
+
       printf "${OK} Patched: %s\n" "$target"
       return 0
     }
