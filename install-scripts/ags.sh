@@ -111,7 +111,14 @@ if git clone --depth=1 https://github.com/JaKooLit/ags_v1.9.0.git; then
       # 3) Inject GI_TYPELIB_PATH export right after the GLib import (once)
       if ! sudo grep -q 'GLib.setenv("GI_TYPELIB_PATH"' "$target"; then
         TMPF=$(sudo mktemp)
-        sudo awk '{print} $0 ~ /^import GLib from "gi:\/\/GLib";$/ {print "const __old = GLib.getenv(\"GI_TYPELIB_PATH\");"; print "GLib.setenv(\"GI_TYPELIB_PATH\", \"/usr/local/lib64/girepository-1.0:/usr/local/lib/girepository-1.0\" + (__old ? \":\" + __old : \"\"), true);"}' "$target" | sudo tee "$TMPF" >/dev/null
+        sudo awk '{print} $0 ~ /^import GLib from "gi:\/\/GLib";$/ {print "const __old = GLib.getenv(\"GI_TYPELIB_PATH\");"; print "GLib.setenv(\"GI_TYPELIB_PATH\", \"/usr/local/lib64/girepository-1.0:/usr/local/lib/girepository-1.0\" + (__old ? \":\" + __old : \"\"), true);"; print "const __oldld = GLib.getenv(\"LD_LIBRARY_PATH\");"; print "GLib.setenv(\"LD_LIBRARY_PATH\", \"/usr/local/lib64:/usr/local/lib\" + (__oldld ? \":\" + __oldld : \"\"), true);"}' "$target" | sudo tee "$TMPF" >/dev/null
+        sudo mv "$TMPF" "$target"
+      fi
+
+      # 4) Ensure LD_LIBRARY_PATH export exists even if GI_TYPELIB_PATH was already present
+      if ! sudo grep -q 'GLib.setenv("LD_LIBRARY_PATH"' "$target"; then
+        TMPF=$(sudo mktemp)
+        sudo awk '{print} $0 ~ /^import GLib from "gi:\/\/GLib";$/ {print "const __oldld = GLib.getenv(\"LD_LIBRARY_PATH\");"; print "GLib.setenv(\"LD_LIBRARY_PATH\", \"/usr/local/lib64:/usr/local/lib\" + (__oldld ? \":\" + __oldld : \"\"), true);"}' "$target" | sudo tee "$TMPF" >/dev/null
         sudo mv "$TMPF" "$target"
       fi
 
@@ -135,6 +142,22 @@ if git clone --depth=1 https://github.com/JaKooLit/ags_v1.9.0.git; then
       patch_ags_launcher "$CAND" || true
     done
 
+    # Create an env-setting wrapper for AGS to ensure GI typelibs/libs are discoverable
+    printf "${NOTE} Creating env wrapper /usr/local/bin/ags...\n"
+    MAIN_JS="/usr/local/share/com.github.Aylur.ags/com.github.Aylur.ags"
+    if ! sudo test -f "$MAIN_JS"; then
+      MAIN_JS="/usr/share/com.github.Aylur.ags/com.github.Aylur.ags"
+    fi
+    sudo tee /usr/local/bin/ags >/dev/null <<WRAP
+#!/usr/bin/env bash
+set -euo pipefail
+# Ensure GI typelibs and native libs are discoverable before gjs ESM loads
+export GI_TYPELIB_PATH="/usr/local/lib64/girepository-1.0:/usr/local/lib/girepository-1.0:/usr/lib64/girepository-1.0:/usr/lib/girepository-1.0:/usr/local/lib64:/usr/local/lib:/usr/lib64/ags:${GI_TYPELIB_PATH:-}"
+export LD_LIBRARY_PATH="/usr/local/lib64:/usr/local/lib:${LD_LIBRARY_PATH:-}"
+exec /usr/bin/gjs -m "$MAIN_JS" "$@"
+WRAP
+    sudo chmod 0755 /usr/local/bin/ags
+    printf "${OK} AGS wrapper installed at /usr/local/bin/ags\n"
   else
     echo -e "\n${ERROR} ${YELLOW} Aylur's GTK shell $ags_tag${RESET} Installation failed\n " 2>&1 | tee -a "$MLOG"
    fi
