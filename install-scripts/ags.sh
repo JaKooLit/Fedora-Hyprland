@@ -91,16 +91,27 @@ if git clone --depth=1 https://github.com/JaKooLit/ags_v1.9.0.git; then
         return 1
       fi
 
-      # Replace GIRepository import with GLib and drop deprecated GIR repository path calls
+      # 1) Remove deprecated GIR Repository path tweaks (harmless if absent)
       sudo sed -i \
-        -e 's|^import GIR from \"gi://GIRepository?version=2.0\";$|import GLib from \"gi://GLib\";|' \
-        -e '/GIR.Repository.prepend_search_path/d' \
-        -e '/GIR.Repository.prepend_library_path/d' \
+        -e '/Repository\.prepend_search_path/d' \
+        -e '/Repository\.prepend_library_path/d' \
         "$target"
 
-      # Inject GI_TYPELIB_PATH export right after the GLib import, if not already present
-      if ! sudo grep -q 'GLib.setenv(\"GI_TYPELIB_PATH\"' "$target"; then
-        sudo awk '{print} $0 ~ /^import GLib from \"gi:\/\/GLib\";$/ {print "const __old = GLib.getenv(\"GI_TYPELIB_PATH\");"; print "GLib.setenv(\"GI_TYPELIB_PATH\", \"/usr/local/lib\" + (__old ? \":\" + __old : \"\"), true);"}' "$target" | sudo tee "$target" >/dev/null
+      # 2) Ensure GLib import exists (insert after first import line, or at top if none)
+      if ! sudo grep -q '^import GLib from "gi://GLib";' "$target"; then
+        TMPF=$(mktemp)
+        sudo awk 'BEGIN{added=0} {
+          if (!added && $0 ~ /^import /) { print; print "import GLib from \"gi://GLib\";"; added=1; next }
+          print
+        } END { if (!added) print "import GLib from \"gi://GLib\";" }' "$target" | sudo tee "$TMPF" >/dev/null
+        sudo mv "$TMPF" "$target"
+      fi
+
+      # 3) Inject GI_TYPELIB_PATH export right after the GLib import (once)
+      if ! sudo grep -q 'GLib.setenv("GI_TYPELIB_PATH"' "$target"; then
+        TMPF=$(mktemp)
+        sudo awk '{print} $0 ~ /^import GLib from "gi:\/\/GLib";$/ {print "const __old = GLib.getenv(\"GI_TYPELIB_PATH\");"; print "GLib.setenv(\"GI_TYPELIB_PATH\", \"/usr/local/lib\" + (__old ? \":\" + __old : \"\"), true);"}' "$target" | sudo tee "$TMPF" >/dev/null
+        sudo mv "$TMPF" "$target"
       fi
 
       printf "${OK} Patched: %s\n" "$target"
