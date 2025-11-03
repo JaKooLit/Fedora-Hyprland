@@ -91,10 +91,11 @@ if git clone --depth=1 https://github.com/JaKooLit/ags_v1.9.0.git; then
         return 1
       fi
 
-      # 1) Remove deprecated GIR Repository path tweaks (harmless if absent)
+      # 1) Remove deprecated GIR Repository path tweaks and GIRepository import (harmless if absent)
       sudo sed -i \
         -e '/Repository\.prepend_search_path/d' \
         -e '/Repository\.prepend_library_path/d' \
+        -e '/gi:\/\/GIRepository/d' \
         "$target"
 
       # 2) Ensure GLib import exists (insert after first import line, or at top if none)
@@ -110,7 +111,7 @@ if git clone --depth=1 https://github.com/JaKooLit/ags_v1.9.0.git; then
       # 3) Inject GI_TYPELIB_PATH export right after the GLib import (once)
       if ! sudo grep -q 'GLib.setenv("GI_TYPELIB_PATH"' "$target"; then
         TMPF=$(sudo mktemp)
-        sudo awk '{print} $0 ~ /^import GLib from "gi:\/\/GLib";$/ {print "const __old = GLib.getenv(\"GI_TYPELIB_PATH\");"; print "GLib.setenv(\"GI_TYPELIB_PATH\", \"/usr/local/lib\" + (__old ? \":\" + __old : \"\"), true);"}' "$target" | sudo tee "$TMPF" >/dev/null
+        sudo awk '{print} $0 ~ /^import GLib from "gi:\/\/GLib";$/ {print "const __old = GLib.getenv(\"GI_TYPELIB_PATH\");"; print "GLib.setenv(\"GI_TYPELIB_PATH\", \"/usr/local/lib64/girepository-1.0:/usr/local/lib/girepository-1.0\" + (__old ? \":\" + __old : \"\"), true);"}' "$target" | sudo tee "$TMPF" >/dev/null
         sudo mv "$TMPF" "$target"
       fi
 
