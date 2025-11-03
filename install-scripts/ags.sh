@@ -99,7 +99,7 @@ if git clone --depth=1 https://github.com/JaKooLit/ags_v1.9.0.git; then
 
       # 2) Ensure GLib import exists (insert after first import line, or at top if none)
       if ! sudo grep -q '^import GLib from "gi://GLib";' "$target"; then
-        TMPF=$(mktemp)
+        TMPF=$(sudo mktemp)
         sudo awk 'BEGIN{added=0} {
           if (!added && $0 ~ /^import /) { print; print "import GLib from \"gi://GLib\";"; added=1; next }
           print
@@ -109,7 +109,7 @@ if git clone --depth=1 https://github.com/JaKooLit/ags_v1.9.0.git; then
 
       # 3) Inject GI_TYPELIB_PATH export right after the GLib import (once)
       if ! sudo grep -q 'GLib.setenv("GI_TYPELIB_PATH"' "$target"; then
-        TMPF=$(mktemp)
+        TMPF=$(sudo mktemp)
         sudo awk '{print} $0 ~ /^import GLib from "gi:\/\/GLib";$/ {print "const __old = GLib.getenv(\"GI_TYPELIB_PATH\");"; print "GLib.setenv(\"GI_TYPELIB_PATH\", \"/usr/local/lib\" + (__old ? \":\" + __old : \"\"), true);"}' "$target" | sudo tee "$TMPF" >/dev/null
         sudo mv "$TMPF" "$target"
       fi
