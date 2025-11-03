@@ -41,15 +41,7 @@ for pkg in "${quick[@]}"; do
     install_package "$pkg" "$LOG"
 done
 
-# removal of ags
-# Check if the file exists and remove it
-printf "\n%s - removing ${SKY_BLUE}AGS${RESET}  \n" "${NOTE}"
-if [ -f "/usr/local/bin/ags" ]; then
-    sudo rm -r /usr/local/bin/ags
-fi
-
-if [ -d "/usr/local/share/com.github.Aylur.ags" ]; then
-    sudo rm -rf /usr/local/share/com.github.Aylur.ags
-fi
+# NOTE: AGS is no longer removed to allow both AGS and Quickshell to coexist
+# The Hyprland-Dots OverviewToggle.sh script handles fallback between them
 
 printf "\n%.0s" {1..1}
