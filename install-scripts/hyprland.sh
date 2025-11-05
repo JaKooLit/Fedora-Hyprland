@@ -6,6 +6,7 @@ hypr=(
   hyprland
   hypridle
   hyprlock
+  hyprsunset
 )
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
