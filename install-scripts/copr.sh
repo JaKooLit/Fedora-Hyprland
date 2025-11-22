@@ -9,8 +9,11 @@
 # tofik/nwg-shell - nwg-displays ONLY
 
 # List of COPR repositories to be added and enabled
+# solopasha/hyprland   # No longer getting updated 
+# Replaced with sdegler/hypr-test 11/21/2025
+
 COPR_REPOS=(
-  solopasha/hyprland
+  sdegler/hypr-test
   erikreider/SwayNotificationCenter
   errornointernet/packages
   tofik/nwg-shell 
