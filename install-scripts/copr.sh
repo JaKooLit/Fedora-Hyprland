@@ -10,7 +10,8 @@
 
 # List of COPR repositories to be added and enabled
 COPR_REPOS=(
-  solopasha/hyprland
+  sdegler/hypr-test
+  # solopasha/hyprland   # No longer getting updated 
   erikreider/SwayNotificationCenter
   errornointernet/packages
   tofik/nwg-shell 
