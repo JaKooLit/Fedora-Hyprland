@@ -6,7 +6,7 @@
 packages=(
   cliphist
   kvantum
-  rofi-wayland
+  rofi
   ImageMagick
   SwayNotificationCenter
   swww
