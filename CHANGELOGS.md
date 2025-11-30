@@ -1,5 +1,12 @@
 ## CHANGELOGS
 
+## Dec 2025
+
+- Updated Quickshell-Overview integration with corrected IPC commands
+- Fixed OverviewToggle.sh script to use proper `qs ipc` syntax
+- Quickshell-Overview now properly handles startup and toggling via Hyprland keybinds
+- AGS remains as fallback option if Quickshell is unavailable
+
 ## Nov 2025
 
 - Moved COPR to `lionhardp/Hyprland`
