@@ -12,9 +12,11 @@
 # solopasha/hyprland   # No longer getting updated
 # Replaced with sdegler/hypr-test 11/21/2025
 # Replaced sdegler/hypr-test with lionheartp/Hyprland  11/24/25
+# Replaced  lionheartp/Hyprland  with updated sdegler/hyprland COPR 
+#  Sdegler supports RAWHIDE and Fedora 43 
 
 COPR_REPOS=(
-    lionheartp/Hyprland
+    sdegler/hyprland 
     erikreider/SwayNotificationCenter
     errornointernet/packages
     tofik/nwg-shell

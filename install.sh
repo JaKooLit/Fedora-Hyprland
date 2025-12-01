@@ -202,7 +202,7 @@ options_command+=(
     "gtk_themes" "Install GTK themes (required for Dark/Light function)" "OFF"
     "bluetooth" "Do you want script to configure Bluetooth?" "OFF"
     "thunar" "Do you want Thunar file manager to be installed?" "OFF"
-    "quickshell" "Install quickshell for Desktop-Like Overview" "OFF"
+    "quickshell" "Install quickshell for Desktop-Like Overview (availability depends on COPR support for your Fedora version)" "OFF"
     "xdph" "Install XDG-DESKTOP-PORTAL-HYPRLAND (for screen share)?" "OFF"
     "zsh" "Install zsh shell with Oh-My-Zsh?" "OFF"
     "pokemon" "Add Pokemon color scripts to your terminal?" "OFF"

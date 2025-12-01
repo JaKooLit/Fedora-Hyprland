@@ -1,6 +1,15 @@
 ## CHANGELOGS
 
-## Dec 2025
+## Nov 2025 (Late Nov)
+
+- Enhanced quickshell.sh with Fedora version detection and COPR availability checking
+- Added graceful fallback messaging for Rawhide and other unsupported Fedora versions
+- Improved installation verification and error handling for quickshell package
+- Updated install.sh UI to inform users about quickshell COPR support dependency
+- Fixed shellcheck warnings in quickshell.sh (SC2066, SC1091)
+- Updated COPR to `sdegler/hyprland` Support Fedora43/Rawhide
+
+## Nov 2025 (Earlier)
 
 - Updated Quickshell-Overview integration with corrected IPC commands
 - Fixed OverviewToggle.sh script to use proper `qs ipc` syntax
