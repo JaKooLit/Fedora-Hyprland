@@ -1,5 +1,10 @@
 ## CHANGELOGS
 
+## Dec 2025 )
+
+- Added `hyprland-guituils`
+- Added `hyprpaper`
+
 ## Nov 2025 (Late Nov)
 
 - Enhanced quickshell.sh with Fedora version detection and COPR availability checking
