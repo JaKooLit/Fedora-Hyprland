@@ -22,6 +22,11 @@ COPR_REPOS=(
     tofik/nwg-shell
     alternateved/eza
     lihaohong/yazi
+    opuk/bottom
+    atim/lazygit
+    atim/lazydocker
+    wezfurlong/wezterm-nightly
+    scottames/ghostty
 )
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
