@@ -21,6 +21,7 @@ COPR_REPOS=(
     errornointernet/packages
     tofik/nwg-shell
     alternateved/eza
+    lihaohong/yazi
 )
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
