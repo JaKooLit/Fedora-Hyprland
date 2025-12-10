@@ -1,9 +1,11 @@
 ## CHANGELOGS
 
-## Dec 2025 )
+## Dec 2025
 
 - Added `hyprland-guituils`
 - Added `hyprpaper`
+- Added COPRs for wezterm, eza, ghostty
+    - They are not installed by default but can be with `dnf`
 
 ## Nov 2025 (Late Nov)
 
