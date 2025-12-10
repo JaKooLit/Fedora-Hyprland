@@ -12,14 +12,15 @@
 # solopasha/hyprland   # No longer getting updated
 # Replaced with sdegler/hypr-test 11/21/2025
 # Replaced sdegler/hypr-test with lionheartp/Hyprland  11/24/25
-# Replaced  lionheartp/Hyprland  with updated sdegler/hyprland COPR 
-#  Sdegler supports RAWHIDE and Fedora 43 
+# Replaced  lionheartp/Hyprland  with updated sdegler/hyprland COPR
+#  Sdegler supports RAWHIDE and Fedora 43
 
 COPR_REPOS=(
-    sdegler/hyprland 
+    sdegler/hyprland
     erikreider/SwayNotificationCenter
     errornointernet/packages
     tofik/nwg-shell
+    alternateved/eza
 )
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
@@ -101,4 +102,3 @@ printf "\n%.0s" {1..1}
 sudo dnf update -y
 
 printf "\n%.0s" {1..2}
-
