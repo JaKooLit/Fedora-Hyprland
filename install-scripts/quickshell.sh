@@ -4,20 +4,23 @@
 COPR_QUICK="errornointernet/quickshell"
 
 quick=(
-	quickshell
+    quickshell
 )
 
 ## WARNING: DO NOT EDIT BEYOND THIS LINE IF YOU DON'T KNOW WHAT YOU ARE DOING! ##
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Change the working directory to the parent directory of the script
 PARENT_DIR="$SCRIPT_DIR/.."
-cd "$PARENT_DIR" || { echo "${ERROR} Failed to change directory to $PARENT_DIR"; exit 1; }
+cd "$PARENT_DIR" || {
+    echo "${ERROR} Failed to change directory to $PARENT_DIR"
+    exit 1
+}
 
 # shellcheck source=./Global_functions.sh disable=SC1091
-if ! source "$(dirname "$(readlink -f "$0")")\Global_functions.sh"; then
-  echo "Failed to source Global_functions.sh"
-  exit 1
+if ! source "$(dirname "$(readlink -f "$0")")/Global_functions.sh"; then
+    echo "Failed to source Global_functions.sh"
+    exit 1
 fi
 
 # Set the name of the log file to include the current date and time
@@ -41,7 +44,10 @@ echo "${INFO} Fedora version detected: ${FEDORA_VERSION}" | tee -a "$LOG"
 printf "\n%s - Adding ${SKY_BLUE}Quickshell COPR repo${RESET} \n" "${NOTE}"
 
 for repo in $COPR_QUICK; do
-  sudo dnf copr enable -y "$repo" 2>&1 | tee -a "$LOG" || { printf "%s - Failed to enable quickshell copr repo\n" "${ERROR}"; exit 1; }
+    sudo dnf copr enable -y "$repo" 2>&1 | tee -a "$LOG" || {
+        printf "%s - Failed to enable quickshell copr repo\n" "${ERROR}"
+        exit 1
+    }
 done
 
 printf "\n%.0s" {1..1}
@@ -65,7 +71,7 @@ else
     for pkg in "${quick[@]}"; do
         install_package "$pkg" "$LOG"
     done
-    
+
     # Verify installation
     if rpm -q quickshell &>/dev/null; then
         echo -e "\n${OK} ${SKY_BLUE}Quickshell${RESET} installed successfully for Fedora ${FEDORA_VERSION}"
