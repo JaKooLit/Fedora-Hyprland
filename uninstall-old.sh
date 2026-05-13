@@ -119,7 +119,7 @@ print_color $BLUE "Starting Hyprland uninstallation process..."
 
 # Uninstall Hyprland and related packages
 print_color $YELLOW "Removing Hyprland and related packages..."
-safe_remove hyprland hyprcursor waybar kvantum polkit-gnome swappy SwayNotificationCenter wlogout kitty rofi-wayland aylurs-gtk-shell cliphist hypridle hyprlock pamixer pyprland swww
+safe_remove hyprland hyprcursor waybar kvantum polkit-gnome swappy SwayNotificationCenter wlogout kitty rofi-wayland aylurs-gtk-shell cliphist hypridle hyprlock pamixer pyprland awww
 
 # Remove COPR repositories
 print_color $YELLOW "Removing COPR repositories..."

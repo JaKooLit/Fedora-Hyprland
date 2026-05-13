@@ -127,7 +127,7 @@ packages=(
     "slurp" "screenshot tool" "off"
     "swappy" "screenshot tool" "off"
     "SwayNotificationCenter" "notification agent" "off"
-    "swww" "wallpaper engine" "off"
+    "awww" "wallpaper engine" "off"
     "Thunar" "File Manager" "off"
     "thunar-archive-plugin" "Archive Plugin" "off"
     "thunar-volman" "Volume Management" "off"
